@@ -1,0 +1,98 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:sec="http://www.springframework.org/schema/security"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+    <!-- to enable inMemoryDao, add filterInvocationInterceptor to the filterInvocationDefinitionSource
+        property of filterChainProxy -->
+
+    <bean id="filterChainProxy" class="org.springframework.security.web.FilterChainProxy">
+        <sec:filter-chain-map path-type="ant">
+            <sec:filter-chain pattern="/**"
+                filters="securityContextPersistenceFilter, exceptionTranslationFilter" />
+        </sec:filter-chain-map>
+    </bean>
+
+    <bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
+        <property name="providers">
+            <list>
+                <ref bean="authenticationProvider" />
+            </list>
+        </property>
+    </bean>
+
+    <!-- 
+    <sec:http authentication-manager-ref='authenticationManager'>
+        <sec:intercept-url pattern="/spring/**" access="ROLE_USER" />
+        <sec:http-basic />
+    </sec:http>
+
+    <sec:authentication-manager alias="authenticationManager"
+        erase-credentials="false">
+        <sec:authentication-provider ref="authProvider" />
+    </sec:authentication-manager>
+     -->
+
+    <bean id="authenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <property name="userDetailsService" ref="inMemoryDaoImpl" />
+    </bean>
+
+    <bean id="inMemoryDaoImpl" class="org.springframework.security.core.userdetails.memory.InMemoryDaoImpl">
+        <property name="userMap">
+            <value>admin=admin,ROLE_UICDS</value>
+        </property>
+    </bean>
+
+    <bean id="authenticationEntryPoint"
+        class="org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint">
+        <property name="realmName" value="uicds" />
+    </bean>
+
+    <bean id="authenticationProcessingFilter" class="org.springframework.security.web.authentication.www.BasicAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager" />
+        <property name="authenticationEntryPoint" ref="authenticationEntryPoint" />
+    </bean>
+
+    <bean id="securityContextPersistenceFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter">
+        <property name='securityContextRepository'>
+            <bean class='org.springframework.security.web.context.HttpSessionSecurityContextRepository'>
+                <property name='allowSessionCreation' value='false' />
+            </bean>
+        </property>
+    </bean>
+    <!--
+        <bean id="httpSessionContextIntegrationFilter" class="org.springframework.security.web.context.HttpSessionContextIntegrationFilter">
+        <property name="allowSessionCreation" value="true" />
+        <property name="forceEagerSessionCreation" value="true" />
+        </bean>
+    -->
+
+    <bean id="exceptionTranslationFilter" class="org.springframework.security.web.access.ExceptionTranslationFilter">
+        <property name="authenticationEntryPoint" ref="authenticationProcessingFilterEntryPoint" />
+    </bean>
+
+    <bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <property name="loginFormUrl" value="/login.jsp" />
+        <property name="forceHttps" value="false" />
+    </bean>
+
+    <bean id="filterInvocationInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+        <property name="authenticationManager" ref="authenticationManager" />
+        <property name="accessDecisionManager" ref="accessDecisionManager" />
+        <property name="securityMetadataSource">
+            <sec:filter-security-metadata-source path-type="ant">
+                <sec:intercept-url pattern="/*" access="ROLE_UICDS" />
+            </sec:filter-security-metadata-source>
+        </property>
+    </bean>
+
+    <bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+        <property name="decisionVoters">
+            <list>
+                <bean class="org.springframework.security.access.vote.RoleVoter" />
+            </list>
+        </property>
+    </bean>
+
+</beans>

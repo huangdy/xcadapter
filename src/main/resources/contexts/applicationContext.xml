@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+             http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+             http://www.springframework.org/schema/tx  
+             http://www.springframework.org/schema/tx/spring-tx-4.0.xsd  
+             http://www.springframework.org/schema/context  
+             http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+             
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="ignoreResourceNotFound" value="true" />
+
+        <property name="locations">
+            <list>
+                <value>classpath:contexts/*.properties</value>
+                <value>xc-adapter.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <context:annotation-config />
+    <tx:annotation-driven />
+    
+    <bean class="com.leidos.xchangecore.adapter.config.AdapterSpringConfig" />
+    
+    <bean id="csvFileParser" class="com.leidos.xchangecore.adapter.csv.CSVFileParser">
+        <property name="mappedRecordDao" ref="mappedRecordDao" />
+    </bean>
+
+    <bean id="configFileParser" class="com.leidos.xchangecore.adapter.csv.ConfigFilePaser">
+        <property name="csvConfigurationDao" ref="csvConfigurationDao" />
+    </bean>
+    
+    <bean id="webServiceClient" class="com.leidos.xchangecore.adapter.webclient.WebServiceClient">
+        <property name="webServiceTemplate" ref="webServiceTemplate" />
+    </bean>
+
+</beans>  

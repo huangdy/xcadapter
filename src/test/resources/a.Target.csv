@@ -1,0 +1,12 @@
+Location Type,Location #,City,Address,Zip,State,Operation Status,Power Outage Status,Planned/Actual Close Time,Planned/Actual Open Time,Facility Damage,latitude,longitude
+Store,1000,Westminster,200 Malcolm Dr,21157,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.567,-76.9738
+Store,1001,Baltimore,5230 Campbell Blvd,21236,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.3708,-76.4521
+Store,1002,Bel Air,580 Marketplace Dr,21014,MD,Closed,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.5252,-76.3501
+Store,1043,Aberdeen,1025 Middleton Rd,21001,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.5213,-76.178
+Store,1045,Owings Mills,11200 Reisterstown Rd,21117,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.4331,-76.7987
+Store,1142,Towson,1238 Putty Hill Ave,21286,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.3948,-76.5814
+Store,1265,Cockeysville,9901 York Rd,21030,MD,Closed,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.4622,-76.6343
+Store,1541,Pikesville,1737 Reisterstown Rd,21208,MD,Closed,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.385,-76.7316
+Store,1871,Abingdon,403 Constant Friendship Blvd,21009,MD,Open,Utility Power,10/29/2012 17:00,10/30/2012 8:00,No,39.4603,-76.3167
+Store,1970,Middle River,1330 Martin Blvd,21220,MD,Open,Utility Power,10/29/2012 16:30,10/30/2012 8:00,No,39.3344,-76.4475
+Store,2393,Baltimore,3201 Tioga Pkwy,21215,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 12:00,No,39.317408,-76.65498

@@ -1,0 +1,60 @@
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<title>XchangeCore Adapter</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style>
+legend {
+	border: 1px solid #e9601a;
+	background-color: #bbb;
+	color: #fff;
+	padding: 4px;
+}
+
+fieldset {
+	border: 1px solid #e9601a;
+	padding: 10px;
+	margin-top: 10px;
+}
+</style>
+</head>
+<body>
+
+    <form wicket:id="simpleUpload">
+        <fieldset>
+            <legend>XchangeCore CSV Upload</legend>
+            <p>
+                <label for="simpleUpload">File: </label> <input wicket:id="fileInput" type="file"
+                    id="simpleUpload" />
+            </p>
+            <input type="submit" value="Upload" /> <span wicket:id="progress">[[upload
+                progressbar]]</span>
+        </fieldset>
+    </form>
+
+    <div wicket:id="statusPage"></div>
+    <table>
+        <tr>
+            <td align="left"><a wicket:id="showStatus">Status</a></td>
+        </tr>
+        <tr>
+            <td align="right"><a wicket:id="redirect">Redirct back to Login Page</a></td>
+        </tr>
+    </table>
+
+    <div>
+        <span wicket:id="uploadFeedback" />
+    </div>
+
+    <!-- 
+    <div>
+        <table>
+            <tr wicket:id="fileList">
+                <td width="200"><span wicket:id="file">(file)</span></td>
+                <td><a href="#" wicket:id="delete"><img src="delete.gif" border="0" /></a></td>
+            </tr>
+        </table>
+    </div>
+     -->
+
+</body>
+</html>

@@ -1,0 +1,266 @@
+Location Type,Location #,City,Address,Zip,State,Operation Status,Power Outage Status,Planned/Actual Close Time,Planned/Actual Open Time,Facility Damage,latitude,longitude
+Store,1000,Westminster,200 Malcolm Dr,21157,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.567,-76.9738
+Store,1001,Baltimore,5230 Campbell Blvd,21236,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.3708,-76.4521
+Store,1002,Bel Air,580 Marketplace Dr,21014,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.5252,-76.3501
+Store,1043,Aberdeen,1025 Middleton Rd,21001,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.5213,-76.178
+Store,1045,Owings Mills,11200 Reisterstown Rd,21117,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.4331,-76.7987
+Store,1142,Towson,1238 Putty Hill Ave,21286,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.3948,-76.5814
+Store,1265,Cockeysville,9901 York Rd,21030,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.4622,-76.6343
+Store,1541,Pikesville,1737 Reisterstown Rd,21208,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.385,-76.7316
+Store,1871,Abingdon,403 Constant Friendship Blvd,21009,MD,Open,Utility Power,10/29/2012 17:00,10/30/2012 8:00,No,39.4603,-76.3167
+Store,1970,Middle River,1330 Martin Blvd,21220,MD,Open,Utility Power,10/29/2012 16:30,10/30/2012 8:00,No,39.3344,-76.4475
+Store,2393,Baltimore,3201 Tioga Pkwy,21215,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 12:00,No,39.317408,-76.65498
+Store,1076,Alexandria,3101 Jefferson Davis Hwy,22305,VA,Open,Utility Power,10/29/2012 15:00,,No,38.8337,-77.0493
+Store,1416,Springfield,6600 Springfield Mall,22150,VA,Open,Utility Power,10/29/2012 16:00,,No,38.7748,-77.1756
+Store,1431,Falls Church,6100 Arlington Blvd,22044,VA,Closed,Utility Power,10/29/2012 16:00,,No,38.8693,-77.1438
+Store,1533,Alexandria,6600 Richmond Hwy,22306,VA,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,38.7753,-77.0832
+Store,1893,Falls Church,5115 Leesburg Pike,22041,VA,Open,Utility Power,10/29/2012 16:00,,No,38.8445,-77.1163
+Store,1897,District Heights,3101 Donnell Dr,20747,MD,Open,Utility Power,10/29/2012 16:00,,No,38.8483,-76.8862
+Store,1004,Bowie,4600 Mitchellville Rd,20716,MD,Open,Utility Power,10/29/2012 16:00,,No,38.9526,-76.7221
+Store,1006,Largo,10500 Campus Way S,20774,MD,Open,Utility Power,10/29/2012 16:00,,No,38.8966,-76.8265
+Store,1008,Waldorf,3300 Western Pkwy,20603,MD,Open,Utility Power,10/29/2012 16:00,,No,38.6211,-76.9232
+Store,1233,Salisbury,125 E North Point Dr,21804,MD,Open,Utility Power,10/29/2012 11:00,10/30/2012 10:00,No,38.4157,-75.5606
+Store,1258,California,45155 First Colony Way,20619,MD,Closed,Utility Power,10/29/2012 15:00,10/30/2012 8:00,No,38.2977,-76.5133
+Store,2133,La Plata,60 Shining Willow Way,20646,MD,Open,Utility Power,10/29/2012 15:30,10/30/2012 8:00,No,38.5418,-76.9823
+Store,2271,Annapolis,1911 Towne Centre Blvd,21401,MD,Open,Utility Power,10/29/2012 16:00,,No,38.980842,-76.54141
+Store,2310,Easton,28539 Marlboro Ave,21601,MD,Open,Utility Power,10/29/2012 11:15,10/30/2012 10:00,Yes,38.781296,-76.087618
+Store,2394,Brandywine,15922 Crain Hwy SE,20613,MD,Open,Utility Power,10/29/2012 16:00,,No,38.67286,-76.87373
+Store,1055,Edison,100 Parsonage Rd,08837,NJ,Open,Utility Power,10/29/2012 16:00,10/30/2012 9:00,No,40.5515,-74.333
+Store,1084,Union,2690 US Hwy 22 E,07083,NJ,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,40.6866,-74.3088
+Store,1152,Milltown,400 Ryders Ln,08850,NJ,Open,Generator Only,10/29/2012 16:00,10/30/2012 9:00,No,40.4422,-74.426
+Store,1155,Watchung,1515 US Highway 22,07069,NJ,Open,Generator Only,10/29/2012 15:45,10/30/2012 8:00,No,40.6412,-74.4221
+Store,1224,Bridgewater,200 Promenade Blvd,08807,NJ,Open,Generator Only,10/29/2012 15:30,10/30/2012 8:00,No,40.5623,-74.5533
+Store,1315,Linden,621 W Edgar Rd,07036,NJ,Closed,Generator Only,10/29/2012 15:30,,No,40.6196,-74.2431
+Store,1467,Clark,45 Central Ave,07066,NJ,Open,Utility Power,10/29/2012 15:00,,No,40.6277,-74.3074
+Store,1929,South Plainfield,5000 Hadley Center Dr,07080,NJ,Closed,Generator Only,10/30/2012 15:30,,No,40.5484,-74.4234
+Store,2006,Staten Island,2900 Veterans Rd W,10309,NY,Closed,Generator Only,,,No,40.529,-74.2304
+Store,2141,Vauxhall,2235 Springfield Ave,07088,NJ,Open,Generator Only,,,No,40.71713,-74.285666
+Store,1159,North Wales,125 Witchwood Dr,19454,PA,Open,Utility Power,10/29/2012 14:20,10/30/2012 8:30,No,40.2247,-75.2394
+Store,1196,Warrington,401 Easton Rd,18976,PA,Open,Generator Only,10/29/2012 15:00,10/30/2012 8:00,No,40.2234,-75.1371
+Store,1256,Abington,1495 Old York Rd,19001,PA,Open,Generator Only,10/29/2012 16:00,10/30/2012 8:00,No,40.1246,-75.116
+Store,1269,Plymouth Meeting,2250 Chemical Rd,19462,PA,Open,Utility Power,10/29/2012 15:00,10/30/2012 8:00,No,40.1055,-75.2962
+Store,1291,Oaks,PO Box 985,19456,PA,Open,Utility Power,10/29/2012 13:00,10/30/2012 8:00,No,40.1305,-75.4533
+Store,2124,Philadelphia,4000 Monument Rd,19131,PA,Open,Utility Power,10/29/2012 17:30,10/30/2012 8:00,No,40.0065,-75.2128
+Store,2131,Royersford,1824 E Ridge Pike,19468,PA,Open,Utility Power,10/29/2012 17:00,10/30/2012 8:00,No,40.2127,-75.4997
+Store,2527,Philadelphia,2450 Shoppers Ln,19150,PA,Open,Generator Only,10/29/2012 18:00,10/30/2012 8:00,No,40.0751,-75.1561
+Store,2548,Pottstown,100 Upland Square Dr,19464,PA,Open,Utility Power,10/29/2012 17:00,10/30/2012 8:00,No,40.265441,-75.652378
+Store,1085,Cherry Hill,2137 Route 38,08002,NJ,Open,Utility Power,10/29/2012 12:00,10/30/2012 8:00,No,39.9346,-75.0256
+Store,1132,Turnersville,4001 Black Horse Pike,08012,NJ,Open,Utility Power,,10/30/2012 8:00,No,39.7324,-75.0397
+Store,1133,Voorhees,1139 White Horse Rd,08043,NJ,Open,Utility Power,10/29/2012 14:00,10/30/2012 8:00,No,39.8503,-74.9844
+Store,1158,Burlington,2703 Route 541,08016,NJ,Open,Generator Only,10/29/2012 15:30,10/30/2012 8:00,No,40.0357,-74.8229
+Store,1365,Evesham,751 Route 73 S,08053,NJ,Open,Utility Power,10/29/2012 15:30,10/30/2012 8:00,No,39.8672,-74.9229
+Store,1389,Deptford,1900 Deptford Center Rd,08096,NJ,Open,Utility Power,10/29/2012 14:00,10/30/2012 8:00,No,39.8297,-75.0918
+Store,1917,Mount Laurel,4 Centerton Rd,08054,NJ,Open,Utility Power,10/29/2012 14:00,10/30/2012 9:10,No,39.9683,-74.9155
+Store,2104,Delran,4004 Rte 130 N,08075,NJ,Open,Utility Power,10/29/2012 0:00,10/30/2012 8:00,No,40.0123,-74.9581
+Store,2170,Millville,2100 N 2nd St,08332,NJ,Open,Utility Power,10/28/2012 21:00,10/30/2012 12:00,No,39.4219,-75.0423
+Store,2181,Sicklerville,487 Cross Keys Rd,08081,NJ,Open,Utility Power,,10/30/2012 8:00,No,39.7462,-74.9943
+Store,2384,Sewell,675 Woodbury Glassboro Rd,08080,NJ,Open,Utility Power,10/29/2012 15:00,10/30/2012 8:00,No,39.76491,-75.130961
+Store,1150,College Point,13505 20th Ave,11356,NY,Open,Utility Power,10/28/2012 20:00,10/30/2012 10:30,No,40.7831,-73.8333
+Store,1344,Elmhurst,8801 Queens Blvd,11373,NY,Open,Utility Power,10/28/2012 18:00,10/30/2012 8:30,No,40.7344,-73.8676
+Store,1401,Brooklyn,519 Gateway Dr,11239,NY,Open,Utility Power,10/28/2012 20:00,10/30/2012 12:00,No,40.6522,-73.8697
+Store,1849,Brooklyn,139 Flatbush Ave,11217,NY,Open,Utility Power,10/29/2012 13:30,10/30/2012 10:00,No,40.685,-73.9766
+Store,2212,Brooklyn,1598 Flatbush Ave,11210,NY,Open,Utility Power,10/29/2012 12:00,10/30/2012 12:00,No,40.63136,-73.94668
+Store,2380,New York,517 E 117th Street,10035,NY,Open,Utility Power,10/28/2012 19:00,10/30/2012 14:00,No,40.7948,-73.9315
+Store,1108,Commack,98 Veterans Memorial Hwy,11725,NY,Closed,Generator Only,10/29/2012 14:00,,No,40.8389,-73.2852
+Store,1148,Bay Shore,838 Sunrise Hwy,11706,NY,Closed,Generator Only,10/29/2012 15:00,,No,40.7264,-73.2772
+Store,1191,South Setauket,255 Pond Path Rd,11720,NY,Open,Utility Power,10/29/2012 15:00,10/30/2012 9:00,No,40.8842,-73.1001
+Store,1387,Commack,4 Henry St,11725,NY,Open,Utility Power,10/29/2012 14:00,10/30/2012 9:30,No,40.8093,-73.2871
+Store,1818,Riverhead,1150 Old Country Rd,11901,NY,Open,Utility Power,10/29/2012 14:00,10/30/2012 9:00,No,40.9331,-72.6776
+Store,1948,Medford,2975 Horseblock Rd,11763,NY,Open,Utility Power,10/29/2012 14:00,10/30/2012 9:30,No,40.8246,-72.9886
+Store,2102,Central Islip,160 N Research Pl,11722,NY,Open,Utility Power,10/29/2012 14:00,10/30/2012 9:30,No,40.7721,-73.2003
+Store,1188,Warwick,1245 Bald Hill Rd,02886,RI,Open,Utility Power,,,No,41.7065,-71.4937
+Store,1189,Taunton,81 Taunton Depot Dr,02780,MA,Open,Utility Power,,,No,41.8781,-71.0693
+Store,1374,Seekonk,79 Commerce Way,02771,MA,Open,Utility Power,,,No,41.7957,-71.3208
+Store,1404,Smithfield,371 Putnam Pike Ste A-250,02917,RI,Open,Utility Power,,,No,41.8765,-71.5187
+Store,1495,Kingston,101 Independence Mall Way,02364,MA,Open,Utility Power,,,No,41.971,-70.7173
+Store,2073,Lincoln,620 George Washington Hwy,02865,RI,Open,Utility Power,,,No,41.9376,-71.4764
+Store,2167,North Dartmouth,479 State Rd,02747,MA,Open,Utility Power,,,No,41.638,-71.0033
+Store,2292,Wareham,2421 Cranberry Hwy Ste 110,02571,MA,Open,Utility Power,,,No,41.772956,-70.746285
+Store,2430,Warwick,400 Bald Hill Rd,02886,RI,Open,Utility Power,,,No,41.724465,-71.476147
+Store,2532,Hanover,1167 Washington St,02339,MA,Open,Utility Power,,,No,42.136962,-70.838953
+Store,1190,North Attleboro,1205 S Washington St,02760,MA,Open,Utility Power,,,No,41.9405,-71.3527
+Store,1281,Milford,250 Fortune Blvd,01757,MA,Open,Utility Power,,,No,42.16,-71.4978
+Store,1441,Somerville,180 Somerville Ave,02143,MA,Open,Utility Power,,,No,42.3769,-71.0899
+Store,1442,Watertown,550 Arsenal St,02472,MA,Open,Utility Power,,,No,42.3639,-71.158
+Store,1898,Dorchester,7 Allstate Rd,02125,MA,Open,Utility Power,,,No,42.3291,-71.0626
+Store,1930,Plainville,91 Taunton St,02762,MA,Open,Utility Power,,,No,42.0338,-71.3108
+Store,2173,Abington,385 Centre Ave,02351,MA,Open,Utility Power,,,No,42.1106,-70.9279
+Store,2258,Stoughton,1 Hawes Way,02072,MA,Open,Utility Power,,,No,42.151915,-71.072335
+Store,2267,South Easton,41 Robert Dr,02375,MA,Open,Utility Power,,,No,42.0282,-71.142
+Store,2693,Braintree,250 Granite St,02184,MA,Open,Utility Power,,,No,42.222,-71.0256
+Store,1249,Manchester,125 Buckland Hills Dr,06042,CT,Open,Utility Power,,,No,41.8098,-72.5497
+Store,1255,Enfield,90 Elm St,06082,CT,Open,Utility Power,,,No,41.9951,-72.5825
+Store,1289,New Britain,475 Hartford Rd,06053,CT,Open,Utility Power,,,No,41.711,-72.764
+Store,1373,Meriden,474 Chamberlain Hwy,06451,CT,Open,Utility Power,,,No,41.5526,-72.8153
+Store,1802,Newington,3265 Berlin Turnpike,06111,CT,Open,Utility Power,,,No,41.6605,-72.7255
+Store,2213,Windsor,1075 Kennedy Rd,06095,CT,Open,Utility Power,,,No,41.8914,-72.6524
+Store,2434,Southington,600 Executive Blvd,06489,CT,Open,Utility Power,,,No,41.610761,-72.901906
+Store,1009,Sterling,46201 Potomac Run Plz,20164,VA,Open,Utility Power,10/29/2012 20:30,,No,39.0262,-77.4003
+Store,1088,Reston,12197 Sunset Hills Rd,20190,VA,Open,Utility Power,,,No,38.9549,-77.3707
+Store,1341,Fairfax,13047 Fair Lakes Shopping Ctr,22033,VA,Open,Utility Power,,,No,38.8557,-77.3935
+Store,1827,Chantilly,14391 Chantilly Crossing Ln,20151,VA,Open,Utility Power,,,No,38.8964,-77.4436
+Store,1873,Gainesville,13301 Gateway Center Dr,20155,VA,Open,Utility Power,,,No,38.7956,-77.6056
+Store,1874,Leesburg,1200 Edwards Ferry Rd,20176,VA,Open,Utility Power,,,No,39.1155,-77.5332
+Store,2272,Sterling,45130 Columbia PL,20166,VA,Open,Utility Power,,,No,39.0084,-77.4388
+Store,1175,Fairfield,632 Route 46 E,07004,NJ,Closed,Generator Only,10/29/2012 13:00,10/30/2012 12:00,No,40.8895,-74.2718
+Store,1263,Edgewater,543 River Rd,07020,NJ,Closed,Generator Only,10/29/2012 15:00,,No,40.8135,-73.9821
+Store,1330,Hackensack,630 Main St,07601,NJ,Open,Utility Power,10/29/2012 12:00,,No,40.8983,-74.0389
+Store,1491,East Hanover,130 State Route 10,07936,NJ,Open,Generator Only,10/29/2012 12:00,10/30/2012 14:00,No,40.8122,-74.3799
+Store,1822,Clifton,30 Kingsland Rd,07014,NJ,Closed,Generator Only,10/29/2012 14:00,,No,40.8258,-74.1366
+Store,1865,North Bergen,7101 Tonnelle Ave,07047,NJ,Open,Utility Power,10/29/2012 11:00,10/30/2012 12:00,No,40.802,-74.0217
+Store,1886,Jersey City,100 14th St,07310,NJ,Open,Utility Power,10/29/2012 12:00,,No,40.7326,-74.0357
+Store,2381,Paramus,900 Bergen Town Ctr,07652,NJ,Closed,Utility Power,10/29/2012 12:45,,No,40.91544,-74.058896
+Store,1338,South Portland,200 Running Hill Rd,04106,ME,Open,Utility Power,,,No,43.6339,-70.3471
+Store,1520,Hooksett,100 Quality Dr,03106,NH,Open,Utility Power,,,No,43.0457,-71.461
+Store,2009,Bedford,220 S River Rd,03110,NH,Open,Utility Power,,,No,42.9412,-71.4722
+Store,2130,Topsham,125 Topsham Fair Mall Rd,04086,ME,Open,Utility Power,,,No,43.9349,-69.9824
+Store,2166,Biddeford,430 Mariner Way,04005,ME,Open,Utility Power,10/29/2012 20:30,10/30/2012 8:00,No,43.4737,-70.5112
+Store,2182,Somersworth,11 Andrews Rd,03878,NH,Open,Utility Power,,,No,43.235,-70.8833
+Store,2530,Greenland,1450 Greenland Rd,03840,NH,Open,Utility Power,,,No,43.04945,-70.817669
+Store,1044,Columbia,6111 Dobbin Rd,21045,MD,Open,Utility Power,10/29/2012 17:00,10/30/2012 8:00,No,39.1971,-76.8139
+Store,1046,Germantown,20908 Frederick Rd,20876,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,Yes,39.1992,-77.2489
+Store,1137,Frederick,5437 Urbana Pike,21704,MD,Open,Utility Power,10/29/2012 18:00,10/30/2012 8:00,Yes,39.3821,-77.3982
+Store,1138,Silver Spring,12000 Cherry Hill Rd,20904,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.0519,-76.9562
+Store,1193,Gaithersburg,25 Grand Corner Ave,20878,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.1194,-77.2021
+Store,1415,Wheaton,11160 Veirs Mill Rd,20902,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.0365,-77.055
+Store,1854,Rockville,5700 Bou Ave,20852,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.0558,-77.1167
+Store,1109,Mays Landing,380 Consumer Sq,08330,NJ,Open,Utility Power,10/28/2012 21:00,10/30/2012 10:25,No,39.452,-74.634
+Store,1153,Brick,570 Route 70,08723,NJ,Open,Generator Only,10/29/2012 15:00,10/30/2012 12:00,No,40.0583,-74.1498
+Store,1154,Toms River,1331 Hooper Ave,08753,NJ,Open,Utility Power,,10/30/2012 8:00,No,39.9879,-74.1754
+Store,1184,Manalapan,55 US Hwy 9,07726,NJ,Open,Generator Only,10/29/2012 16:00,10/30/2012 10:00,Yes,40.2905,-74.3009
+Store,1192,Middletown,2105 Route 35,07748,NJ,Open,Generator Only,10/29/2012 12:00,10/30/2012 9:00,No,40.4115,-74.136
+Store,1345,East Windsor,70 Princeton Hightstown Rd,08520,NJ,Open,Generator Only,10/29/2012 16:30,10/30/2012 10:00,No,40.2771,-74.5415
+Store,1378,Ocean,2331 State Rte 66,07712,NJ,Open,Generator Only,10/29/2012 14:00,,No,40.2307,-74.0448
+Store,1823,Howell,4955 US Highway 9,07731,NJ,Open,Utility Power,10/29/2012 16:30,10/30/2012 10:00,No,40.1305,-74.2204
+Store,2256,Monmouth Junction,4196 US Hwy 1,08852,NJ,Open,Generator Only,10/29/2012 15:00,10/30/2012 8:00,No,40.3809,-74.5759
+Store,2392,Manahawkin,209 Stafford Park Blvd,08050,NJ,Open,Generator Only,,,No,39.710778,-74.283471
+Store,1083,West Nyack,4120 Palisades Center Dr,10994,NY,Open,Generator Only,,,No,41.0965,-73.9534
+Store,1808,Spring Valley,50 Spring Valley Market Pl,10977,NY,Closed,Generator Only,10/29/2012 14:30,10/30/2012 9:00,No,41.1047,-74.0236
+Store,2024,Monroe,128 Bailey Farm Rd,10950,NY,Closed,Generator Only,10/29/2012 14:00,10/30/2012 9:00,No,41.3181,-74.1542
+Store,2076,Newburgh,50 Rte 17 K,12550,NY,Closed,Generator Only,10/29/2012 8:00,10/30/2012 8:00,No,41.5048,-74.0592
+Store,2247,Riverdale,94 State Rt 23,07457,NJ,Closed,Utility Power,,,No,40.989187,-74.326089
+Store,1186,Salem,203 S Broadway,03079,NH,Open,Utility Power,,,No,42.7647,-71.2155
+Store,1187,Danvers,240 Independence Way,01923,MA,Open,Utility Power,,,No,42.5524,-70.9372
+Store,1229,Everett,1 Mystic View Rd,02149,MA,Open,Utility Power,,,No,42.3992,-71.072
+Store,1266,Woburn,101 Commerce Way,01801,MA,Open,Utility Power,,,No,42.5187,-71.1347
+Store,1290,Saugus,400 Lynn Fells Pkwy,01906,MA,Open,Utility Power,,,No,42.4811,-71.0246
+Store,1803,Salem,227 Highland Ave,01970,MA,Open,Utility Power,,,No,42.5038,-70.92
+Store,1942,Revere,36 Furlong Dr,02151,MA,Open,Utility Power,,,No,42.3991,-70.9995
+Store,2287,Methuen,67 Pleasant Valley St,01844,MA,Open,Utility Power,,,No,42.7401,-71.1602
+Store,2325,Haverhill,35 Computer Dr,01832,MA,Open,Utility Power,,,No,42.787623,-71.114832
+Store,2480,Lowell,181 Plain St,01852,MA,Open,Generator Only,,,No,42.623853,-71.317859
+Store,1134,Exton,201 Sunrise Blvd,19341,PA,Open,Utility Power,10/29/2012 14:00,10/30/2012 8:00,No,40.039,-75.6294
+Store,1136,Springfield,857 Baltimore Pike,19064,PA,Open,Generator Only,10/29/2012 12:00,10/30/2012 8:00,No,39.9155,-75.334
+Store,1146,Wilmington,1050 Brandywine Pkwy,19803,DE,Open,Utility Power,10/29/2012 12:00,10/30/2012 8:00,No,39.8305,-75.5408
+Store,1312,Dover,148 John Hunn Brown Rd,19901,DE,Open,Utility Power,10/29/2012 7:00,10/30/2012 8:00,No,39.1594,-75.5105
+Store,2072,Lancaster,2385 Covered Bridge Dr,17602,PA,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,40.0259,-76.2028
+Store,2172,Glen Mills,600 Hatton Dr,19342,PA,Open,Utility Power,10/29/2012 11:00,10/30/2012 8:00,No,39.882786,-75.528169
+Store,2312,Springfield,1200 Baltimore Pike,19064,PA,Open,Utility Power,,10/30/2012 8:00,No,39.9148,-75.3531
+Store,2496,Exton,180 Eagleview Blvd,19341,PA,Open,Utility Power,10/29/2012 17:00,10/30/2012 8:00,No,40.05259,-75.665338
+Store,2537,Malvern,455 Carnegie Blvd,19355,PA,Open,Utility Power,10/29/2012 14:00,10/30/2012 8:00,No,40.049,-75.5203
+Store,2764,Newark,800 Christiana Mall,19702,DE,Open,Utility Power,10/29/2012 12:00,10/30/2012 8:00,No,39.6811,-75.6522
+Store,1139,Westbury,999 Corporate Dr,11590,NY,Open,Utility Power,10/29/2012 13:00,10/30/2012 10:00,No,40.7417,-73.5995
+Store,1147,Copiague,1149 Sunrise Hwy,11726,NY,Closed,Generator Only,10/29/2012 12:00,,No,40.688,-73.4068
+Store,1262,Valley Stream,500 W Sunrise Hwy,11581,NY,Closed,Utility Power,10/29/2012 14:00,,No,40.6611,-73.7258
+Store,1264,Levittown,3850 Hempstead Tpke,11756,NY,Open,Generator Only,10/29/2012 12:00,10/30/2012 8:00,No,40.7247,-73.4947
+Store,1866,Farmingdale,100 Willow Park Ctr,11735,NY,Closed,Generator Only,10/29/2012 12:00,10/30/2012 12:00,No,40.7514,-73.4198
+Store,1885,Hicksville,2003 Broadway Mall,11801,NY,Closed,Generator Only,10/29/2012 12:00,,No,40.773,-73.5314
+Store,2451,Flushing,4024 College Point Blvd,11354,NY,Closed,Utility Power,10/28/2012 19:00,10/30/2012 14:00,No,40.75709,-73.8354
+Store,1003,Glen Burnie,7951 Nolpark Ct,21061,MD,Open,Utility Power,10/29/2012 17:00,,No,39.1332,-76.6343
+Store,1007,Laurel,3343 Corridor Marketplace,20724,MD,Open,Utility Power,10/29/2012 16:00,,No,39.0969,-76.81
+Store,1042,Ellicott City,4390 Montgomery Rd,21043,MD,Open,Utility Power,10/29/2012 17:00,,No,39.2511,-76.8197
+Store,1295,Greenbelt,6100 Greenbelt Rd,20770,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,38.9982,-76.9066
+Store,1890,Hyattsville,3500 East West Hwy Ste 1200,20782,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,38.9683,-76.9549
+Store,1938,Glen Burnie,6717 Ritchie Hwy,21061,MD,Open,Utility Power,10/29/2012 17:00,10/30/2012 9:00,Yes,39.1907,-76.611
+Store,2007,Bowie,10401 Martin Luther King Jr Hwy,20720,MD,Open,Utility Power,10/29/2012 17:00,,No,38.9542,-76.8247
+Store,1358,White Plains,9 City Pl,10601,NY,Open,Utility Power,10/28/2012 20:00,10/30/2012 8:00,No,41.0324,-73.7653
+Store,1528,Bethel,7 Stony Hill Rd,06801,CT,Open,Utility Power,10/29/2012 15:00,10/30/2012 8:00,No,41.4155,-73.4015
+Store,1544,Stamford,21 Broad St,06901,CT,Open,Utility Power,10/29/2012 12:00,10/30/2012 8:00,No,41.0553,-73.5417
+Store,1798,Bronx,40 W 225th St,10463,NY,Open,Utility Power,10/29/2012 20:00,10/30/2012 8:00,No,40.8727,-73.9073
+Store,1887,Mount Vernon,500 East Sandford Blvd,10550,NY,Open,Utility Power,10/29/2012 19:00,10/30/2012 8:00,No,40.9005,-73.8192
+Store,1954,Mount Kisco,195 N Bedford Rd Ste A,10549,NY,Open,Utility Power,10/29/2012 17:30,10/30/2012 8:00,No,41.2174,-73.7217
+Store,1267,Waterford,900 Hartford Tpke,06385,CT,Closed,Utility Power,10/29/2012 12:00,,No,41.3773,-72.1496
+Store,1916,North Haven,200 Universal Dr N,06473,CT,Open,Utility Power,10/29/2012 13:00,10/30/2012 8:00,No,41.3511,-72.8712
+Store,1955,Orange,25 Boston Post Rd,06477,CT,Open,Utility Power,10/29/2012 17:30,10/30/2012 8:00,No,41.2794,-72.9872
+Store,1956,Trumbull,120 Hawley Ln,06611,CT,Closed,Generator Only,10/29/2012 20:30,10/30/2012 8:00,No,41.2335,-73.1518
+Store,2045,Milford,1191 Boston Post Rd,06460,CT,Open,Utility Power,10/29/2012 12:00,10/30/2012 8:00,No,41.2353,-73.0349
+Store,2156,Waterbury,300 Chase Ave,06704,CT,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,41.5832,-73.0337
+Store,2249,Ansonia,20 W Main St,06401,CT,Open,Utility Power,10/29/2012 14:00,,No,41.3407,-73.0799
+Store,2305,Torrington,1922 E Main St,06790,CT,Open,Utility Power,,,No,41.818533,-73.075714
+Store,2361,Trumbull,5065 Main St Ste Target,06611,CT,Open,Utility Power,,,No,41.229561,-73.226954
+Store,2432,Dayville,2177 Killingly CMNS,06241,CT,Open,Utility Power,,,No,41.840369,-71.884504
+Store,2433,Lisbon,195 River Rd,06351,CT,Open,Utility Power,,,No,41.585898,-71.99532
+Store,1864,Rockaway,381 Mount Hope Ave,07866,NJ,Open,Utility Power,10/29/2012 20:30,10/30/2012 10:00,No,40.9039,-74.5492
+Store,2446,Hackettstown,68 US Hwy 46 W,07840,NJ,Open,Generator Only,10/29/2012 19:30,10/30/2012 8:00,No,40.847725,-74.809394
+Store,1135,Langhorne,2331 E Lincoln Hwy,19047,PA,Open,Utility Power,10/29/2012 17:00,10/30/2012 8:00,No,40.1761,-74.8779
+Store,1151,Princeton,500 Nassau Park Blvd,08540,NJ,Open,Utility Power,10/29/2012 16:00,10/30/2012 9:00,No,40.3059,-74.6766
+Store,1183,Bensalem,800 Rock Hill Dr,19020,PA,Open,Utility Power,10/29/2012 17:00,10/30/2012 8:00,No,40.1359,-74.9618
+Store,1443,Philadelphia,1 Mifflin St,19148,PA,Open,Utility Power,10/29/2012 15:00,10/30/2012 0:00,No,39.9243,-75.1462
+Store,1809,Philadelphia,11000 Roosevelt Blvd Ste 3,19116,PA,Open,Utility Power,10/29/2012 15:00,,No,40.1019,-75.0105
+Store,2075,Philadelphia,2701 Castor Ave,19134,PA,Open,Utility Power,10/29/2012 14:30,10/30/2012 8:00,Yes,39.9904,-75.0899
+Store,2418,Philadelphia,7400 Bustleton Ave,19152,PA,Open,Utility Power,10/29/2012 14:30,10/30/2012 8:00,No,40.051005,-75.058938
+Store,0759,Woodbridge,2460 Prince William Pkwy,22192,VA,Open,Utility Power,10/29/2012 19:45,,No,38.6551,-77.2878
+Store,0772,Fredericksburg,1180 Carl D Silver Pkwy,22401,VA,Open,Utility Power,10/29/2012 20:30,,No,38.2987,-77.5106
+Store,1005,Fairfax,10301 New Guinea Rd,22032,VA,Open,Utility Power,10/29/2012 19:30,,No,38.7988,-77.3012
+Store,1089,Manassas,8340 Sudley Rd,20109,VA,Open,Utility Power,10/29/2012 19:00,,No,38.7743,-77.5065
+Store,1857,Stafford,1090 Stafford Market Pl,22556,VA,Open,Utility Power,,,No,38.4692,-77.4086
+Store,2017,Dumfries,4310 Fortuna Center Plz,22025,VA,Open,Utility Power,10/29/2012 19:45,,No,38.5967,-77.3328
+Store,2138,Fredericksburg,9785 Jefferson Davis Hwy,22407,VA,Open,Utility Power,10/29/2012 20:30,,No,38.2247,-77.5015
+Store,2175,Fredericksburg,25 S Gateway Dr,22406,VA,Open,Utility Power,10/29/2012 19:00,,No,38.344835,-77.493816
+Store,2323,Manassas,9900 Sowder Village Sq,20109,VA,Open,Utility Power,10/29/2012 20:30,,No,38.73984,-77.534759
+Store,1228,Nashua,310 Daniel Webster Hwy,03060,NH,Open,Utility Power,,,No,42.7027,-71.4381
+Store,1308,Framingham,400 Cochituate Rd,01701,MA,Open,Generator Only,,,No,42.3042,-71.402
+Store,1348,Worcester,529 Lincoln St,01605,MA,Open,Utility Power,,,No,42.2928,-71.7749
+Store,1496,Westborough,330 Turnpike Rd,01581,MA,Open,Utility Power,,,No,42.2807,-71.6555
+Store,1516,Marlborough,423 Donald Lynch Blvd,01752,MA,Open,Utility Power,,,No,42.3595,-71.6066
+Store,1532,Nashua,600 Amherst St,03063,NH,Open,Utility Power,,,No,42.7986,-71.536
+Store,1835,Millbury,70 Worcester Providence Tpke #100,01527,MA,Open,Generator Only,,,No,42.2002,-71.7779
+Store,1965,Leominster,86 Orchard Hill Park Dr,01453,MA,Open,Utility Power,,,No,42.5271,-71.7143
+Store,2570,Marlborough,605 Boston Post Rd E,01752,MA,Open,Utility Power,,,No,42.348185,-71.505446
+IC,9359,Ellicott City,4380-A Montgomery Rd,21043,MD,Open,Utility Power,10/29/2012 14:30,10/30/2012 9:30,No,39.1974,-76.8119
+IC,9360,Springfield,"900 W Sproul Rd, Ste 102",19064,PA,Open,Utility Power,10/29/2012 6:45,10/30/2012 12:30,No,39.939,-75.3503
+IC,9376,Hauppauge,230 Oser Av,11788,NY,Closed,Generator Only,10/29/2012 14:00,10/30/2012 16:00,Yes,40.8169,-73.25349
+TSS,0001,New York,500 7th Ave,10018,NY,Closed,Utility Power,10/28/2012 13:00,10/30/2012 0:00,No,40.75291,-73.98928
+Other,9495,Washington,500 8th Street NW  Suite 210,20004,DC,Closed,Utility Power,10/29/2012 5:00,,No,,
+Store,2475,Bronx,700 Exterior St,10451,NY,Closed,Utility Power,10/28/2012 18:00,,No,40.824125,-73.930124
+Other,2840,Valley Stream,,,NY,Closed,Utility Power,10/29/2012 15:00,,No,40.664562,-73.719953
+Store,1828,Bridgeport,2800 Meadowbrook Mall,26330,WV,Open,Utility Power,,,No,39.3094,-80.2747
+Store,1318,Kingston,1300 Ulster Ave,12401,NY,Open,Utility Power,10/29/2012 17:00,10/30/2012 8:00,No,41.9685,-73.9859
+Store,2545,Lititz,960 Lititz Pike,17543,PA,Open,Utility Power,10/29/2012 15:30,10/30/2012 8:00,No,40.132212,-76.307927
+Store,2631,Crofton,,,MD,Open,Utility Power,10/29/2012 16:00,10/30/2012 8:00,No,39.034491,-76.683988
+IC,9372,Westborough,330 Turnpike Rd,01581,MA,Open,Utility Power,10/29/2012 16:00,10/30/2012 9:55,No,42.2826,-71.6527
+OSW,8069,Hunt Valley,10711 Gilroy Road,21031,MD,Closed,Utility Power,10/29/2012 16:00,,No,39.47609,-76.66245
+Store,1855,Bangor,60 Longview Dr,04401,ME,Open,Utility Power,,,No,44.8423,-68.7418
+Store,2259,Washington,3100 14th St NW,20010,DC,Open,Utility Power,10/29/2012 15:00,10/30/2012 9:45,No,38.929131,-77.033725
+Store,1296,Middletown,1 N Galleria Dr,10941,NY,Closed,Utility Power,10/29/2012 16:00,10/30/2012 9:00,No,41.452,-74.3696
+DC,3802,Amsterdam,1730 State Hwy 5S,12010,NY,Open,Generator Only,,,No,42.935438,-74.247323
+Store,1464,Phillipsburg,1204 New Brunswick Ave,08865,NJ,Open,Generator Only,10/29/2012 20:00,,No,40.6738,-75.1351
+Store,1845,Wilkes-Barre Township,3400 Wilkes-Barre Township Commons,18702,PA,Open,Utility Power,10/29/2012 17:00,10/30/2012 8:00,No,41.2375,-75.8463
+Store,2186,Harrisburg,4600 High Pointe Blvd,17111,PA,Open,Utility Power,10/29/2012 18:00,,No,40.247,-76.8045
+Store,2302,Temple,4220 N 5th Street Hwy,19560,PA,Open,Generator Only,10/29/2012 17:45,10/30/2012 8:00,No,40.397728,-75.929158
+Store,2529,Reading,4599 Perkiomen Ave,19606,PA,Open,Utility Power,10/29/2012 18:00,,No,40.309332,-75.859321
+Store,2099,Carlisle,246 Westminster Dr,17013,PA,Open,Utility Power,10/29/2012 20:00,,No,40.1962,-77.1572
+Store,1856,Poughkeepsie,2001 South Rd,12601,NY,Open,Utility Power,10/29/2012 18:00,10/30/2012 8:00,No,41.6258,-73.9197
+Store,2069,Durham,8210 Renaissance Pkwy,27713,NC,Open,Utility Power,,,No,35.9038,-78.9505
+Store,1257,Hagerstown,17213 Cole Rd,21740,MD,Open,Utility Power,10/29/2012 18:00,10/30/2012 8:00,No,39.6203,-77.773
+Store,1105,Virginia Beach,2060 S Independence Blvd,23453,VA,Open,Utility Power,10/29/2012 19:00,,No,36.7878,-76.1089
+Store,2246,Quakertown,610 N West End Blvd,18951,PA,Open,Generator Only,10/29/2012 19:00,,No,40.4603,-75.3712
+Store,1222,Wyomissing,2769 Papermill Rd,19610,PA,Open,Utility Power,10/29/2012 19:30,,No,40.357,-75.981
+Store,2536,Easton,3835 Dryland Way,18045,PA,Open,Utility Power,10/29/2012 20:00,10/30/2012 8:00,No,40.712962,-75.288023
+Store,1474,Dickson City,1140 Commerce Blvd,18519,PA,Open,Utility Power,10/29/2012 20:00,,No,41.4657,-75.6379
+Store,2439,Selinsgrove,501 Market Place Blvd,17870,PA,Open,Utility Power,10/29/2012 20:00,,No,40.841824,-76.837878
+Store,2567,Hanover,31 WILSON AVE,17331,PA,Open,Utility Power,10/29/2012 20:00,,No,39.826775,-76.998505
+Store,2437,Muncy,170 S Lycoming Mall Rd,17756,PA,Open,Utility Power,10/29/2012 20:00,,No,41.24358,-76.835183
+Store,2241,Chambersburg,913 Norland Ave,17201,PA,Open,Utility Power,10/29/2012 20:00,,No,39.9416,-77.6277
+Store,1875,York,2251 York Crossing Dr,17408,PA,Open,Utility Power,10/29/2012 20:00,,No,39.9642,-76.7787
+Store,1221,York,2610 Pleasant Valley Rd,17402,PA,Open,Utility Power,10/29/2012 20:00,,No,39.987,-76.6802
+Store,1260,Stroudsburg,350 Pocono Commons,18360,PA,Open,Utility Power,10/29/2012 20:00,,No,40.9942,-75.2449
+Store,1254,Harrisburg,5125 Jonestown Rd Ste 331,17112,PA,Open,Utility Power,10/29/2012 20:00,,No,40.3086,-76.7967
+Store,1048,Norfolk,1245 N Military Hwy,23502,VA,Open,Utility Power,10/29/2012 19:00,,No,36.8653,-76.2123
+Store,2501,Hampton,5001 Holt Ave,23666,VA,Open,Utility Power,10/29/2012 20:30,,No,37.0429,-76.3912
+Store,2399,Allentown,912 Airport Center Dr,18109,PA,Open,Generator Only,10/29/2012 21:00,10/30/2012 8:00,No,40.638632,-75.440299
+Store,1510,Allentown,1600 N Cedar Crest Blvd,18104,PA,Open,Utility Power,10/29/2012 0:00,10/30/2012 10:00,No,40.6131,-75.5363
+Store,1475,Liverpool,3857 State Route 31,13090,NY,Open,Utility Power,,,No,43.1878,-76.2464
+Store,0792,Parma,6850 Ridge Rd,44129,OH,,Utility Power,,,No,41.3777,-81.7362
+Store,1021,Chesapeake,1316 Greenbrier Pkwy,23320,VA,Open,Utility Power,,10/30/2012 8:00,Yes,36.7716,-76.2314
+Store,2538,Martinsburg,436 Retail Commons Pkwy,25403,WV,Open,Utility Power,,10/30/2012 8:00,No,39.439629,-77.992152

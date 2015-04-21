@@ -1,0 +1,23 @@
+STORE_NBR,District,Market,City,State,Store/Site Status,Store Priority,Current Power Status,Generator Deployed,Damage Level
+5214,251,24,NORTH RICHLAND HILLS,TX,OPEN: Regular Hours,,Regular,,
+13607,315,21,ROBBINSDALE,MN,OPEN: Regular Hours,,Regular,No,None
+7969,17,29,BERKELEY HEIGHTS,NJ,OPEN: Regular Hours,,No Power,,
+9364,250,12,ESCANABA,MI,Select Status,,Regular,,
+7164,155,22,HENDERSON,NV,OPEN: Regular Hours,,Regular,,
+2054,8,10,CALUMET CITY,IL,OPEN: Regular Hours,,Generator,,
+13707,108,29,WYCKOFF,NJ,OPEN: Regular Hours,,No Power,No,
+9375,270,14,MOORE,OK,CLOSED,,No Power,No,Heavy
+10882,33,28,MIMS,FL,OPEN: Regular Hours,,Regular,,
+12841,274,17,GRAND TERRACE,CA,Select Status,,Regular,,Light
+4646,170,28,ORLANDO,FL,OPEN: Regular Hours,,Regular,,Light
+4214,224,29,LEVITTOWN,PA,OPEN: Regular Hours,,Regular,No,None
+6005,233,14,WICHITA,KS,OPEN: Regular Hours,,Regular,,Light
+12188,404,3,PINELLAS PARK,FL,OPEN: Regular Hours,,Regular,,Moderate
+12277,258,29,GRAFTON,WV,,,,,
+CO-1419,,,DEERFIELD,IL,Select Status,,Regular,,
+9733,241,13,FRANKLIN,OH,,,,,
+7010,52,3,VALRICO,FL,,,,,
+5469,246,4,MCHENRY,IL,OPEN: Regular Hours,,Regular,,
+0,,,DEERFIELD,IL,OPEN: Regular Hours,,Regular,,
+12869,154,8,SOMERSET,MA,OPEN: Regular Hours,,Regular,,None
+5434,215,24,CLEBURNE,TX,OPEN: Regular Hours,,Regular,,

@@ -16,7 +16,7 @@ import com.leidos.xchangecore.adapter.model.CsvConfiguration;
 import com.leidos.xchangecore.adapter.model.MappedRecord;
 
 public class MappingCsvToBean
-    extends CsvToBean<MappedRecord> {
+extends CsvToBean<MappedRecord> {
 
     private static final Logger logger = LoggerFactory.getLogger(MappingCsvToBean.class);
 
@@ -147,7 +147,7 @@ public class MappingCsvToBean
                     sb.append("<b>");
                     sb.append(this.columnNames[i][j] + ": ");
                     sb.append("</b>");
-                    sb.append(columns[this.columnIndexes[i][j]]);
+                    sb.append(columns[this.columnIndexes[i][j]] + TokenSeparator);
                 } else {
                     sb.append(columns[this.columnIndexes[i][j]] + TokenSeparator);
                 }

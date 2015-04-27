@@ -16,7 +16,7 @@ import com.leidos.xchangecore.adapter.model.CsvConfiguration;
 import com.leidos.xchangecore.adapter.model.MappedRecord;
 
 public class MappingCsvToBean
-extends CsvToBean<MappedRecord> {
+    extends CsvToBean<MappedRecord> {
 
     private static final Logger logger = LoggerFactory.getLogger(MappingCsvToBean.class);
 
@@ -32,23 +32,23 @@ extends CsvToBean<MappedRecord> {
     public MappingCsvToBean(CsvConfiguration configMap) {
 
         final int columns = CsvConfiguration.DefinedColumnNames.length;
-        this.columnNames = new String[columns][];
-        this.columnIndexes = new Integer[columns][];
+        columnNames = new String[columns][];
+        columnIndexes = new Integer[columns][];
         for (int i = 0; i < columns; i++) {
-            this.columnNames[i] = configMap.getFieldValue(CsvConfiguration.DefinedColumnNames[i]).split("[.]",
-                -1);
-            this.columnIndexes[i] = new Integer[this.columnNames[i].length];
+            columnNames[i] = configMap.getFieldValue(CsvConfiguration.DefinedColumnNames[i]).split(
+                "[.]", -1);
+            columnIndexes[i] = new Integer[columnNames[i].length];
         }
-        this.indexes = configMap.getIndex().split("[.]", -1);
-        this.indexColumns = new Integer[this.indexes.length];
-        this.titlePrefix = configMap.getTitlePrefix();
+        indexes = configMap.getIndex().split("[.]", -1);
+        indexColumns = new Integer[indexes.length];
+        titlePrefix = configMap.getTitlePrefix();
     }
 
     @Override
     protected Object convertValue(String value, PropertyDescriptor prop)
         throws InstantiationException, IllegalAccessException {
 
-        final PropertyEditor editor = this.getPropertyEditor(prop);
+        final PropertyEditor editor = getPropertyEditor(prop);
         Object obj = value;
         if (null != editor) {
             try {
@@ -65,25 +65,19 @@ extends CsvToBean<MappedRecord> {
     // figure out the index key in column order
     private void figureOutMultiColumnField(String[] headers) {
 
-        for (int i = 0; i < this.indexes.length; i++) {
-            for (int j = 0; j < headers.length; j++) {
-                if (this.indexes[i].equalsIgnoreCase(headers[j])) {
-                    this.indexColumns[i] = j;
-                }
-            }
-        }
-        for (int i = 0; i < this.columnNames.length; i++) {
-            if (this.columnNames[i].length == 1) {
+        for (int i = 0; i < indexes.length; i++)
+            for (int j = 0; j < headers.length; j++)
+                if (indexes[i].equalsIgnoreCase(headers[j]))
+                    indexColumns[i] = j;
+        for (int i = 0; i < columnNames.length; i++) {
+            if (columnNames[i].length == 1)
                 continue;
-            }
-            for (int j = 0; j < this.columnNames[i].length; j++) {
-                for (int k = 0; k < headers.length; k++) {
-                    if (this.columnNames[i][j].equalsIgnoreCase(headers[k])) {
-                        this.columnIndexes[i][j] = k;
+            for (int j = 0; j < columnNames[i].length; j++)
+                for (int k = 0; k < headers.length; k++)
+                    if (columnNames[i][j].equalsIgnoreCase(headers[k])) {
+                        columnIndexes[i][j] = k;
                         break;
                     }
-                }
-            }
         }
     }
 
@@ -93,13 +87,13 @@ extends CsvToBean<MappedRecord> {
         try {
             mapper.captureHeader(csvReader);
 
-            this.figureOutMultiColumnField(((MappingHeaderColumnNameTranslateMappingStrategy) mapper).getHeaders());
+            figureOutMultiColumnField(((MappingHeaderColumnNameTranslateMappingStrategy) mapper).getHeaders());
 
             String[] columns;
             final List<MappedRecord> list = new ArrayList<MappedRecord>();
             while (null != (columns = csvReader.readNext())) {
-                final MappedRecord bean = this.processLine(mapper, columns);
-                this.postProcessing(bean, columns);
+                final MappedRecord bean = processLine(mapper, columns);
+                postProcessing(bean, columns);
                 list.add(bean);
             }
             return list;
@@ -112,58 +106,52 @@ extends CsvToBean<MappedRecord> {
     private void postProcessing(MappedRecord record, String[] columns) {
 
         // prefix the title
-        record.setTitle(this.titlePrefix + " - " + record.getTitle());
+        record.setTitle(titlePrefix + " - " + record.getTitle());
         logger.debug("record.title: " + record.getTitle());
 
         // figure out the content
         StringBuffer sb = new StringBuffer();
         sb.append("[");
-        for (final String column : columns) {
+        for (final String column : columns)
             sb.append(column + TokenSeparator);
-        }
         String value = sb.toString();
         value = value.substring(0, value.lastIndexOf(TokenSeparator));
         record.setContent(value + "]");
 
         // figuer out the index key
         sb = new StringBuffer();
-        for (int i = 0; i < this.indexes.length; i++) {
-            sb.append(columns[this.indexColumns[i]] + TokenSeparator);
-        }
+        for (int i = 0; i < indexes.length; i++)
+            sb.append(columns[indexColumns[i]] + TokenSeparator);
         value = sb.toString();
         value = value.substring(0, value.lastIndexOf(TokenSeparator));
         record.setIndex(value);
 
         // figure out the value for the multi-column field
-        for (int i = 0; i < this.columnNames.length; i++) {
-            if (this.columnNames[i].length == 1) {
+        for (int i = 0; i < columnNames.length; i++) {
+            if (columnNames[i].length == 1)
                 continue;
-            }
             final boolean isDescription = CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FieldName_Description);
             sb = new StringBuffer();
-            for (int j = 0; j < this.columnNames[i].length; j++) {
+            for (int j = 0; j < columnNames[i].length; j++)
                 if (isDescription) {
                     sb.append("<br/>");
                     sb.append("<b>");
-                    sb.append(this.columnNames[i][j] + ": ");
+                    sb.append(columnNames[i][j] + ": ");
                     sb.append("</b>");
-                    sb.append(columns[this.columnIndexes[i][j]] + TokenSeparator);
-                } else {
-                    sb.append(columns[this.columnIndexes[i][j]] + TokenSeparator);
-                }
-            }
+                    sb.append(columns[columnIndexes[i][j]] + TokenSeparator);
+                } else
+                    sb.append(columns[columnIndexes[i][j]] + TokenSeparator);
             value = sb.toString();
             value = value.substring(0, value.lastIndexOf(TokenSeparator));
 
-            if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FieldName_Category)) {
+            if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FieldName_Category))
                 record.setCategory(value);
-            } else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FieldName_Title)) {
+            else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FieldName_Title))
                 record.setTitle(value);
-            } else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FieldName_FilterName)) {
+            else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FieldName_FilterName))
                 record.setFilter(value);
-            } else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FieldName_Description)) {
+            else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FieldName_Description))
                 record.setDescription(value);
-            }
         }
     }
 }

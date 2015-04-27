@@ -25,87 +25,94 @@ implements Serializable {
 
     @Column(columnDefinition = "VARCHAR(4096)")
     private String title;
+
     @Column(columnDefinition = "VARCHAR(4096)")
     private String category = "N/A";
+
     @Column(columnDefinition = "VARCHAR(65536)")
     private String content = "N/A";
+
     @Column(columnDefinition = "VARCHAR(65536)")
     private String description = "N/A";
+
     @Column(columnDefinition = "VARCHAR(4096)")
     private String index;
+
     private String creator;
+
     private String filter;
+
     private String igID = null;
     @Column(columnDefinition = "VARCHAR(4096)")
     private String workProductID = null;
+
     private String latitude;
     private String longitude;
-
     private Date lastUpdated;
 
     public String getCategory() {
 
-        return this.category;
+        return category;
     }
 
     public String getContent() {
 
-        return this.content;
+        return content;
     }
 
     public String getCreator() {
 
-        return this.creator;
+        return creator;
     }
 
     public String getDescription() {
 
-        return this.description;
+        return description;
     }
 
     public String getFilter() {
 
-        return this.filter;
+        return filter;
     }
 
     public Integer getId() {
 
-        return this.id;
+        return id;
     }
 
     public String getIgID() {
 
-        return this.igID;
+        return igID;
     }
 
     public String getIndex() {
 
-        return this.index;
+        return index;
     }
 
     public Date getLastUpdated() {
 
-        return this.lastUpdated;
+        return lastUpdated;
     }
 
     public String getLatitude() {
 
-        return this.latitude;
+        return latitude;
     }
 
     public String getLongitude() {
 
-        return this.longitude;
+        return longitude;
     }
 
     public String getTitle() {
 
-        return this.title;
+        return title;
     }
 
     public String getWorkProductID() {
 
-        return this.workProductID;
+        return workProductID;
     }
 
     public void setCategory(String category) {
@@ -177,20 +184,18 @@ implements Serializable {
     public String toString() {
 
         final StringBuffer sb = new StringBuffer();
-        sb.append("\n\tID: " + this.id);
-        sb.append("\n\tTitle: " + this.title);
-        sb.append("\n\tCategory: " + this.category);
-        sb.append("\n\tLat/Lon: " + this.latitude + "/" + this.longitude);
-        sb.append("\n\tIndex Key: " + this.index);
-        sb.append("\n\tFilter: " + this.filter);
-        sb.append("\n\tDescription: " + this.description);
-        sb.append("\n\tContent:  " + this.content);
-        if (this.workProductID != null) {
-            sb.append("\n\tProductID: " + this.workProductID);
-        }
-        if (this.igID != null) {
-            sb.append("\n\tIGID: " + this.igID);
-        }
+        sb.append("\n\tID: " + id);
+        sb.append("\n\tTitle: " + title);
+        sb.append("\n\tCategory: " + category);
+        sb.append("\n\tLat/Lon: " + latitude + "/" + longitude);
+        sb.append("\n\tIndex Key: " + index);
+        sb.append("\n\tFilter: " + filter);
+        sb.append("\n\tDescription: " + description);
+        sb.append("\n\tContent:  " + content);
+        if (workProductID != null)
+            sb.append("\n\tProductID: " + workProductID);
+        if (igID != null)
+            sb.append("\n\tIGID: " + igID);
         sb.append("\n");
         return sb.toString();
     }

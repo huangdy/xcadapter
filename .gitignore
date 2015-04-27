@@ -4,3 +4,5 @@ maven-eclipse.xml
 .project
 .settings/
 target/
+Logs/
+data/

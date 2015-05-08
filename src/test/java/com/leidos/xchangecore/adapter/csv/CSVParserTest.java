@@ -134,5 +134,8 @@ public class CSVParserTest {
         key = "abc:def:kadfa dkerekjkkde  dde";
         final boolean found = key.matches("(?i:.*ada.*)");
         System.out.println("contains de: " + (found ? " found" : " not found"));
+
+        key = " abc def ";
+        System.out.println("[" + key + "] -> [" + key.trim() + "]");
     }
 }

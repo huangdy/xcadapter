@@ -85,6 +85,7 @@ public class CSVParserTest {
         final MappedRecord[] records = csvFileParser.getRecords();
         for (final MappedRecord record : records) {
             System.out.println("Record: " + record);
+            System.out.println("Incident Document:\n" + Util.getIncidentDocument(record) + "\n");
         }
 
     }

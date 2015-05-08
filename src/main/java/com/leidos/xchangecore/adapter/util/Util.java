@@ -35,22 +35,37 @@ import com.saic.precis.x2009.x06.structures.WorkProductDocument.WorkProduct;
 
 public class Util {
 
+    private static final String ACTIVITY_DATE = "ActivityDate";
+
+    private static final Logger logger = LoggerFactory.getLogger(Util.class);
+
+    private static final String NIEM_NS = "http://niem.gov/niem/niem-core/2.0";
+
+    private static final String PRECISS_NS = "http://www.saic.com/precis/2009/06/structures";
+
+    private static final String WORKPRODUCT_IDENTIFICATION = "WorkProductIdentification";
+
+    private static final String WORKPRODUCT_PROPERTIES = "WorkProductProperties";
+
+    private static final String ZERO = "0";
+
+    private static final String ZERO_POINT_ZERO = "0.0";
+
+    private static final String ONE_POINT_ZERO = "1.0";
+
     public static String[] convertToDegMinSec(String decimal) {
 
-        if (decimal.indexOf("\"") == -1) {
+        if (decimal.indexOf("\"") == -1)
             return toDegMinSec(decimal);
-        }
         int sign = 1;
         decimal = decimal.trim();
-        if (decimal.endsWith("S") || decimal.endsWith("W")) {
+        if (decimal.endsWith("S") || decimal.endsWith("W"))
             sign = -1;
-        }
         decimal = decimal.substring(0, decimal.length() - 1).trim();
         final String[] ret = decimal.split(" ", -1);
         ret[0] = ret[0].substring(0, ret[0].length() - 1);
-        if (sign == -1) {
+        if (sign == -1)
             ret[0] = new String("-" + ret[0]);
-        }
         ret[1] = ret[1].substring(0, ret[1].length() - 1);
         ret[2] = ret[2].substring(0, ret[2].length() - 1);
         return ret;
@@ -109,15 +124,13 @@ public class Util {
     private static final IdentificationType getIdentificationElement(WorkProduct workProduct) {
 
         IdentificationType id = null;
-        if (workProduct == null) {
+        if (workProduct == null)
             System.err.println("Trying to get an identification element from a null work product");
-        }
-        if ((workProduct != null) && (workProduct.getPackageMetadata() != null)) {
-            final XmlObject[] objects = workProduct.getPackageMetadata().selectChildren(new QName(PRECISS_NS,
-                WORKPRODUCT_IDENTIFICATION));
-            if (objects.length > 0) {
+        if (workProduct != null && workProduct.getPackageMetadata() != null) {
+            final XmlObject[] objects = workProduct.getPackageMetadata().selectChildren(
+                new QName(PRECISS_NS, WORKPRODUCT_IDENTIFICATION));
+            if (objects.length > 0)
                 id = (IdentificationType) objects[0];
-            }
         }
         return id;
     }
@@ -125,11 +138,10 @@ public class Util {
     public static final String getIGID(WorkProduct workProduct) {
 
         final AssociatedGroups associatedGroup = getPropertiesElement(workProduct).getAssociatedGroups();
-        if ((associatedGroup != null) && (associatedGroup.sizeOfIdentifierArray() > 0)) {
+        if (associatedGroup != null && associatedGroup.sizeOfIdentifierArray() > 0)
             return associatedGroup.getIdentifierArray(0).getStringValue();
-        } else {
+        else
             return null;
-        }
     }
 
     public static IncidentType getIncidentDocument(MappedRecord record) {
@@ -137,7 +149,8 @@ public class Util {
         final IncidentType incident = IncidentType.Factory.newInstance();
 
         // set Activiy Category
-        incident.addNewActivityCategoryText().setStringValue(StringEscapeUtils.escapeXml(record.getCategory()));
+        incident.addNewActivityCategoryText().setStringValue(
+            StringEscapeUtils.escapeXml(record.getCategory()));
 
         // set Acitivity Name
         // incident.addNewActivityName().setStringValue(StringEscapeUtils.escapeXml(record.getTitle()));
@@ -147,8 +160,8 @@ public class Util {
         incident.addNewIncidentLocation();
         final AreaType area = incident.getIncidentLocationArray(0).addNewLocationArea();
         area.addNewAreaCircularDescriptionText().setStringValue("Location: " + record.getTitle());
-        area.addNewAreaCircularRegion().set(createCircle(record.getLatitude(),
-            record.getLongitude()));
+        area.addNewAreaCircularRegion().set(
+            createCircle(record.getLatitude(), record.getLongitude()));
 
         // set the ActivityDate
         setIncidentDate(incident);
@@ -156,13 +169,15 @@ public class Util {
         // set the Activity Description using the content ?
         incident.addNewActivityDescriptionText();
         final TextType description = incident.getActivityDescriptionTextArray(0);
-        description.setStringValue(StringEscapeUtils.escapeXml(record.getDescription()));
+        // description.setStringValue(StringEscapeUtils.escapeXml(record.getDescription()));
+        description.setStringValue(record.getDescription());
 
         // escape the content string
         // incident.addNewIncidentObservationText().setStringValue(StringEscapeUtils.escapeXml(record.getContent()));
 
         final StatusType status = incident.addNewActivityStatus();
-        status.addNewStatusDescriptionText().setStringValue(StringEscapeUtils.escapeXml(record.getFilter()));
+        status.addNewStatusDescriptionText().setStringValue(
+            StringEscapeUtils.escapeXml(record.getFilter()));
 
         // logger.debug("getIncidentDocument: " + incident.xmlText());
 
@@ -200,12 +215,11 @@ public class Util {
     private static final PropertiesType getPropertiesElement(WorkProduct workProduct) {
 
         PropertiesType properties = null;
-        if ((workProduct != null) && (workProduct.getPackageMetadata() != null)) {
-            final XmlObject[] objects = workProduct.getPackageMetadata().selectChildren(new QName(PRECISS_NS,
-                WORKPRODUCT_PROPERTIES));
-            if (objects.length > 0) {
+        if (workProduct != null && workProduct.getPackageMetadata() != null) {
+            final XmlObject[] objects = workProduct.getPackageMetadata().selectChildren(
+                new QName(PRECISS_NS, WORKPRODUCT_PROPERTIES));
+            if (objects.length > 0)
                 properties = (PropertiesType) objects[0];
-            }
         }
         return properties;
     }
@@ -217,11 +231,8 @@ public class Util {
 
         final ActivityDateDocument activityDate = ActivityDateDocument.Factory.newInstance();
         activityDate.addNewActivityDate().set(dateDoc);
-        substitute(incident.addNewActivityDateRepresentation(),
-            NIEM_NS,
-            ACTIVITY_DATE,
-            DateType.type,
-            activityDate.getActivityDate());
+        substitute(incident.addNewActivityDateRepresentation(), NIEM_NS, ACTIVITY_DATE,
+            DateType.type, activityDate.getActivityDate());
     }
 
     /**
@@ -241,11 +252,10 @@ public class Util {
 
         final XmlObject subObject = parentObject.substitute(new QName(subNamespace, subTypeName),
             subSchemaType);
-        if (subObject == parentObject) {
+        if (subObject == parentObject)
             System.out.println("cannot change to " + subTypeName);
-        } else {
+        else
             subObject.set(theObject);
-        }
     }
 
     private static String[] toDegMinSec(String decimal) {
@@ -254,27 +264,11 @@ public class Util {
         final int degrees = (int) d;
         d = Math.abs(d - degrees) * 60;
         final int minutes = (int) d;
-        final double seconds = ((d - minutes) * 60) + 0.005;
+        final double seconds = (d - minutes) * 60 + 0.005;
         final String[] ret = new String[3];
         ret[0] = String.valueOf(degrees);
         ret[1] = String.valueOf(minutes);
         ret[2] = String.valueOf(seconds).substring(0, 5);
         return ret;
     }
-
-    private static final String ACTIVITY_DATE = "ActivityDate";
-
-    private static final Logger logger = LoggerFactory.getLogger(Util.class);
-
-    private static final String NIEM_NS = "http://niem.gov/niem/niem-core/2.0";
-
-    private static final String PRECISS_NS = "http://www.saic.com/precis/2009/06/structures";
-
-    private static final String WORKPRODUCT_IDENTIFICATION = "WorkProductIdentification";
-
-    private static final String WORKPRODUCT_PROPERTIES = "WorkProductProperties";
-
-    private static final String ZERO = "0";
-    private static final String ZERO_POINT_ZERO = "0.0";
-    private static final String ONE_POINT_ZERO = "1.0";
 }

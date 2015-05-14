@@ -19,42 +19,46 @@ public class CsvConfiguration
      *
      */
     private static final long serialVersionUID = 1L;
-    private static final Logger logger = LoggerFactory.getLogger(CsvConfiguration.class);
 
-    public static final String FieldName_Latitude = "latitude";
-    public static final String FieldName_Longitude = "longitude";
-    public static final String FieldName_Title = "title";
-    public static final String FieldName_TitlePrefix = "title.prefix";
-    public static final String FieldName_Category = "category";
-    public static final String FieldName_CategoryFixed = "category.fixed";
-    public static final String FieldName_FilterName = "filter";
-    public static final String FieldName_FilterText = "filter.text";
-    public static final String FieldName_Index = "index";
-    public static final String FieldName_Description = "description";
-    public static final String FieldName_URLHost = "url.host";
-    public static final String FieldName_Username = "url.username";
-    public static final String FieldName_Password = "url.password";
-    public static final String FieldName_RedirectUrl = "url.redirectUrl";
-    private static final String urlPostfix = "/core/ws/services";
+    private static final Logger logger = LoggerFactory.getLogger(CsvConfiguration.class);
+    public static final String FN_Latitude = "latitude";
+    public static final String FN_Longitude = "longitude";
+    public static final String FN_Title = "title";
+    public static final String FN_TitlePrefix = "title.prefix";
+    public static final String FN_Category = "category";
+    public static final String FN_CategoryFixed = "category.fixed";
+    public static final String FN_FilterName = "filter";
+    public static final String FN_FilterText = "filter.text";
+    public static final String FN_Distance = "distance";
+    public static final String FN_DistanceFilterText = "distance.filter.text";
+    public static final String FN_Index = "index";
+    public static final String FN_Description = "description";
+    public static final String FN_URLHost = "url.host";
+    public static final String FN_Username = "url.username";
+    public static final String FN_Password = "url.password";
+    public static final String FN_RedirectUrl = "url.redirectUrl";
+
+    public static final String urlPostfix = "/core/ws/services";
 
     public static final String[] DefinedColumnNames = new String[] {
-        FieldName_Title,
-        FieldName_Category,
-        FieldName_Latitude,
-        FieldName_Longitude,
-        FieldName_FilterName,
-        FieldName_Description,
+        FN_Title,
+        FN_Category,
+        FN_Latitude,
+        FN_Longitude,
+        FN_FilterName,
+        FN_Description,
     };
 
     @Id
     @Column
     private String id;
-
     private String title;
     private String titlePrefix;
     private String category;
     private String filter;
     private String filterText;
+    private String distance = "";
+    private String distanceFilterText = "";
     private String latitude;
     private String longitude;
     private String categoryFixed = "";
@@ -63,21 +67,32 @@ public class CsvConfiguration
     private String uri = "http://localhost";
     private String username = "xchangecore";
     private String password = "xchangecore";
+
     private String redirectUrl = "http://www.google.com";
 
     public String getCategory() {
 
-        return category;
+        return this.category;
     }
 
     public String getCategoryFixed() {
 
-        return categoryFixed;
+        return this.categoryFixed;
     }
 
     public String getDescription() {
 
-        return description;
+        return this.description;
+    }
+
+    public String getDistance() {
+
+        return this.distance;
+    }
+
+    public String getDistanceFilterText() {
+
+        return this.distanceFilterText;
     }
 
     public String getFieldValue(String columnName) {
@@ -85,94 +100,103 @@ public class CsvConfiguration
         try {
             return (String) this.getClass().getDeclaredField(columnName).get(this);
         } catch (final Throwable e) {
-            e.printStackTrace();
-            return null;
+            if (e instanceof NoSuchFieldException) {
+                return "";
+            } else {
+                logger.error("getFieldValue: " + columnName + ": " + e.getMessage());
+                return null;
+            }
         }
     }
 
     public String getFilter() {
 
-        return filter;
+        return this.filter;
     }
 
     public String getFilterText() {
 
-        return filterText;
+        return this.filterText;
     }
 
     public String getId() {
 
-        return id;
+        return this.id;
     }
 
     public String getIndex() {
 
-        return index;
+        return this.index;
     }
 
     public String getLatitude() {
 
-        return latitude;
+        return this.latitude;
     }
 
     public String getLongitude() {
 
-        return longitude;
+        return this.longitude;
     }
 
     public String getPassword() {
 
-        return password;
+        return this.password;
     }
 
     public String getRedirectUrl() {
 
-        return redirectUrl;
+        return this.redirectUrl;
     }
 
     public String getTitle() {
 
-        return title;
+        return this.title;
     }
 
     public String getTitlePrefix() {
 
-        return titlePrefix;
+        return this.titlePrefix;
     }
 
     public String getUri() {
 
-        return uri;
+        return this.uri;
     }
 
     public String getUsername() {
 
-        return username;
+        return this.username;
     }
 
     public String getValue(String key) {
 
-        if (key.equals(FieldName_Category))
-            return getCategory();
-        else if (key.equalsIgnoreCase(FieldName_Description))
-            return getDescription();
-        else if (key.equalsIgnoreCase(FieldName_FilterName))
-            return getFilter();
-        else if (key.equalsIgnoreCase(FieldName_Latitude))
-            return getLatitude();
-        else if (key.equalsIgnoreCase(FieldName_Longitude))
-            return getLongitude();
-        else if (key.equalsIgnoreCase(FieldName_Title))
-            return getTitle();
-        else if (key.equalsIgnoreCase(FieldName_Category))
-            return getCategoryFixed();
-        else
+        if (key.equals(FN_Category)) {
+            return this.getCategory();
+        } else if (key.equalsIgnoreCase(FN_Description)) {
+            return this.getDescription();
+        } else if (key.equalsIgnoreCase(FN_FilterName)) {
+            return this.getFilter();
+        } else if (key.equalsIgnoreCase(FN_Latitude)) {
+            return this.getLatitude();
+        } else if (key.equalsIgnoreCase(FN_Longitude)) {
+            return this.getLongitude();
+        } else if (key.equalsIgnoreCase(FN_Title)) {
+            return this.getTitle();
+        } else if (key.equalsIgnoreCase(FN_Category)) {
+            return this.getCategoryFixed();
+        } else if (key.equalsIgnoreCase(FN_Distance)) {
+            return this.getDistance();
+        } else if (key.equalsIgnoreCase(FN_DistanceFilterText)) {
+            return this.getDistanceFilterText();
+        } else {
             return null;
+        }
     }
 
     public boolean isValid() {
 
-        return getTitle() == null || getTitle().length() == 0 ? false : true;
+        return (this.getTitle() == null) || (this.getTitle().length() == 0) ? false : true;
     }
 
     public void setCategory(String category) {
@@ -188,6 +212,16 @@ public class CsvConfiguration
     public void setDescription(String description) {
 
         this.description = description;
+    }
+
+    public void setDistance(String distance) {
+
+        this.distance = distance;
+    }
+
+    public void setDistanceFilterText(String distanceFilterText) {
+
+        this.distanceFilterText = distanceFilterText;
     }
 
     public void setFilter(String filter) {
@@ -214,36 +248,41 @@ public class CsvConfiguration
 
         logger.debug("key/value: [" + keyAndValue[0] + "/" + keyAndValue[1] + "]");
 
-        if (keyAndValue[0].equalsIgnoreCase(FieldName_Category))
-            setCategory(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FieldName_Title))
-            setTitle(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FieldName_TitlePrefix))
-            setTitlePrefix(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FieldName_Latitude))
-            setLatitude(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FieldName_Longitude))
-            setLongitude(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FieldName_FilterName))
-            setFilter(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FieldName_FilterText))
-            setFilterText(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FieldName_Index))
-            setIndex(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FieldName_Description))
-            setDescription(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FieldName_URLHost))
-            setUri(keyAndValue[1] + urlPostfix);
-        else if (keyAndValue[0].equalsIgnoreCase(FieldName_Username))
-            setUsername(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FieldName_Password))
-            setPassword(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FieldName_RedirectUrl))
-            setRedirectUrl(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FieldName_CategoryFixed))
-            setCategoryFixed(keyAndValue[1]);
-        else
+        if (keyAndValue[0].equalsIgnoreCase(FN_Category)) {
+            this.setCategory(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Title)) {
+            this.setTitle(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_TitlePrefix)) {
+            this.setTitlePrefix(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Latitude)) {
+            this.setLatitude(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Longitude)) {
+            this.setLongitude(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_FilterName)) {
+            this.setFilter(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_FilterText)) {
+            this.setFilterText(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Index)) {
+            this.setIndex(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Description)) {
+            this.setDescription(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_URLHost)) {
+            this.setUri(keyAndValue[1] + urlPostfix);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Username)) {
+            this.setUsername(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Password)) {
+            this.setPassword(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_RedirectUrl)) {
+            this.setRedirectUrl(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_CategoryFixed)) {
+            this.setCategoryFixed(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Distance)) {
+            this.setDistance(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_DistanceFilterText)) {
+            this.setDistanceFilterText(keyAndValue[1]);
+        } else {
             logger.warn("Invalid Key/Value: [" + keyAndValue[0] + "/" + keyAndValue[1] + "]");
+        }
     }
 
     public void setLatitude(String latitude) {
@@ -290,14 +329,17 @@ public class CsvConfiguration
 
         final HashMap<String, String> map = new HashMap<String, String>();
 
-        if (getCategory().indexOf(".") == -1)
-            map.put(getCategory(), FieldName_Category);
-        if (getTitle().indexOf(".") == -1)
-            map.put(getTitle(), FieldName_Title);
-        if (getFilter().indexOf(".") == -1)
-            map.put(getFilter(), FieldName_FilterName);
-        map.put(getLatitude(), FieldName_Latitude);
-        map.put(getLongitude(), FieldName_Longitude);
+        if (this.getCategory().indexOf(".") == -1) {
+            map.put(this.getCategory(), FN_Category);
+        }
+        if (this.getTitle().indexOf(".") == -1) {
+            map.put(this.getTitle(), FN_Title);
+        }
+        if (this.getFilter().indexOf(".") == -1) {
+            map.put(this.getFilter(), FN_FilterName);
+        }
+        map.put(this.getLatitude(), FN_Latitude);
+        map.put(this.getLongitude(), FN_Longitude);
 
         return map;
     }

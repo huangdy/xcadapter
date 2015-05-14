@@ -15,7 +15,9 @@ import gov.niem.niem.niemCore.x20.TextType;
 import gov.niem.niem.niemCore.x20.TwoDimensionalGeographicCoordinateType;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.TimeZone;
 
 import javax.xml.namespace.QName;
@@ -32,26 +34,20 @@ import com.saic.precis.x2009.x06.base.AssociatedGroupsDocument.AssociatedGroups;
 import com.saic.precis.x2009.x06.base.IdentificationType;
 import com.saic.precis.x2009.x06.base.PropertiesType;
 import com.saic.precis.x2009.x06.structures.WorkProductDocument.WorkProduct;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.LinearRing;
+import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.Polygon;
 
 public class Util {
 
-    private static final String ACTIVITY_DATE = "ActivityDate";
+    public static boolean contains(Double[][] bb, Point point) {
 
-    private static final Logger logger = LoggerFactory.getLogger(Util.class);
-
-    private static final String NIEM_NS = "http://niem.gov/niem/niem-core/2.0";
-
-    private static final String PRECISS_NS = "http://www.saic.com/precis/2009/06/structures";
-
-    private static final String WORKPRODUCT_IDENTIFICATION = "WorkProductIdentification";
-
-    private static final String WORKPRODUCT_PROPERTIES = "WorkProductProperties";
-
-    private static final String ZERO = "0";
-
-    private static final String ZERO_POINT_ZERO = "0.0";
-
-    private static final String ONE_POINT_ZERO = "1.0";
+        final LinearRing bbLinerRing = new GeometryFactory().createLinearRing(getCoordinateArray(bb));
+        final Polygon bbPloygon = new GeometryFactory().createPolygon(bbLinerRing, null);
+        return point.within(bbPloygon);
+    }
 
     public static String[] convertToDegMinSec(String decimal) {
 
@@ -121,14 +117,22 @@ public class Util {
         return center;
     }
 
+    private static Coordinate[] getCoordinateArray(Double[][] coords) {
+
+        final List<Coordinate> coordianteList = new ArrayList<Coordinate>();
+        for (final Double[] coord : coords)
+            coordianteList.add(new Coordinate(coord[0], coord[1]));
+        return coordianteList.toArray(new Coordinate[coordianteList.size()]);
+    }
+
     private static final IdentificationType getIdentificationElement(WorkProduct workProduct) {
 
         IdentificationType id = null;
         if (workProduct == null)
             System.err.println("Trying to get an identification element from a null work product");
         if (workProduct != null && workProduct.getPackageMetadata() != null) {
-            final XmlObject[] objects = workProduct.getPackageMetadata().selectChildren(
-                new QName(PRECISS_NS, WORKPRODUCT_IDENTIFICATION));
+            final XmlObject[] objects = workProduct.getPackageMetadata().selectChildren(new QName(PRECISS_NS,
+                                                                                                  WORKPRODUCT_IDENTIFICATION));
             if (objects.length > 0)
                 id = (IdentificationType) objects[0];
         }
@@ -149,8 +153,7 @@ public class Util {
         final IncidentType incident = IncidentType.Factory.newInstance();
 
         // set Activiy Category
-        incident.addNewActivityCategoryText().setStringValue(
-            StringEscapeUtils.escapeXml(record.getCategory()));
+        incident.addNewActivityCategoryText().setStringValue(StringEscapeUtils.escapeXml(record.getCategory()));
 
         // set Acitivity Name
         // incident.addNewActivityName().setStringValue(StringEscapeUtils.escapeXml(record.getTitle()));
@@ -160,8 +163,8 @@ public class Util {
         incident.addNewIncidentLocation();
         final AreaType area = incident.getIncidentLocationArray(0).addNewLocationArea();
         area.addNewAreaCircularDescriptionText().setStringValue("Location: " + record.getTitle());
-        area.addNewAreaCircularRegion().set(
-            createCircle(record.getLatitude(), record.getLongitude()));
+        area.addNewAreaCircularRegion().set(createCircle(record.getLatitude(),
+            record.getLongitude()));
 
         // set the ActivityDate
         setIncidentDate(incident);
@@ -176,8 +179,7 @@ public class Util {
         // incident.addNewIncidentObservationText().setStringValue(StringEscapeUtils.escapeXml(record.getContent()));
 
         final StatusType status = incident.addNewActivityStatus();
-        status.addNewStatusDescriptionText().setStringValue(
-            StringEscapeUtils.escapeXml(record.getFilter()));
+        status.addNewStatusDescriptionText().setStringValue(StringEscapeUtils.escapeXml(record.getFilter()));
 
         // logger.debug("getIncidentDocument: " + incident.xmlText());
 
@@ -216,12 +218,20 @@ public class Util {
 
         PropertiesType properties = null;
         if (workProduct != null && workProduct.getPackageMetadata() != null) {
-            final XmlObject[] objects = workProduct.getPackageMetadata().selectChildren(
-                new QName(PRECISS_NS, WORKPRODUCT_PROPERTIES));
+            final XmlObject[] objects = workProduct.getPackageMetadata().selectChildren(new QName(PRECISS_NS,
+                                                                                                  WORKPRODUCT_PROPERTIES));
             if (objects.length > 0)
                 properties = (PropertiesType) objects[0];
         }
         return properties;
+    }
+
+    public static boolean insideBoundingBox(Double[][] boundingBox, String lat, String lon) {
+
+        final Coordinate coords = new Coordinate(Double.parseDouble(lon), Double.parseDouble(lat));
+        final Point point = new GeometryFactory().createPoint(coords);
+
+        return contains(boundingBox, point);
     }
 
     private static void setIncidentDate(IncidentType incident) {
@@ -231,8 +241,11 @@ public class Util {
 
         final ActivityDateDocument activityDate = ActivityDateDocument.Factory.newInstance();
         activityDate.addNewActivityDate().set(dateDoc);
-        substitute(incident.addNewActivityDateRepresentation(), NIEM_NS, ACTIVITY_DATE,
-            DateType.type, activityDate.getActivityDate());
+        substitute(incident.addNewActivityDateRepresentation(),
+            NIEM_NS,
+            ACTIVITY_DATE,
+            DateType.type,
+            activityDate.getActivityDate());
     }
 
     /**
@@ -271,4 +284,22 @@ public class Util {
         ret[2] = String.valueOf(seconds).substring(0, 5);
         return ret;
     }
+
+    private static final String ACTIVITY_DATE = "ActivityDate";
+
+    private static final Logger logger = LoggerFactory.getLogger(Util.class);
+
+    private static final String NIEM_NS = "http://niem.gov/niem/niem-core/2.0";
+
+    private static final String PRECISS_NS = "http://www.saic.com/precis/2009/06/structures";
+
+    private static final String WORKPRODUCT_IDENTIFICATION = "WorkProductIdentification";
+
+    private static final String WORKPRODUCT_PROPERTIES = "WorkProductProperties";
+
+    private static final String ZERO = "0";
+
+    private static final String ZERO_POINT_ZERO = "0.0";
+
+    private static final String ONE_POINT_ZERO = "1.0";
 }

@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 @Entity
 public class MappedRecord
-implements Serializable {
+    implements Serializable {
 
     /**
      *
@@ -39,80 +39,91 @@ implements Serializable {
     private String index;
 
     private String creator;
-
     private String filter;
-
     private String igID = null;
+
     @Column(columnDefinition = "VARCHAR(4096)")
     private String workProductID = null;
-
     private String latitude;
     private String longitude;
+    private String distance;
+    private String distanceFilterText;
+
     private Date lastUpdated;
 
     public String getCategory() {
 
-        return category;
+        return this.category;
     }
 
     public String getContent() {
 
-        return content;
+        return this.content;
     }
 
     public String getCreator() {
 
-        return creator;
+        return this.creator;
     }
 
     public String getDescription() {
 
-        return description;
+        return this.description;
+    }
+
+    public String getDistance() {
+
+        return this.distance;
+    }
+
+    public String getDistanceFilterText() {
+
+        return this.distanceFilterText;
     }
 
     public String getFilter() {
 
-        return filter;
+        return this.filter;
     }
 
     public Integer getId() {
 
-        return id;
+        return this.id;
     }
 
     public String getIgID() {
 
-        return igID;
+        return this.igID;
     }
 
     public String getIndex() {
 
-        return index;
+        return this.index;
     }
 
     public Date getLastUpdated() {
 
-        return lastUpdated;
+        return this.lastUpdated;
     }
 
     public String getLatitude() {
 
-        return latitude;
+        return this.latitude;
     }
 
     public String getLongitude() {
 
-        return longitude;
+        return this.longitude;
     }
 
     public String getTitle() {
 
-        return title;
+        return this.title;
     }
 
     public String getWorkProductID() {
 
-        return workProductID;
+        return this.workProductID;
     }
 
     public void setCategory(String category) {
@@ -133,6 +144,16 @@ implements Serializable {
     public void setDescription(String description) {
 
         this.description = description;
+    }
+
+    public void setDistance(String distance) {
+
+        this.distance = distance;
+    }
+
+    public void setDistanceFilterText(String distanceFilterText) {
+
+        this.distanceFilterText = distanceFilterText;
     }
 
     public void setFilter(String filter) {
@@ -184,18 +205,28 @@ implements Serializable {
     public String toString() {
 
         final StringBuffer sb = new StringBuffer();
-        sb.append("\n\tID: " + id);
-        sb.append("\n\tTitle: " + title);
-        sb.append("\n\tCategory: " + category);
-        sb.append("\n\tLat/Lon: " + latitude + "/" + longitude);
-        sb.append("\n\tIndex Key: " + index);
-        sb.append("\n\tFilter: " + filter);
-        sb.append("\n\tDescription: " + description);
-        sb.append("\n\tContent:  " + content);
-        if (workProductID != null)
-            sb.append("\n\tProductID: " + workProductID);
-        if (igID != null)
-            sb.append("\n\tIGID: " + igID);
+        if (this.id != null) {
+            sb.append("\n\tID: " + this.id);
+        }
+        sb.append("\n\tTitle: " + this.title);
+        sb.append("\n\tCategory: " + this.category);
+        sb.append("\n\tLat/Lon: " + this.latitude + "/" + this.longitude);
+        sb.append("\n\tIndex Key: " + this.index);
+        sb.append("\n\tFilter: " + this.filter);
+        sb.append("\n\tDescription: " + this.description);
+        sb.append("\n\tContent:  " + this.content);
+        if (this.distance != null) {
+            sb.append("\n\tDistance: " + this.distance);
+        }
+        if (this.distanceFilterText != null) {
+            sb.append("\n\tDistance.Filter.Text: " + this.distanceFilterText);
+        }
+        if (this.workProductID != null) {
+            sb.append("\n\tProductID: " + this.workProductID);
+        }
+        if (this.igID != null) {
+            sb.append("\n\tIGID: " + this.igID);
+        }
         sb.append("\n");
         return sb.toString();
     }

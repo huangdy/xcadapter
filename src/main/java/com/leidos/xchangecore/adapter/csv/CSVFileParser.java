@@ -239,19 +239,19 @@ public class CSVFileParser {
                 filterRecordSet.put(r.getIndex(), r);
         }
         logger.debug("filtered records: " + filterRecordSet.size());
-
-        final Set<MappedRecord> recordSet = new HashSet<MappedRecord>();
-        if (this.getDistance().length() > 0) {
+        final Set<MappedRecord> distanceSet = new HashSet<MappedRecord>();
+        if (this.getDistance().length() > 0 && filterRecordSet.size() > 1) {
             final Double[][] boundingBox = this.calculateBoundingBox(filterRecordSet,
                 Double.parseDouble(this.getDistance()));
-            final Collection<MappedRecord> records = filterRecordSet.values();
             for (final MappedRecord r : this.records)
                 if (r.getFilter().equalsIgnoreCase(this.getDistanceFilterText()))
                     if (Util.insideBoundingBox(boundingBox, r.getLatitude(), r.getLongitude()))
-                        recordSet.add(r);
-            return recordSet.toArray(new MappedRecord[recordSet.size()]);
-
+                        distanceSet.add(r);
+            logger.debug("within the BoundingBox: " + distanceSet.size() + " records found");
+            for (final MappedRecord r : distanceSet)
+                filterRecordSet.put(r.getIndex(), r);
         }
+        distanceSet.clear();
 
         // get the existed records for this creator, for example: target
         final List<MappedRecord> existedRecordList = getMappedRecordDao().findByCreator(this.getCreator());

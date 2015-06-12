@@ -60,23 +60,7 @@ public class CSVParserTest {
         // this.testCostco();
         // this.testIrWin();
         // this.testWalgreen();
-        this.testDistance();
-    }
-
-    private void testDistance() throws Throwable {
-
-        final String path = "src/main/webapp/config/distance.config";
-        final FileInputStream fis = new FileInputStream(new File(path));
-        final File csvFile = new File("src/test/resources/distance.csv");
-        final ConfigFilePaser configFileParser = new ConfigFilePaser("distance.config", fis);
-        final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
-            null,
-            configFileParser.getConfigMap());
-        final MappedRecord[] records = csvFileParser.getRecords();
-        for (final MappedRecord record : records) {
-            final IncidentType incident = Util.getIncidentDocument(record);
-            System.out.println("Record: " + incident);
-        }
+        testSears();
     }
 
     private void testIrWin() throws Throwable {
@@ -101,6 +85,22 @@ public class CSVParserTest {
         final FileInputStream fis = new FileInputStream(new File(path));
         final File csvFile = new File("src/test/resources/a.Macys.csv");
         final ConfigFilePaser configFileParser = new ConfigFilePaser("macys.config", fis);
+        final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
+            null,
+            configFileParser.getConfigMap());
+        final MappedRecord[] records = csvFileParser.getRecords();
+        for (final MappedRecord record : records) {
+            final IncidentType incident = Util.getIncidentDocument(record);
+            System.out.println("Record: " + incident);
+        }
+    }
+
+    private void testSears() throws Throwable {
+
+        final String path = "src/main/webapp/config/sears.config";
+        final FileInputStream fis = new FileInputStream(new File(path));
+        final File csvFile = new File("src/test/resources/distance.csv");
+        final ConfigFilePaser configFileParser = new ConfigFilePaser("sears.config", fis);
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
             null,
             configFileParser.getConfigMap());

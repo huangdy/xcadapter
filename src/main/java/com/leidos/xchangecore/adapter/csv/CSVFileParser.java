@@ -26,6 +26,16 @@ import com.leidos.xchangecore.adapter.util.Util;
 
 public class CSVFileParser {
 
+    private static final double Pi = 3.14159;
+
+    private static final double Radius = 6378137.0;
+
+    private static Logger logger = LoggerFactory.getLogger(CSVFileParser.class);
+    private static MappedRecordDao mappedRecordDao;
+
+    private static String PatternPrefix = "(?i:.*";
+    private static String PatternPostfix = ".*)";
+
     public static MappedRecordDao getMappedRecordDao() {
 
         return mappedRecordDao;
@@ -35,15 +45,6 @@ public class CSVFileParser {
 
         CSVFileParser.mappedRecordDao = mappedRecordDao;
     }
-
-    private static final double Pi = 3.14159;
-    private static final double Radius = 6378137.0;
-
-    private static Logger logger = LoggerFactory.getLogger(CSVFileParser.class);
-    private static MappedRecordDao mappedRecordDao;
-
-    private static String PatternPrefix = "(?i:.*";
-    private static String PatternPostfix = ".*)";
 
     private String filterText;
     private String distance;
@@ -63,10 +64,10 @@ public class CSVFileParser {
         throws Throwable {
 
         super();
-        this.setFilterText(configMap.getFilterText());
-        this.setDistance(configMap.getDistance());
-        this.setDistanceFilterText(configMap.getDistanceFilterText());
-        this.setCreator(configMap.getId());
+        setFilterText(configMap.getFilterText());
+        setDistance(configMap.getDistance());
+        setDistanceFilterText(configMap.getDistanceFilterText());
+        setCreator(configMap.getId());
 
         final MappingHeaderColumnNameTranslateMappingStrategy strategy = new MappingHeaderColumnNameTranslateMappingStrategy();
         strategy.setType(MappedRecord.class);
@@ -76,18 +77,24 @@ public class CSVFileParser {
 
         // merge files if necessary
         File csvFile = null;
-        if (baseInputStream != null)
-            csvFile = this.mergeFiles(baseInputStream, file);
-        else
+        if (baseInputStream != null) {
+            csvFile = mergeFiles(baseInputStream, file);
+        } else {
             csvFile = file;
-        this.validateConfiguration(configMap, strategy, new CSVReader(new FileReader(csvFile)));
+        }
+        validateConfiguration(configMap, strategy, new CSVReader(new FileReader(csvFile)));
 
         // try {
-        this.records = bean.parse(strategy, new CSVReader(new FileReader(csvFile)));
+        records = bean.parse(strategy, new CSVReader(new FileReader(csvFile)));
         final Date currentDate = new Date();
-        for (final MappedRecord record : this.records) {
-            if (configMap.getCategoryFixed().length() > 0)
+        for (final MappedRecord record : records) {
+            // for the category, we will override with category.fixed if existed
+            if (configMap.getCategoryFixed().length() > 0) {
                 record.setCategory(configMap.getCategoryFixed());
+            } else if (configMap.getCategoryPrefix().length() > 0) {
+                // Or, prefix the category if category.prefix existed
+                record.setCategory(configMap.getCategoryPrefix() + " - " + record.getCategory());
+            }
             record.setCreator(configMap.getId());
             record.setLastUpdated(currentDate);
             logger.debug("record: " + record.toString());
@@ -97,8 +104,9 @@ public class CSVFileParser {
         // logger.error("CSV Parser: " + e.getMessage());
         // }
 
-        if (baseInputStream != null)
+        if (baseInputStream != null) {
             csvFile.delete();
+        }
     }
 
     private Double[][] calculateBoundingBox(Map<String, MappedRecord> filterRecordSet,
@@ -116,14 +124,18 @@ public class CSVFileParser {
             final double lon = Double.parseDouble(r.getLongitude());
             west = lon > 0 ? lon < west ? lon : west : lon > west ? west : lon;
             east = lon > 0 ? lon > east ? lon : east : lon < east ? east : lon;
-            if (south == 0)
+            if (south == 0) {
                 south = north;
-            if (north == 0)
+            }
+            if (north == 0) {
                 north = south;
-            if (east == 0)
+            }
+            if (east == 0) {
                 east = west;
-            if (west == 0)
+            }
+            if (west == 0) {
                 west = east;
+            }
         }
         /*
         //Earth’s radius, sphere
@@ -141,14 +153,14 @@ public class CSVFileParser {
         latO = lat + dLat * 180/Pi
         lonO = lon + dLon * 180/Pi
          */
-        final double d = Double.parseDouble(this.getDistance()) * 1000.0;
-        final double deltaLat = d / Radius * 180 / Pi;
+        final double d = Double.parseDouble(getDistance()) * 1000.0;
+        final double deltaLat = ((d / Radius) * 180) / Pi;
         north += deltaLat * (north > 0 ? 1 : -1);
         south -= deltaLat * (south > 0 ? 1 : -1);
-        final double northDelta = d / (Radius * Math.cos(Pi * north / 180.0)) * 180.0 / Pi;
+        final double northDelta = ((d / (Radius * Math.cos((Pi * north) / 180.0))) * 180.0) / Pi;
         final double northWestLon = west - northDelta;
         final double northEastLon = east + northDelta;
-        final double southDelta = d / (Radius * Math.cos(Pi * south / 180.0)) * 180.0 / Pi;
+        final double southDelta = ((d / (Radius * Math.cos((Pi * south) / 180.0))) * 180.0) / Pi;
         final double southWestLon = west - southDelta;
         final double southEastLon = east + southDelta;
         final Double[][] boundingBox = new Double[5][2];
@@ -168,7 +180,7 @@ public class CSVFileParser {
 
     public List<MappedRecord> getAllRecords() {
 
-        return this.records;
+        return records;
     }
 
     private String getCombinedLine(String[] indexHeaders, String[] baseHeaders, int index) {
@@ -180,8 +192,9 @@ public class CSVFileParser {
             sb.append(",");
         }
         for (int i = 0; i < baseHeaders.length; i++) {
-            if (i == index)
+            if (i == index) {
                 continue;
+            }
             sb.append(baseHeaders[i]);
             sb.append(",");
         }
@@ -192,109 +205,124 @@ public class CSVFileParser {
 
     public String getCreator() {
 
-        return this.creator;
+        return creator;
     }
 
     public MappedRecord[] getDeleteRecords() {
 
-        if (this.deleteRecords.isEmpty())
+        if (deleteRecords.isEmpty()) {
             return null;
-        else
-            return this.deleteRecords.values().toArray(new MappedRecord[this.deleteRecords.values().size()]);
+        } else {
+            return deleteRecords.values().toArray(new MappedRecord[deleteRecords.values().size()]);
+        }
     }
 
     public String getDistance() {
 
-        return this.distance;
+        return distance;
     }
 
     public String getDistanceFilterText() {
 
-        return this.distanceFilterText;
+        return distanceFilterText;
     }
 
     public String getFilterText() {
 
-        return this.filterText;
+        return filterText;
     }
 
     public MappedRecord[] getRecords() {
 
         // reset the update and delete set
-        this.updateRecords.clear();
-        this.deleteRecords.clear();
+        updateRecords.clear();
+        deleteRecords.clear();
 
-        logger.debug("total records: " + this.records.size());
+        logger.debug("total records: " + records.size());
 
-        final boolean negativeExpression = this.getFilterText().startsWith("!");
-        final String filterText = negativeExpression ? this.getFilterText().substring(1) : this.getFilterText();
+        final boolean negativeExpression = getFilterText().startsWith("!");
+        final String filterText = negativeExpression ? getFilterText().substring(1) : getFilterText();
         final String pattern = PatternPrefix + filterText + PatternPostfix;
         logger.debug("Filter Pattern: " + pattern);
         // find the matched filter text records
         final Map<String, MappedRecord> filterRecordSet = new HashMap<String, MappedRecord>();
-        for (final MappedRecord r : this.records) {
+        for (final MappedRecord r : records) {
             final boolean isMatched = r.getFilter().matches(pattern);
-            if (isMatched && negativeExpression == false || isMatched == false &&
-                negativeExpression == true)
+            if ((isMatched && (negativeExpression == false)) ||
+                ((isMatched == false) && (negativeExpression == true))) {
                 filterRecordSet.put(r.getIndex(), r);
+            }
         }
         logger.debug("filtered records: " + filterRecordSet.size());
         final Set<MappedRecord> distanceSet = new HashSet<MappedRecord>();
-        if (this.getDistance().length() > 0 && filterRecordSet.size() > 1) {
-            final Double[][] boundingBox = this.calculateBoundingBox(filterRecordSet,
-                Double.parseDouble(this.getDistance()));
-            for (final MappedRecord r : this.records)
-                if (r.getFilter().equalsIgnoreCase(this.getDistanceFilterText()))
-                    if (Util.insideBoundingBox(boundingBox, r.getLatitude(), r.getLongitude()))
+        if ((getDistance().length() > 0) && (filterRecordSet.size() > 1)) {
+            final Double[][] boundingBox = calculateBoundingBox(filterRecordSet,
+                Double.parseDouble(getDistance()));
+            for (final MappedRecord r : records) {
+                if (r.getFilter().equalsIgnoreCase(getDistanceFilterText())) {
+                    if (Util.insideBoundingBox(boundingBox, r.getLatitude(), r.getLongitude())) {
                         distanceSet.add(r);
+                    }
+                }
+            }
             logger.debug("within the BoundingBox: " + distanceSet.size() + " records found");
-            for (final MappedRecord r : distanceSet)
+            for (final MappedRecord r : distanceSet) {
                 filterRecordSet.put(r.getIndex(), r);
+            }
         }
         distanceSet.clear();
 
         // get the existed records for this creator, for example: target
-        final List<MappedRecord> existedRecordList = getMappedRecordDao().findByCreator(this.getCreator());
+        final List<MappedRecord> existedRecordList = getMappedRecordDao().findByCreator(
+            getCreator());
         final Map<String, MappedRecord> existedRecordSet = new HashMap<String, MappedRecord>();
-        for (final MappedRecord record : existedRecordList)
+        for (final MappedRecord record : existedRecordList) {
             existedRecordSet.put(record.getIndex(), record);
+        }
         logger.debug("existed records: " + existedRecordSet.size());
 
         // if the existed record contains the IGID, then we assume it's been saved in XchangeCore already
         final Map<String, MappedRecord> inCoreSet = new HashMap<String, MappedRecord>();
-        for (final MappedRecord r : existedRecordList)
-            if (r.getIgID() != null)
+        for (final MappedRecord r : existedRecordList) {
+            if (r.getIgID() != null) {
                 inCoreSet.put(r.getIndex(), r);
+            }
+        }
         logger.debug("records in Core: " + inCoreSet.size());
 
         // if the in-core record is part of the new incident, we will perform an update of it
         // if the in-core recrod is not part of the new incident, we will delete it from XchangeCore
         final Set<String> inCoreKeySet = inCoreSet.keySet();
-        for (final String key : inCoreKeySet)
+        for (final String key : inCoreKeySet) {
             if (filterRecordSet.containsKey(key)) {
                 final MappedRecord record = filterRecordSet.remove(key);
-                if (inCoreSet.get(key).getContent().equalsIgnoreCase(record.getContent()) == false)
-                    this.updateRecords.put(key, record);
-            } else
-                this.deleteRecords.put(key, inCoreSet.get(key));
-        logger.debug("records need to be updated: " + this.updateRecords.size());
-        logger.debug("records need to be deleted: " + this.deleteRecords.size());
+                if (inCoreSet.get(key).getContent().equalsIgnoreCase(record.getContent()) == false) {
+                    updateRecords.put(key, record);
+                }
+            } else {
+                deleteRecords.put(key, inCoreSet.get(key));
+            }
+        }
+        logger.debug("records need to be updated: " + updateRecords.size());
+        logger.debug("records need to be deleted: " + deleteRecords.size());
 
         return filterRecordSet.values().toArray(new MappedRecord[filterRecordSet.values().size()]);
     }
 
     public MappedRecord[] getUpdateRecords() {
 
-        if (this.updateRecords.isEmpty())
+        if (updateRecords.isEmpty()) {
             return null;
-        else
-            return this.updateRecords.values().toArray(new MappedRecord[this.updateRecords.values().size()]);
+        } else {
+            return updateRecords.values().toArray(new MappedRecord[updateRecords.values().size()]);
+        }
     }
 
     public void makePersist() {
 
-        for (final MappedRecord record : this.records)
+        for (final MappedRecord record : records) {
             getMappedRecordDao().makePersistent(record);
+        }
     }
 
     private File mergeFiles(InputStream is, File f) {
@@ -304,27 +332,30 @@ public class CSVFileParser {
         try {
             String[] headers = baseReader.readNext();
             final String[] baseHeaders = new String[headers.length];
-            for (int i = 0; i < headers.length; i++)
+            for (int i = 0; i < headers.length; i++) {
                 baseHeaders[i] = headers[i].trim();
+            }
             indexedReader = new CSVReader(new FileReader(f));
             headers = indexedReader.readNext();
             final String[] indexHeaders = new String[headers.length];
-            for (int i = 0; i < headers.length; i++)
+            for (int i = 0; i < headers.length; i++) {
                 indexHeaders[i] = headers[i].trim();
+            }
 
-            final int[] columnNumbers = this.whichColumn(baseHeaders, indexHeaders);
+            final int[] columnNumbers = whichColumn(baseHeaders, indexHeaders);
             final HashMap<String, String[]> indexMap = new HashMap<String, String[]>();
             // read in the target file
             String[] columns = null;
-            while ((columns = indexedReader.readNext()) != null)
+            while ((columns = indexedReader.readNext()) != null) {
                 indexMap.put(columns[columnNumbers[0]], columns);
+            }
             indexedReader.close();
             logger.debug("index file contains " + indexMap.size() + " records");
 
             final File temp = File.createTempFile(f.getName(), ".tmp");
             final BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
 
-            writer.write(this.getCombinedLine(indexHeaders, baseHeaders, columnNumbers[1]));
+            writer.write(getCombinedLine(indexHeaders, baseHeaders, columnNumbers[1]));
 
             // merge with base csv file
             while ((columns = baseReader.readNext()) != null) {
@@ -332,7 +363,7 @@ public class CSVFileParser {
                 if (indexMap.containsKey(key)) {
                     // write the merged line
                     logger.debug("index file contain [" + key + "]");
-                    writer.write(this.getCombinedLine(indexMap.get(key), columns, columnNumbers[1]));
+                    writer.write(getCombinedLine(indexMap.get(key), columns, columnNumbers[1]));
                 }
             }
             baseReader.close();
@@ -344,10 +375,12 @@ public class CSVFileParser {
             e.printStackTrace();
         } finally {
             try {
-                if (baseReader != null)
+                if (baseReader != null) {
                     baseReader.close();
-                if (indexedReader != null)
+                }
+                if (indexedReader != null) {
                     indexedReader.close();
+                }
             } catch (final Throwable e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -393,27 +426,32 @@ public class CSVFileParser {
             final String[] columns = column.split("\\.", -1);
             for (final String c : columns) {
                 boolean found = false;
-                for (final String h : strategy.getHeaders())
+                for (final String h : strategy.getHeaders()) {
                     if (c.equalsIgnoreCase(h.trim())) {
                         found = true;
                         break;
                     }
+                }
                 // if the column is not specified in configuration file, it's valid
-                if (!found)
+                if (!found) {
                     throw new Exception("Column: " + c + " is invalid column name");
+                }
             }
         }
     }
 
     private int[] whichColumn(String[] baseHeaders, String[] indexHeaders) {
 
-        for (int i = 0; i < indexHeaders.length; i++)
-            for (int j = 0; j < baseHeaders.length; j++)
-                if (indexHeaders[i].equalsIgnoreCase(baseHeaders[j]))
+        for (int i = 0; i < indexHeaders.length; i++) {
+            for (int j = 0; j < baseHeaders.length; j++) {
+                if (indexHeaders[i].equalsIgnoreCase(baseHeaders[j])) {
                     return new int[] {
-                    i,
-                    j
-                };
+                        i,
+                        j
+                    };
+                }
+            }
+        }
         return null;
     }
 }

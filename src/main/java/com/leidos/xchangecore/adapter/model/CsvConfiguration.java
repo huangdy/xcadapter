@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 @Entity
 public class CsvConfiguration
-    implements Serializable {
+implements Serializable {
 
     /**
      *
@@ -26,6 +26,7 @@ public class CsvConfiguration
     public static final String FN_Title = "title";
     public static final String FN_TitlePrefix = "title.prefix";
     public static final String FN_Category = "category";
+    public static final String FN_CategoryPrefix = "category.prefix";
     public static final String FN_CategoryFixed = "category.fixed";
     public static final String FN_FilterName = "filter";
     public static final String FN_FilterText = "filter.text";
@@ -54,45 +55,53 @@ public class CsvConfiguration
     private String id;
     private String title;
     private String titlePrefix;
-    private String category;
+    private String category = "";
     private String filter;
     private String filterText;
     private String distance = "";
     private String distanceFilterText = "";
     private String latitude;
     private String longitude;
+    private String categoryPrefix = "";
+
     private String categoryFixed = "";
+
     private String description = "title.category";
+
     private String index = "title.category.latitude.longitude";
     private String uri = "http://localhost";
     private String username = "xchangecore";
     private String password = "xchangecore";
-
     private String redirectUrl = "http://www.google.com";
 
     public String getCategory() {
 
-        return this.category;
+        return category;
     }
 
     public String getCategoryFixed() {
 
-        return this.categoryFixed;
+        return categoryFixed;
+    }
+
+    public String getCategoryPrefix() {
+
+        return categoryPrefix;
     }
 
     public String getDescription() {
 
-        return this.description;
+        return description;
     }
 
     public String getDistance() {
 
-        return this.distance;
+        return distance;
     }
 
     public String getDistanceFilterText() {
 
-        return this.distanceFilterText;
+        return distanceFilterText;
     }
 
     public String getFieldValue(String columnName) {
@@ -111,84 +120,84 @@ public class CsvConfiguration
 
     public String getFilter() {
 
-        return this.filter;
+        return filter;
     }
 
     public String getFilterText() {
 
-        return this.filterText;
+        return filterText;
     }
 
     public String getId() {
 
-        return this.id;
+        return id;
     }
 
     public String getIndex() {
 
-        return this.index;
+        return index;
     }
 
     public String getLatitude() {
 
-        return this.latitude;
+        return latitude;
     }
 
     public String getLongitude() {
 
-        return this.longitude;
+        return longitude;
     }
 
     public String getPassword() {
 
-        return this.password;
+        return password;
     }
 
     public String getRedirectUrl() {
 
-        return this.redirectUrl;
+        return redirectUrl;
     }
 
     public String getTitle() {
 
-        return this.title;
+        return title;
     }
 
     public String getTitlePrefix() {
 
-        return this.titlePrefix;
+        return titlePrefix;
     }
 
     public String getUri() {
 
-        return this.uri;
+        return uri;
     }
 
     public String getUsername() {
 
-        return this.username;
+        return username;
     }
 
     public String getValue(String key) {
 
         if (key.equals(FN_Category)) {
-            return this.getCategory();
+            return getCategory();
         } else if (key.equalsIgnoreCase(FN_Description)) {
-            return this.getDescription();
+            return getDescription();
         } else if (key.equalsIgnoreCase(FN_FilterName)) {
-            return this.getFilter();
+            return getFilter();
         } else if (key.equalsIgnoreCase(FN_Latitude)) {
-            return this.getLatitude();
+            return getLatitude();
         } else if (key.equalsIgnoreCase(FN_Longitude)) {
-            return this.getLongitude();
+            return getLongitude();
         } else if (key.equalsIgnoreCase(FN_Title)) {
-            return this.getTitle();
+            return getTitle();
         } else if (key.equalsIgnoreCase(FN_Category)) {
-            return this.getCategoryFixed();
+            return getCategory();
         } else if (key.equalsIgnoreCase(FN_Distance)) {
-            return this.getDistance();
+            return getDistance();
         } else if (key.equalsIgnoreCase(FN_DistanceFilterText)) {
-            return this.getDistanceFilterText();
+            return getDistanceFilterText();
         } else {
             return null;
         }
@@ -196,7 +205,7 @@ public class CsvConfiguration
 
     public boolean isValid() {
 
-        return (this.getTitle() == null) || (this.getTitle().length() == 0) ? false : true;
+        return (getTitle() == null) || (getTitle().length() == 0) ? false : true;
     }
 
     public void setCategory(String category) {
@@ -207,6 +216,11 @@ public class CsvConfiguration
     public void setCategoryFixed(String categoryFixed) {
 
         this.categoryFixed = categoryFixed;
+    }
+
+    public void setCategoryPrefix(String categoryPrefix) {
+
+        this.categoryPrefix = categoryPrefix;
     }
 
     public void setDescription(String description) {
@@ -249,37 +263,39 @@ public class CsvConfiguration
         logger.debug("key/value: [" + keyAndValue[0] + "/" + keyAndValue[1] + "]");
 
         if (keyAndValue[0].equalsIgnoreCase(FN_Category)) {
-            this.setCategory(keyAndValue[1]);
+            setCategory(keyAndValue[1]);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_Title)) {
-            this.setTitle(keyAndValue[1]);
+            setTitle(keyAndValue[1]);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_TitlePrefix)) {
-            this.setTitlePrefix(keyAndValue[1]);
+            setTitlePrefix(keyAndValue[1]);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_Latitude)) {
-            this.setLatitude(keyAndValue[1]);
+            setLatitude(keyAndValue[1]);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_Longitude)) {
-            this.setLongitude(keyAndValue[1]);
+            setLongitude(keyAndValue[1]);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_FilterName)) {
-            this.setFilter(keyAndValue[1]);
+            setFilter(keyAndValue[1]);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_FilterText)) {
-            this.setFilterText(keyAndValue[1]);
+            setFilterText(keyAndValue[1]);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_Index)) {
-            this.setIndex(keyAndValue[1]);
+            setIndex(keyAndValue[1]);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_Description)) {
-            this.setDescription(keyAndValue[1]);
+            setDescription(keyAndValue[1]);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_URLHost)) {
-            this.setUri(keyAndValue[1] + urlPostfix);
+            setUri(keyAndValue[1] + urlPostfix);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_Username)) {
-            this.setUsername(keyAndValue[1]);
+            setUsername(keyAndValue[1]);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_Password)) {
-            this.setPassword(keyAndValue[1]);
+            setPassword(keyAndValue[1]);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_RedirectUrl)) {
-            this.setRedirectUrl(keyAndValue[1]);
+            setRedirectUrl(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_CategoryPrefix)) {
+            setCategoryPrefix(keyAndValue[1]);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_CategoryFixed)) {
-            this.setCategoryFixed(keyAndValue[1]);
+            setCategoryFixed(keyAndValue[1]);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_Distance)) {
-            this.setDistance(keyAndValue[1]);
+            setDistance(keyAndValue[1]);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_DistanceFilterText)) {
-            this.setDistanceFilterText(keyAndValue[1]);
+            setDistanceFilterText(keyAndValue[1]);
         } else {
             logger.warn("Invalid Key/Value: [" + keyAndValue[0] + "/" + keyAndValue[1] + "]");
         }
@@ -329,17 +345,17 @@ public class CsvConfiguration
 
         final HashMap<String, String> map = new HashMap<String, String>();
 
-        if (this.getCategory().indexOf(".") == -1) {
-            map.put(this.getCategory(), FN_Category);
+        if (getCategory().indexOf(".") == -1) {
+            map.put(getCategory(), FN_Category);
         }
-        if (this.getTitle().indexOf(".") == -1) {
-            map.put(this.getTitle(), FN_Title);
+        if (getTitle().indexOf(".") == -1) {
+            map.put(getTitle(), FN_Title);
         }
-        if (this.getFilter().indexOf(".") == -1) {
-            map.put(this.getFilter(), FN_FilterName);
+        if (getFilter().indexOf(".") == -1) {
+            map.put(getFilter(), FN_FilterName);
         }
-        map.put(this.getLatitude(), FN_Latitude);
-        map.put(this.getLongitude(), FN_Longitude);
+        map.put(getLatitude(), FN_Latitude);
+        map.put(getLongitude(), FN_Longitude);
 
         return map;
     }

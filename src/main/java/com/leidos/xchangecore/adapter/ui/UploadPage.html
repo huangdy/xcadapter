@@ -26,24 +26,34 @@ fieldset {
                 <label for="simpleUpload">File: </label> <input wicket:id="fileInput" type="file"
                     id="simpleUpload" />
             </p>
-            <input type="submit" value="Upload" /> <span wicket:id="progress">[[upload
-                progressbar]]</span>
+            <p>
+                <span wicket:id="progress">[[upload progressbar]]</span>
+            </p>
+            <p>
+                <input type="submit" value="Upload" />
+            </p>
+            <p></p>
         </fieldset>
     </form>
+    
+    <span wicket:id="statusMessage" id="statusMessage">Message goes here</span>
+    
+    <div wicket:id="feedback">[[ feedback ]]</div>
 
+    <!-- 
     <div wicket:id="statusPage"></div>
+     -->
+
     <table>
+        <!-- 
         <tr>
             <td align="left"><a wicket:id="showStatus">Status</a></td>
         </tr>
+         -->
         <tr>
-            <td align="right"><a wicket:id="redirect">Redirct back to Login Page</a></td>
+            <td align="right"><a wicket:id="redirect">Redirect back to Login Page</a></td>
         </tr>
     </table>
-
-    <div>
-        <span wicket:id="uploadFeedback" />
-    </div>
 
     <!-- 
     <div>

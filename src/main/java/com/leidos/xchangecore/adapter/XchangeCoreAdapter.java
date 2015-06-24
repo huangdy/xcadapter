@@ -35,7 +35,7 @@ extends WebApplication {
      */
     public Folder getUploadFolder() {
 
-        return this.uploadFolder;
+        return uploadFolder;
     }
 
     @Override
@@ -43,21 +43,11 @@ extends WebApplication {
 
         super.init();
 
-        /*
-        final AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-        ctx.scan("com.leidos.xchangecore.adapter.config.AdapterSpringConfig");
-        ctx.refresh();
-        getComponentInitializationListeners().add((IComponentInitializationListener) new SpringComponentInjector(this,
-                                                                                                                 ctx));
-        getComponentInstantiationListeners().add(new SpringComponentInjector(this));
-         */
+        getResourceSettings().setThrowExceptionOnMissingResource(false);
 
-        this.getResourceSettings().setThrowExceptionOnMissingResource(false);
-
-        this.uploadFolder = new Folder(System.getProperty("java.io.tmpdir"), "xchangecore-uploads");
-        // this.uploadFolder.mkdirs();
+        uploadFolder = new Folder(System.getProperty("java.io.tmpdir"), "xchangecore-uploads");
 
         // need to enable explicitly
-        this.getApplicationSettings().setUploadProgressUpdatesEnabled(true);
+        getApplicationSettings().setUploadProgressUpdatesEnabled(true);
     }
 }

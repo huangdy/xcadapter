@@ -1,19 +1,5 @@
 package com.leidos.xchangecore.adapter.util;
 
-import gov.niem.niem.niemCore.x20.ActivityDateDocument;
-import gov.niem.niem.niemCore.x20.AreaType;
-import gov.niem.niem.niemCore.x20.CircularRegionType;
-import gov.niem.niem.niemCore.x20.DateTimeDocument;
-import gov.niem.niem.niemCore.x20.DateType;
-import gov.niem.niem.niemCore.x20.IncidentType;
-import gov.niem.niem.niemCore.x20.LatitudeCoordinateType;
-import gov.niem.niem.niemCore.x20.LengthMeasureType;
-import gov.niem.niem.niemCore.x20.LongitudeCoordinateType;
-import gov.niem.niem.niemCore.x20.MeasurePointValueDocument;
-import gov.niem.niem.niemCore.x20.StatusType;
-import gov.niem.niem.niemCore.x20.TextType;
-import gov.niem.niem.niemCore.x20.TwoDimensionalGeographicCoordinateType;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,11 +26,44 @@ import com.vividsolutions.jts.geom.LinearRing;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.geom.Polygon;
 
+import gov.niem.niem.niemCore.x20.ActivityDateDocument;
+import gov.niem.niem.niemCore.x20.AreaType;
+import gov.niem.niem.niemCore.x20.CircularRegionType;
+import gov.niem.niem.niemCore.x20.DateTimeDocument;
+import gov.niem.niem.niemCore.x20.DateType;
+import gov.niem.niem.niemCore.x20.IncidentType;
+import gov.niem.niem.niemCore.x20.LatitudeCoordinateType;
+import gov.niem.niem.niemCore.x20.LengthMeasureType;
+import gov.niem.niem.niemCore.x20.LongitudeCoordinateType;
+import gov.niem.niem.niemCore.x20.MeasurePointValueDocument;
+import gov.niem.niem.niemCore.x20.StatusType;
+import gov.niem.niem.niemCore.x20.TextType;
+import gov.niem.niem.niemCore.x20.TwoDimensionalGeographicCoordinateType;
+
 public class Util {
+
+    private static final String ACTIVITY_DATE = "ActivityDate";
+
+    private static final Logger logger = LoggerFactory.getLogger(Util.class);
+
+    private static final String NIEM_NS = "http://niem.gov/niem/niem-core/2.0";
+
+    private static final String PRECISS_NS = "http://www.saic.com/precis/2009/06/structures";
+
+    private static final String WORKPRODUCT_IDENTIFICATION = "WorkProductIdentification";
+
+    private static final String WORKPRODUCT_PROPERTIES = "WorkProductProperties";
+
+    private static final String ZERO = "0";
+
+    private static final String ZERO_POINT_ZERO = "0.0";
+
+    private static final String ONE_POINT_ZERO = "1.0";
 
     public static boolean contains(Double[][] bb, Point point) {
 
-        final LinearRing bbLinerRing = new GeometryFactory().createLinearRing(getCoordinateArray(bb));
+        final LinearRing bbLinerRing = new GeometryFactory().createLinearRing(getCoordinateArray(
+            bb));
         final Polygon bbPloygon = new GeometryFactory().createPolygon(bbLinerRing, null);
         return point.within(bbPloygon);
     }
@@ -131,7 +150,8 @@ public class Util {
         if (workProduct == null)
             System.err.println("Trying to get an identification element from a null work product");
         if (workProduct != null && workProduct.getPackageMetadata() != null) {
-            final XmlObject[] objects = workProduct.getPackageMetadata().selectChildren(new QName(PRECISS_NS,
+            final XmlObject[] objects = workProduct.getPackageMetadata().selectChildren(new QName(
+                                                                                                  PRECISS_NS,
                                                                                                   WORKPRODUCT_IDENTIFICATION));
             if (objects.length > 0)
                 id = (IdentificationType) objects[0];
@@ -141,7 +161,8 @@ public class Util {
 
     public static final String getIGID(WorkProduct workProduct) {
 
-        final AssociatedGroups associatedGroup = getPropertiesElement(workProduct).getAssociatedGroups();
+        final AssociatedGroups associatedGroup = getPropertiesElement(
+            workProduct).getAssociatedGroups();
         if (associatedGroup != null && associatedGroup.sizeOfIdentifierArray() > 0)
             return associatedGroup.getIdentifierArray(0).getStringValue();
         else
@@ -153,7 +174,8 @@ public class Util {
         final IncidentType incident = IncidentType.Factory.newInstance();
 
         // set Activiy Category
-        incident.addNewActivityCategoryText().setStringValue(StringEscapeUtils.escapeXml(record.getCategory()));
+        incident.addNewActivityCategoryText().setStringValue(StringEscapeUtils.escapeXml(
+            record.getCategory()));
 
         // set Acitivity Name
         // incident.addNewActivityName().setStringValue(StringEscapeUtils.escapeXml(record.getTitle()));
@@ -179,7 +201,8 @@ public class Util {
         // incident.addNewIncidentObservationText().setStringValue(StringEscapeUtils.escapeXml(record.getContent()));
 
         final StatusType status = incident.addNewActivityStatus();
-        status.addNewStatusDescriptionText().setStringValue(StringEscapeUtils.escapeXml(record.getFilter()));
+        status.addNewStatusDescriptionText().setStringValue(StringEscapeUtils.escapeXml(
+            record.getFilter()));
 
         // logger.debug("getIncidentDocument: " + incident.xmlText());
 
@@ -218,7 +241,8 @@ public class Util {
 
         PropertiesType properties = null;
         if (workProduct != null && workProduct.getPackageMetadata() != null) {
-            final XmlObject[] objects = workProduct.getPackageMetadata().selectChildren(new QName(PRECISS_NS,
+            final XmlObject[] objects = workProduct.getPackageMetadata().selectChildren(new QName(
+                                                                                                  PRECISS_NS,
                                                                                                   WORKPRODUCT_PROPERTIES));
             if (objects.length > 0)
                 properties = (PropertiesType) objects[0];
@@ -284,22 +308,4 @@ public class Util {
         ret[2] = String.valueOf(seconds).substring(0, 5);
         return ret;
     }
-
-    private static final String ACTIVITY_DATE = "ActivityDate";
-
-    private static final Logger logger = LoggerFactory.getLogger(Util.class);
-
-    private static final String NIEM_NS = "http://niem.gov/niem/niem-core/2.0";
-
-    private static final String PRECISS_NS = "http://www.saic.com/precis/2009/06/structures";
-
-    private static final String WORKPRODUCT_IDENTIFICATION = "WorkProductIdentification";
-
-    private static final String WORKPRODUCT_PROPERTIES = "WorkProductProperties";
-
-    private static final String ZERO = "0";
-
-    private static final String ZERO_POINT_ZERO = "0.0";
-
-    private static final String ONE_POINT_ZERO = "1.0";
 }

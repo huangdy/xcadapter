@@ -57,7 +57,7 @@
             <url-pattern>/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>uicds-users</role-name>
+            <role-name>xchangecore-users</role-name>
         </auth-constraint>
     </security-constraint>
 
@@ -76,7 +76,7 @@
 
         </web-resource-collection>
         <auth-constraint>
-        <role-name>uicds-admins</role-name>
+        <role-name>xchangecore-admins</role-name>
         </auth-constraint>
         </security-constraint>
     -->
@@ -92,13 +92,13 @@
     -->
     <security-role>
         <description> The role that is required to log in to UICDS </description>
-        <role-name>uicds-users</role-name>
+        <role-name>xchangecore-users</role-name>
     </security-role>
 
     <!--
         <security-role>
         <description> The role that is required to acces administrative functions </description>
-        <role-name>uicds-admins</role-name>
+        <role-name>xchangecore-admins</role-name>
         </security-role>
     -->
 

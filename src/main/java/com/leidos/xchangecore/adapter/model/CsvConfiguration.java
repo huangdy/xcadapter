@@ -30,6 +30,8 @@ public class CsvConfiguration
     public static final String FN_CategoryFixed = "category.fixed";
     public static final String FN_FilterName = "filter";
     public static final String FN_FilterText = "filter.text";
+    public static final String FN_CloseFilter = "close.filter";
+    public static final String FN_CloseFilterText = "close.filter.text";
     public static final String FN_Distance = "distance";
     public static final String FN_DistanceFilterText = "distance.filter.text";
     public static final String FN_Index = "index";
@@ -263,42 +265,43 @@ public class CsvConfiguration
 
         logger.debug("key/value: [" + keyAndValue[0] + "/" + keyAndValue[1] + "]");
 
-        if (keyAndValue[0].equalsIgnoreCase(FN_Category))
+        if (keyAndValue[0].equalsIgnoreCase(FN_Category)) {
             this.setCategory(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_Title))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Title)) {
             this.setTitle(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_TitlePrefix))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_TitlePrefix)) {
             this.setTitlePrefix(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_Latitude))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Latitude)) {
             this.setLatitude(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_Longitude))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Longitude)) {
             this.setLongitude(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_FilterName))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_FilterName)) {
             this.setFilter(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_FilterText))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_FilterText)) {
             this.setFilterText(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_Index))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Index)) {
             this.setIndex(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_Description))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Description)) {
             this.setDescription(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_URLHost))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_URLHost)) {
             this.setUri(keyAndValue[1] + urlPostfix);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_Username))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Username)) {
             this.setUsername(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_Password))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Password)) {
             this.setPassword(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_RedirectUrl))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_RedirectUrl)) {
             this.setRedirectUrl(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_CategoryPrefix))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_CategoryPrefix)) {
             this.setCategoryPrefix(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_CategoryFixed))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_CategoryFixed)) {
             this.setCategoryFixed(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_Distance))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_Distance)) {
             this.setDistance(keyAndValue[1]);
-        else if (keyAndValue[0].equalsIgnoreCase(FN_DistanceFilterText))
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_DistanceFilterText)) {
             this.setDistanceFilterText(keyAndValue[1]);
-        else
+        } else {
             logger.warn("Invalid Key/Value: [" + keyAndValue[0] + "/" + keyAndValue[1] + "]");
+        }
     }
 
     public void setLatitude(String latitude) {
@@ -345,12 +348,15 @@ public class CsvConfiguration
 
         final HashMap<String, String> map = new HashMap<String, String>();
 
-        if (this.getCategory().indexOf(".") == -1)
+        if (this.getCategory().indexOf(".") == -1) {
             map.put(this.getCategory(), FN_Category);
-        if (this.getTitle().indexOf(".") == -1)
+        }
+        if (this.getTitle().indexOf(".") == -1) {
             map.put(this.getTitle(), FN_Title);
-        if (this.getFilter().indexOf(".") == -1)
+        }
+        if (this.getFilter().indexOf(".") == -1) {
             map.put(this.getFilter(), FN_FilterName);
+        }
         map.put(this.getLatitude(), FN_Latitude);
         map.put(this.getLongitude(), FN_Longitude);
 

@@ -26,8 +26,8 @@ public class CSVParserTest {
         final File csvFile = new File("src/test/resources/boyd.csv");
         final ConfigFilePaser configFileParser = new ConfigFilePaser("boyd.config", fis);
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
-                                                              null,
-                                                              configFileParser.getConfigMap());
+            null,
+            configFileParser.getConfigMap());
         final MappedRecord[] records = csvFileParser.getRecords();
         for (final MappedRecord record : records) {
             final IncidentType incident = Util.getIncidentDocument(record);
@@ -42,8 +42,8 @@ public class CSVParserTest {
         final File csvFile = new File("src/test/resources/a.Costco.csv");
         final ConfigFilePaser configFileParser = new ConfigFilePaser("costco.config", fis);
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
-                                                              null,
-                                                              configFileParser.getConfigMap());
+            null,
+            configFileParser.getConfigMap());
         final MappedRecord[] records = csvFileParser.getRecords();
         for (final MappedRecord record : records) {
             final IncidentType incident = Util.getIncidentDocument(record);
@@ -70,8 +70,8 @@ public class CSVParserTest {
         final File csvFile = new File("src/test/resources/IRWINexport.csv");
         final ConfigFilePaser configFileParser = new ConfigFilePaser("irwin.config", fis);
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
-                                                              null,
-                                                              configFileParser.getConfigMap());
+            null,
+            configFileParser.getConfigMap());
         final MappedRecord[] records = csvFileParser.getRecords();
         for (final MappedRecord record : records) {
             final IncidentType incident = Util.getIncidentDocument(record);
@@ -86,8 +86,8 @@ public class CSVParserTest {
         final File csvFile = new File("src/test/resources/lowes.1.csv");
         final ConfigFilePaser configFileParser = new ConfigFilePaser("lowes.config", fis);
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
-                                                              null,
-                                                              configFileParser.getConfigMap());
+            null,
+            configFileParser.getConfigMap());
         final MappedRecord[] records = csvFileParser.getRecords();
         for (final MappedRecord record : records) {
             final IncidentType incident = Util.getIncidentDocument(record);
@@ -102,8 +102,8 @@ public class CSVParserTest {
         final File csvFile = new File("src/test/resources/a.Macys.csv");
         final ConfigFilePaser configFileParser = new ConfigFilePaser("macys.config", fis);
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
-                                                              null,
-                                                              configFileParser.getConfigMap());
+            null,
+            configFileParser.getConfigMap());
         final MappedRecord[] records = csvFileParser.getRecords();
         for (final MappedRecord record : records) {
             final IncidentType incident = Util.getIncidentDocument(record);
@@ -118,8 +118,8 @@ public class CSVParserTest {
         final File csvFile = new File("src/test/resources/distance.csv");
         final ConfigFilePaser configFileParser = new ConfigFilePaser("sears.config", fis);
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
-                                                              null,
-                                                              configFileParser.getConfigMap());
+            null,
+            configFileParser.getConfigMap());
         final MappedRecord[] records = csvFileParser.getRecords();
         for (final MappedRecord record : records) {
             final IncidentType incident = Util.getIncidentDocument(record);
@@ -149,8 +149,8 @@ public class CSVParserTest {
         final File csvFile = new File("src/test/resources/a.Target.csv");
         final ConfigFilePaser configFileParser = new ConfigFilePaser("target.config", fis);
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
-                                                              null,
-                                                              configFileParser.getConfigMap());
+            null,
+            configFileParser.getConfigMap());
         final MappedRecord[] records = csvFileParser.getRecords();
         for (final MappedRecord record : records) {
             final IncidentType incident = Util.getIncidentDocument(record);
@@ -167,8 +167,8 @@ public class CSVParserTest {
         final ConfigFilePaser configFileParser = new ConfigFilePaser("walgreen.config", fis);
         final File csvFile = new File("src/test/resources/a.Walgreen.csv");
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
-                                                              baseIS,
-                                                              configFileParser.getConfigMap());
+            baseIS,
+            configFileParser.getConfigMap());
         final MappedRecord[] records = csvFileParser.getRecords();
         for (final MappedRecord record : records) {
             System.out.println("Record: " + record);

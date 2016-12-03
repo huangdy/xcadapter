@@ -7,13 +7,14 @@ import java.util.Map;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Entity
 public class CsvConfiguration
-    implements Serializable {
+implements Serializable {
 
     /**
      *
@@ -30,12 +31,11 @@ public class CsvConfiguration
     public static final String FN_CategoryFixed = "category.fixed";
     public static final String FN_FilterName = "filter";
     public static final String FN_FilterText = "filter.text";
-    public static final String FN_CloseFilter = "close.filter";
-    public static final String FN_CloseFilterText = "close.filter.text";
     public static final String FN_Distance = "distance";
     public static final String FN_DistanceFilterText = "distance.filter.text";
     public static final String FN_Index = "index";
     public static final String FN_Description = "description";
+    public static final String FN_AutoClose = "auto.close";
     public static final String FN_URLHost = "url.host";
     public static final String FN_Username = "url.username";
     public static final String FN_Password = "url.password";
@@ -48,6 +48,7 @@ public class CsvConfiguration
         FN_Latitude,
         FN_Longitude,
         FN_FilterName,
+        FN_Index,
         FN_Description,
     };
 
@@ -64,7 +65,6 @@ public class CsvConfiguration
     private String latitude;
     private String longitude;
     private String categoryPrefix = "";
-
     private String categoryFixed = "";
 
     @Column(columnDefinition = "VARCHAR(65536)")
@@ -72,6 +72,9 @@ public class CsvConfiguration
 
     @Column(columnDefinition = "VARCHAR(65536)")
     private String index = "title.category.latitude.longitude";
+
+    @Transient
+    private boolean autoClose = false;
 
     private String uri = "http://localhost";
     private String username = "xchangecore";
@@ -113,9 +116,9 @@ public class CsvConfiguration
         try {
             return (String) this.getClass().getDeclaredField(columnName).get(this);
         } catch (final Throwable e) {
-            if (e instanceof NoSuchFieldException)
+            if (e instanceof NoSuchFieldException) {
                 return "";
-            else {
+            } else {
                 logger.error("getFieldValue: " + columnName + ": " + e.getMessage());
                 return null;
             }
@@ -184,31 +187,44 @@ public class CsvConfiguration
 
     public String getValue(String key) {
 
-        if (key.equals(FN_Category))
+        if (key.equals(FN_Category)) {
             return this.getCategory();
-        else if (key.equalsIgnoreCase(FN_Description))
+        } else if (key.equalsIgnoreCase(FN_Description)) {
             return this.getDescription();
-        else if (key.equalsIgnoreCase(FN_FilterName))
+        } else if (key.equalsIgnoreCase(FN_FilterName)) {
             return this.getFilter();
-        else if (key.equalsIgnoreCase(FN_Latitude))
+        } else if (key.equalsIgnoreCase(FN_Latitude)) {
             return this.getLatitude();
-        else if (key.equalsIgnoreCase(FN_Longitude))
+        } else if (key.equalsIgnoreCase(FN_Longitude)) {
             return this.getLongitude();
-        else if (key.equalsIgnoreCase(FN_Title))
+        } else if (key.equalsIgnoreCase(FN_Title)) {
             return this.getTitle();
-        else if (key.equalsIgnoreCase(FN_Category))
+        } else if (key.equalsIgnoreCase(FN_Category)) {
             return this.getCategory();
-        else if (key.equalsIgnoreCase(FN_Distance))
+        } else if (key.equalsIgnoreCase(FN_Distance)) {
             return this.getDistance();
-        else if (key.equalsIgnoreCase(FN_DistanceFilterText))
+        } else if (key.equalsIgnoreCase(FN_DistanceFilterText)) {
             return this.getDistanceFilterText();
-        else
+        } else if (key.equalsIgnoreCase(FN_Index)) {
+            return this.getIndex();
+        } else {
             return null;
+        }
+    }
+
+    public boolean isAutoClose() {
+
+        return autoClose;
     }
 
     public boolean isValid() {
 
         return this.getTitle() == null || this.getTitle().length() == 0 ? false : true;
+    }
+
+    private void setAutoClose(String ac) {
+
+        this.autoClose = ac.equalsIgnoreCase("true") == true || ac.equals("1") == true ? true : false;
     }
 
     public void setCategory(String category) {
@@ -299,6 +315,8 @@ public class CsvConfiguration
             this.setDistance(keyAndValue[1]);
         } else if (keyAndValue[0].equalsIgnoreCase(FN_DistanceFilterText)) {
             this.setDistanceFilterText(keyAndValue[1]);
+        } else if (keyAndValue[0].equalsIgnoreCase(FN_AutoClose)) {
+            this.setAutoClose(keyAndValue[1]);
         } else {
             logger.warn("Invalid Key/Value: [" + keyAndValue[0] + "/" + keyAndValue[1] + "]");
         }

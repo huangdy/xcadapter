@@ -16,34 +16,35 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 import au.com.bytecode.opencsv.bean.MappingStrategy;
 
 public class MappingCsvToBean
-    extends CsvToBean<MappedRecord> {
+extends CsvToBean<MappedRecord> {
 
     private static final Logger logger = LoggerFactory.getLogger(MappingCsvToBean.class);
 
     private static final String TokenSeparator = ":";
 
-    private final String[] indexes;
-    private final Integer[] indexColumns;
+    // private final String[] indexes;
+    // private final Integer[] indexColumns;
     private final String[][] columnNames;
     private final Integer[][] columnIndexes;
+    private boolean autoClose = false;
 
     public MappingCsvToBean(CsvConfiguration configMap) {
 
+        setAutoClose(configMap.isAutoClose());
         final int columns = CsvConfiguration.DefinedColumnNames.length;
         columnNames = new String[columns][];
         columnIndexes = new Integer[columns][];
         for (int i = 0; i < columns; i++) {
-            columnNames[i] = configMap.getFieldValue(CsvConfiguration.DefinedColumnNames[i]).split(
-                "[.]", -1);
+            columnNames[i] = configMap.getFieldValue(CsvConfiguration.DefinedColumnNames[i]).split("[.]", -1);
             columnIndexes[i] = new Integer[columnNames[i].length];
         }
-        indexes = configMap.getIndex().split("[.]", -1);
-        indexColumns = new Integer[indexes.length];
+        // indexes = configMap.getIndex().split("[.]", -1);
+        // indexColumns = new Integer[indexes.length];
     }
 
     @Override
-    protected Object convertValue(String value, PropertyDescriptor prop)
-        throws InstantiationException, IllegalAccessException {
+    protected Object convertValue(String value, PropertyDescriptor prop) throws InstantiationException,
+    IllegalAccessException {
 
         final PropertyEditor editor = getPropertyEditor(prop);
         Object obj = value;
@@ -62,22 +63,26 @@ public class MappingCsvToBean
     // figure out the index key in column order
     private void figureOutMultiColumnField(String[] headers) {
 
+        /*
         for (int i = 0; i < indexes.length; i++) {
-            for (int j = 0; j < headers.length; j++)
+            for (int j = 0; j < headers.length; j++) {
                 if (indexes[i].equalsIgnoreCase(headers[j])) {
                     indexColumns[i] = j;
                 }
+            }
         }
+         */
         for (int i = 0; i < columnNames.length; i++) {
             if (columnNames[i].length == 1) {
                 continue;
             }
             for (int j = 0; j < columnNames[i].length; j++) {
-                for (int k = 0; k < headers.length; k++)
+                for (int k = 0; k < headers.length; k++) {
                     if (columnNames[i][j].equalsIgnoreCase(headers[k])) {
                         columnIndexes[i][j] = k;
                         break;
                     }
+                }
             }
         }
     }
@@ -85,12 +90,17 @@ public class MappingCsvToBean
     private int findDuplicateName(int index) {
 
         int i = 0;
-        for (; i < CsvConfiguration.DefinedColumnNames.length; i++)
-            if (i != index && columnNames[i].length == 1 && columnNames[i][0].equalsIgnoreCase(
-                columnNames[index][0])) {
+        for (; i < CsvConfiguration.DefinedColumnNames.length; i++) {
+            if (i != index && columnNames[i].length == 1 && columnNames[i][0].equalsIgnoreCase(columnNames[index][0])) {
                 break;
             }
+        }
         return i;
+    }
+
+    public boolean isAutoClose() {
+
+        return autoClose;
     }
 
     @Override
@@ -99,8 +109,7 @@ public class MappingCsvToBean
         try {
             mapper.captureHeader(csvReader);
 
-            figureOutMultiColumnField(
-                ((MappingHeaderColumnNameTranslateMappingStrategy) mapper).getHeaders());
+            figureOutMultiColumnField(((MappingHeaderColumnNameTranslateMappingStrategy) mapper).getHeaders());
 
             String[] columns;
             final List<MappedRecord> list = new ArrayList<MappedRecord>();
@@ -129,6 +138,7 @@ public class MappingCsvToBean
         record.setContent(value + "]");
 
         // figuer out the index key
+        /*
         sb = new StringBuffer();
         for (int i = 0; i < indexes.length; i++) {
             sb.append(columns[indexColumns[i]] + TokenSeparator);
@@ -136,6 +146,7 @@ public class MappingCsvToBean
         value = sb.toString();
         value = value.substring(0, value.lastIndexOf(TokenSeparator));
         record.setIndex(value);
+         */
 
         // figure out the value for the multi-column field
         for (int i = 0; i < columnNames.length; i++) {
@@ -145,7 +156,7 @@ public class MappingCsvToBean
             final boolean isDescription = CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(
                 CsvConfiguration.FN_Description);
             sb = new StringBuffer();
-            for (int j = 0; j < columnNames[i].length; j++)
+            for (int j = 0; j < columnNames[i].length; j++) {
                 if (isDescription) {
                     sb.append("<br/>");
                     sb.append("<b>");
@@ -153,23 +164,24 @@ public class MappingCsvToBean
                     sb.append("</b>");
                     sb.append(columns[columnIndexes[i][j]]);
                 } else {
-                    sb.append(columns[columnIndexes[i][j]]);
+                    sb.append(columns[columnIndexes[i][j]] + TokenSeparator);
                 }
+            }
             value = sb.toString();
-            // value = value.substring(0, value.lastIndexOf(TokenSeparator));
+            if (isDescription == false) {
+                value = value.substring(0, value.lastIndexOf(TokenSeparator));
+            }
 
-            if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(
-                CsvConfiguration.FN_Category)) {
+            if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FN_Category)) {
                 record.setCategory(value);
-            } else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(
-                CsvConfiguration.FN_Title)) {
+            } else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FN_Title)) {
                 record.setTitle(value);
-            } else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(
-                CsvConfiguration.FN_FilterName)) {
+            } else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FN_FilterName)) {
                 record.setFilter(value);
-            } else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(
-                CsvConfiguration.FN_Description)) {
+            } else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FN_Description)) {
                 record.setDescription(value);
+            } else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FN_Index)) {
+                record.setIndex(value);
             }
         }
 
@@ -187,10 +199,14 @@ public class MappingCsvToBean
                     record.setCategory(record.getDescription());
                     break;
                 default:
-                    logger.warn("Cannot map " + CsvConfiguration.DefinedColumnNames[i] +
-                                "'s value into category");
+                    logger.warn("Cannot map " + CsvConfiguration.DefinedColumnNames[i] + "'s value into category");
                 }
             }
         }
+    }
+
+    private void setAutoClose(boolean autoClose) {
+
+        this.autoClose = autoClose;
     }
 }

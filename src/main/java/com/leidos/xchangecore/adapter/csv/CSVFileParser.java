@@ -50,6 +50,7 @@ public class CSVFileParser {
     private String distance;
     private String distanceFilterText;
     private String creator;
+    private boolean autoClose = false;
 
     private List<MappedRecord> records = null;
     private final Map<String, MappedRecord> updateRecords = new HashMap<String, MappedRecord>();
@@ -60,14 +61,14 @@ public class CSVFileParser {
         super();
     }
 
-    public CSVFileParser(File file, InputStream baseInputStream, CsvConfiguration configMap)
-        throws Throwable {
+    public CSVFileParser(File file, InputStream baseInputStream, CsvConfiguration configMap) throws Throwable {
 
         super();
         this.setFilterText(configMap.getFilterText());
         this.setDistance(configMap.getDistance());
         this.setDistanceFilterText(configMap.getDistanceFilterText());
         this.setCreator(configMap.getId());
+        this.setAutoClose(configMap.isAutoClose());
 
         final MappingHeaderColumnNameTranslateMappingStrategy strategy = new MappingHeaderColumnNameTranslateMappingStrategy();
         strategy.setType(MappedRecord.class);
@@ -108,8 +109,7 @@ public class CSVFileParser {
         }
     }
 
-    private Double[][] calculateBoundingBox(Map<String, MappedRecord> filterRecordSet,
-                                            double distance) {
+    private Double[][] calculateBoundingBox(Map<String, MappedRecord> filterRecordSet, double distance) {
 
         final Collection<MappedRecord> records = filterRecordSet.values();
         double south = 0.0;
@@ -209,11 +209,11 @@ public class CSVFileParser {
 
     public MappedRecord[] getDeleteRecords() {
 
-        if (this.deleteRecords.isEmpty())
+        if (this.deleteRecords.isEmpty()) {
             return null;
-        else
-            return this.deleteRecords.values().toArray(
-                new MappedRecord[this.deleteRecords.values().size()]);
+        } else {
+            return this.deleteRecords.values().toArray(new MappedRecord[this.deleteRecords.values().size()]);
+        }
     }
 
     public String getDistance() {
@@ -240,81 +240,88 @@ public class CSVFileParser {
         logger.debug("total records: " + this.records.size());
 
         final boolean negativeExpression = this.getFilterText().startsWith("!");
-        final String filterText = negativeExpression ? this.getFilterText().substring(
-            1) : this.getFilterText();
-            final String pattern = PatternPrefix + filterText + PatternPostfix;
-            logger.debug("Filter Pattern: " + pattern);
-            // find the matched filter text records
-            final Map<String, MappedRecord> filterRecordSet = new HashMap<String, MappedRecord>();
+        final String filterText = negativeExpression ? this.getFilterText().substring(1) : this.getFilterText();
+        final String pattern = PatternPrefix + filterText + PatternPostfix;
+        logger.debug("Filter Pattern: " + pattern);
+        // find the matched filter text records
+        final Map<String, MappedRecord> filterRecordSet = new HashMap<String, MappedRecord>();
+        for (final MappedRecord r : this.records) {
+            final boolean isMatched = r.getFilter().matches(pattern);
+            if (isMatched && negativeExpression == false || isMatched == false && negativeExpression == true) {
+                filterRecordSet.put(r.getIndex(), r);
+            }
+        }
+        logger.debug("filtered records: " + filterRecordSet.size());
+        final Set<MappedRecord> distanceSet = new HashSet<MappedRecord>();
+        if (this.getDistance().length() > 0 && filterRecordSet.size() > 1) {
+            final Double[][] boundingBox = this.calculateBoundingBox(filterRecordSet, Double.parseDouble(
+                this.getDistance()));
             for (final MappedRecord r : this.records) {
-                final boolean isMatched = r.getFilter().matches(pattern);
-                if (isMatched && negativeExpression == false || isMatched == false &&
-                    negativeExpression == true) {
-                    filterRecordSet.put(r.getIndex(), r);
-                }
-            }
-            logger.debug("filtered records: " + filterRecordSet.size());
-            final Set<MappedRecord> distanceSet = new HashSet<MappedRecord>();
-            if (this.getDistance().length() > 0 && filterRecordSet.size() > 1) {
-                final Double[][] boundingBox = this.calculateBoundingBox(filterRecordSet,
-                    Double.parseDouble(this.getDistance()));
-                for (final MappedRecord r : this.records)
-                    if (r.getFilter().equalsIgnoreCase(this.getDistanceFilterText()))
-                        if (Util.insideBoundingBox(boundingBox, r.getLatitude(), r.getLongitude())) {
-                            distanceSet.add(r);
-                        }
-                logger.debug("within the BoundingBox: " + distanceSet.size() + " records found");
-                for (final MappedRecord r : distanceSet) {
-                    filterRecordSet.put(r.getIndex(), r);
-                }
-            }
-            distanceSet.clear();
-
-            // get the existed records for this creator, for example: target
-            final List<MappedRecord> existedRecordList = getMappedRecordDao().findByCreator(
-                this.getCreator());
-            final Map<String, MappedRecord> existedRecordSet = new HashMap<String, MappedRecord>();
-            for (final MappedRecord record : existedRecordList) {
-                existedRecordSet.put(record.getIndex(), record);
-            }
-            logger.debug("existed records: " + existedRecordSet.size());
-
-            // if the existed record contains the IGID, then we assume it's been saved in XchangeCore already
-            final Map<String, MappedRecord> inCoreSet = new HashMap<String, MappedRecord>();
-            for (final MappedRecord r : existedRecordList)
-                if (r.getIgID() != null) {
-                    inCoreSet.put(r.getIndex(), r);
-                }
-            logger.debug("records in Core: " + inCoreSet.size());
-
-            // if the in-core record is part of the new incident, we will perform an update of it
-            // if the in-core recrod is not part of the new incident, we will delete it from XchangeCore
-            final Set<String> inCoreKeySet = inCoreSet.keySet();
-            for (final String key : inCoreKeySet)
-                if (filterRecordSet.containsKey(key)) {
-                    final MappedRecord record = filterRecordSet.remove(key);
-                    if (inCoreSet.get(key).getContent().equalsIgnoreCase(
-                        record.getContent()) == false) {
-                        record.setWorkProductID(inCoreSet.get(key).getWorkProductID());
-                        logger.debug("for update: WPID: " + record.getWorkProductID());
-                        this.updateRecords.put(key, record);
+                if (r.getFilter().equalsIgnoreCase(this.getDistanceFilterText())) {
+                    if (Util.insideBoundingBox(boundingBox, r.getLatitude(), r.getLongitude())) {
+                        distanceSet.add(r);
                     }
-                } else {
+                }
+            }
+            logger.debug("within the BoundingBox: " + distanceSet.size() + " records found");
+            for (final MappedRecord r : distanceSet) {
+                filterRecordSet.put(r.getIndex(), r);
+            }
+        }
+        distanceSet.clear();
+
+        // get the existed records for this creator, for example: target
+        final List<MappedRecord> existedRecordList = getMappedRecordDao().findByCreator(this.getCreator());
+        final Map<String, MappedRecord> existedRecordSet = new HashMap<String, MappedRecord>();
+        for (final MappedRecord record : existedRecordList) {
+            existedRecordSet.put(record.getIndex(), record);
+        }
+        logger.debug("existed records: " + existedRecordSet.size());
+
+        // if the existed record contains the IGID, then we assume it's been saved in XchangeCore already
+        final Map<String, MappedRecord> inCoreSet = new HashMap<String, MappedRecord>();
+        for (final MappedRecord r : existedRecordList) {
+            if (r.getIgID() != null) {
+                inCoreSet.put(r.getIndex(), r);
+            }
+        }
+        logger.debug("records in Core: " + inCoreSet.size());
+
+        // if the in-core record is part of the new incident, we will perform an update of it
+        // if the in-core recrod is not part of the new incident, we will delete it from XchangeCore
+        final Set<String> inCoreKeySet = inCoreSet.keySet();
+        for (final String key : inCoreKeySet) {
+            if (filterRecordSet.containsKey(key)) {
+                final MappedRecord record = filterRecordSet.remove(key);
+                if (inCoreSet.get(key).getContent().equalsIgnoreCase(record.getContent()) == false) {
+                    record.setWorkProductID(inCoreSet.get(key).getWorkProductID());
+                    logger.debug("for update: WPID: " + record.getWorkProductID());
+                    this.updateRecords.put(key, record);
+                }
+            } else {
+                if (isAutoClose() == true) {
                     this.deleteRecords.put(key, inCoreSet.get(key));
                 }
-            logger.debug("records need to be updated: " + this.updateRecords.size());
-            logger.debug("records need to be deleted: " + this.deleteRecords.size());
+            }
+        }
+        logger.debug("records need to be updated: " + this.updateRecords.size());
+        logger.debug("records need to be deleted: " + this.deleteRecords.size());
 
-            return filterRecordSet.values().toArray(new MappedRecord[filterRecordSet.values().size()]);
+        return filterRecordSet.values().toArray(new MappedRecord[filterRecordSet.values().size()]);
     }
 
     public MappedRecord[] getUpdateRecords() {
 
-        if (this.updateRecords.isEmpty())
+        if (this.updateRecords.isEmpty()) {
             return null;
-        else
-            return this.updateRecords.values().toArray(
-                new MappedRecord[this.updateRecords.values().size()]);
+        } else {
+            return this.updateRecords.values().toArray(new MappedRecord[this.updateRecords.values().size()]);
+        }
+    }
+
+    public boolean isAutoClose() {
+
+        return autoClose;
     }
 
     public void makePersist() {
@@ -362,8 +369,7 @@ public class CSVFileParser {
                 if (indexMap.containsKey(key)) {
                     // write the merged line
                     logger.debug("index file contain [" + key + "]");
-                    writer.write(this.getCombinedLine(indexMap.get(key), columns,
-                        columnNumbers[1]));
+                    writer.write(this.getCombinedLine(indexMap.get(key), columns, columnNumbers[1]));
                 }
             }
             baseReader.close();
@@ -388,6 +394,11 @@ public class CSVFileParser {
         }
 
         return null;
+    }
+
+    public void setAutoClose(boolean autoClose) {
+
+        this.autoClose = autoClose;
     }
 
     public void setCreator(String creator) {
@@ -426,14 +437,16 @@ public class CSVFileParser {
             final String[] columns = column.split("\\.", -1);
             for (final String c : columns) {
                 boolean found = false;
-                for (final String h : strategy.getHeaders())
+                for (final String h : strategy.getHeaders()) {
                     if (c.equalsIgnoreCase(h.trim())) {
                         found = true;
                         break;
                     }
+                }
                 // if the column is not specified in configuration file, it's valid
-                if (!found)
+                if (!found) {
                     throw new Exception("Column: " + c + " is invalid column name");
+                }
             }
         }
     }
@@ -441,12 +454,14 @@ public class CSVFileParser {
     private int[] whichColumn(String[] baseHeaders, String[] indexHeaders) {
 
         for (int i = 0; i < indexHeaders.length; i++) {
-            for (int j = 0; j < baseHeaders.length; j++)
-                if (indexHeaders[i].equalsIgnoreCase(baseHeaders[j]))
+            for (int j = 0; j < baseHeaders.length; j++) {
+                if (indexHeaders[i].equalsIgnoreCase(baseHeaders[j])) {
                     return new int[] {
                         i,
                         j
-                };
+                    };
+                }
+            }
         }
         return null;
     }

@@ -46,13 +46,14 @@ public class CSVFileParser {
         CSVFileParser.mappedRecordDao = mappedRecordDao;
     }
 
+    /*
     private String filterText;
     private String distance;
-    private String distanceFilterText;
+    prnivate String distanceFilterText;
     private String creator;
-    private boolean autoClose = false;
+     */
 
-    private List<MappedRecord> records = null;
+    private final Map<String, MappedRecord> newRecords = new HashMap<String, MappedRecord>();
     private final Map<String, MappedRecord> updateRecords = new HashMap<String, MappedRecord>();
     private final Map<String, MappedRecord> deleteRecords = new HashMap<String, MappedRecord>();
 
@@ -64,11 +65,6 @@ public class CSVFileParser {
     public CSVFileParser(File file, InputStream baseInputStream, CsvConfiguration configMap) throws Throwable {
 
         super();
-        this.setFilterText(configMap.getFilterText());
-        this.setDistance(configMap.getDistance());
-        this.setDistanceFilterText(configMap.getDistanceFilterText());
-        this.setCreator(configMap.getId());
-        this.setAutoClose(configMap.isAutoClose());
 
         final MappingHeaderColumnNameTranslateMappingStrategy strategy = new MappingHeaderColumnNameTranslateMappingStrategy();
         strategy.setType(MappedRecord.class);
@@ -85,10 +81,10 @@ public class CSVFileParser {
         }
 
         this.validateConfiguration(configMap, strategy, new XCCSVReader(new FileReader(csvFile)));
-        this.records = bean.parse(strategy, new XCCSVReader(new FileReader(csvFile)));
+        final List<MappedRecord> records = bean.parse(strategy, new XCCSVReader(new FileReader(csvFile)));
         final Date currentDate = new Date();
 
-        for (final MappedRecord record : this.records) {
+        for (final MappedRecord record : records) {
             // for the category, we will override with category.fixed if existed
             if (configMap.getCategoryFixed().length() > 0) {
                 record.setCategory(configMap.getCategoryFixed());
@@ -103,6 +99,8 @@ public class CSVFileParser {
             record.setLastUpdated(currentDate);
             logger.debug("record: " + record.toString());
         }
+
+        parseRecords(records, configMap);
 
         if (baseInputStream != null) {
             csvFile.delete();
@@ -152,7 +150,7 @@ public class CSVFileParser {
         latO = lat + dLat * 180/Pi
         lonO = lon + dLon * 180/Pi
          */
-        final double d = Double.parseDouble(this.getDistance()) * 1000.0;
+        final double d = distance * 1000.0;
         final double deltaLat = d / Radius * 180 / Pi;
         north += deltaLat * (north > 0 ? 1 : -1);
         south -= deltaLat * (south > 0 ? 1 : -1);
@@ -177,11 +175,6 @@ public class CSVFileParser {
         return boundingBox;
     }
 
-    public List<MappedRecord> getAllRecords() {
-
-        return this.records;
-    }
-
     private String getCombinedLine(String[] indexHeaders, String[] baseHeaders, int index) {
 
         // write the header first
@@ -202,11 +195,6 @@ public class CSVFileParser {
         return header + "\n";
     }
 
-    public String getCreator() {
-
-        return this.creator;
-    }
-
     public MappedRecord[] getDeleteRecords() {
 
         if (this.deleteRecords.isEmpty()) {
@@ -216,98 +204,13 @@ public class CSVFileParser {
         }
     }
 
-    public String getDistance() {
+    public MappedRecord[] getNewRecords() {
 
-        return this.distance;
-    }
-
-    public String getDistanceFilterText() {
-
-        return this.distanceFilterText;
-    }
-
-    public String getFilterText() {
-
-        return this.filterText;
-    }
-
-    public MappedRecord[] getRecords() {
-
-        // reset the update and delete set
-        this.updateRecords.clear();
-        this.deleteRecords.clear();
-
-        logger.debug("total records: " + this.records.size());
-
-        final boolean negativeExpression = this.getFilterText().startsWith("!");
-        final String filterText = negativeExpression ? this.getFilterText().substring(1) : this.getFilterText();
-        final String pattern = PatternPrefix + filterText + PatternPostfix;
-        logger.debug("Filter Pattern: " + pattern);
-        // find the matched filter text records
-        final Map<String, MappedRecord> filterRecordSet = new HashMap<String, MappedRecord>();
-        for (final MappedRecord r : this.records) {
-            final boolean isMatched = r.getFilter().matches(pattern);
-            if (isMatched && negativeExpression == false || isMatched == false && negativeExpression == true) {
-                filterRecordSet.put(r.getIndex(), r);
-            }
+        if (this.newRecords.isEmpty()) {
+            return null;
+        } else {
+            return this.newRecords.values().toArray(new MappedRecord[this.newRecords.values().size()]);
         }
-        logger.debug("filtered records: " + filterRecordSet.size());
-        final Set<MappedRecord> distanceSet = new HashSet<MappedRecord>();
-        if (this.getDistance().length() > 0 && filterRecordSet.size() > 1) {
-            final Double[][] boundingBox = this.calculateBoundingBox(filterRecordSet, Double.parseDouble(
-                this.getDistance()));
-            for (final MappedRecord r : this.records) {
-                if (r.getFilter().equalsIgnoreCase(this.getDistanceFilterText())) {
-                    if (Util.insideBoundingBox(boundingBox, r.getLatitude(), r.getLongitude())) {
-                        distanceSet.add(r);
-                    }
-                }
-            }
-            logger.debug("within the BoundingBox: " + distanceSet.size() + " records found");
-            for (final MappedRecord r : distanceSet) {
-                filterRecordSet.put(r.getIndex(), r);
-            }
-        }
-        distanceSet.clear();
-
-        // get the existed records for this creator, for example: target
-        final List<MappedRecord> existedRecordList = getMappedRecordDao().findByCreator(this.getCreator());
-        final Map<String, MappedRecord> existedRecordSet = new HashMap<String, MappedRecord>();
-        for (final MappedRecord record : existedRecordList) {
-            existedRecordSet.put(record.getIndex(), record);
-        }
-        logger.debug("existed records: " + existedRecordSet.size());
-
-        // if the existed record contains the IGID, then we assume it's been saved in XchangeCore already
-        final Map<String, MappedRecord> inCoreSet = new HashMap<String, MappedRecord>();
-        for (final MappedRecord r : existedRecordList) {
-            if (r.getIgID() != null) {
-                inCoreSet.put(r.getIndex(), r);
-            }
-        }
-        logger.debug("records in Core: " + inCoreSet.size());
-
-        // if the in-core record is part of the new incident, we will perform an update of it
-        // if the in-core recrod is not part of the new incident, we will delete it from XchangeCore
-        final Set<String> inCoreKeySet = inCoreSet.keySet();
-        for (final String key : inCoreKeySet) {
-            if (filterRecordSet.containsKey(key)) {
-                final MappedRecord record = filterRecordSet.remove(key);
-                if (inCoreSet.get(key).getContent().equalsIgnoreCase(record.getContent()) == false) {
-                    record.setWorkProductID(inCoreSet.get(key).getWorkProductID());
-                    logger.debug("for update: WPID: " + record.getWorkProductID());
-                    this.updateRecords.put(key, record);
-                }
-            } else {
-                if (isAutoClose() == true) {
-                    this.deleteRecords.put(key, inCoreSet.get(key));
-                }
-            }
-        }
-        logger.debug("records need to be updated: " + this.updateRecords.size());
-        logger.debug("records need to be deleted: " + this.deleteRecords.size());
-
-        return filterRecordSet.values().toArray(new MappedRecord[filterRecordSet.values().size()]);
     }
 
     public MappedRecord[] getUpdateRecords() {
@@ -316,18 +219,6 @@ public class CSVFileParser {
             return null;
         } else {
             return this.updateRecords.values().toArray(new MappedRecord[this.updateRecords.values().size()]);
-        }
-    }
-
-    public boolean isAutoClose() {
-
-        return autoClose;
-    }
-
-    public void makePersist() {
-
-        for (final MappedRecord record : this.records) {
-            getMappedRecordDao().makePersistent(record);
         }
     }
 
@@ -396,34 +287,83 @@ public class CSVFileParser {
         return null;
     }
 
-    public void setAutoClose(boolean autoClose) {
+    private void parseRecords(List<MappedRecord> records, CsvConfiguration config) {
 
-        this.autoClose = autoClose;
-    }
+        // reset the update and delete set
+        this.newRecords.clear();
+        this.updateRecords.clear();
+        this.deleteRecords.clear();
 
-    public void setCreator(String creator) {
+        logger.debug("total records: " + records.size());
 
-        this.creator = creator;
-    }
+        final boolean negativeExpression = config.getFilterText().startsWith("!");
+        final String filterText = negativeExpression ? config.getFilterText().substring(1) : config.getFilterText();
+        final String pattern = PatternPrefix + filterText + PatternPostfix;
+        logger.debug("Filter Pattern: " + pattern);
 
-    public void setDistance(String distance) {
+        // find the matched filter text records
+        for (final MappedRecord r : records) {
+            final boolean isMatched = r.getFilter().matches(pattern);
+            if (isMatched && negativeExpression == false || isMatched == false && negativeExpression == true) {
+                newRecords.put(r.getIndex(), r);
+            }
+        }
+        logger.debug("filtered records: " + newRecords.size());
+        final Set<MappedRecord> distanceSet = new HashSet<MappedRecord>();
+        if (config.getDistance().length() > 0 && newRecords.size() > 1) {
+            final Double[][] boundingBox = this.calculateBoundingBox(newRecords, Double.parseDouble(
+                config.getDistance()));
+            for (final MappedRecord r : records) {
+                if (r.getFilter().equalsIgnoreCase(config.getDistanceFilterText())) {
+                    if (Util.insideBoundingBox(boundingBox, r.getLatitude(), r.getLongitude())) {
+                        distanceSet.add(r);
+                    }
+                }
+            }
+            logger.debug("within the BoundingBox: " + distanceSet.size() + " records found");
+            for (final MappedRecord r : distanceSet) {
+                newRecords.put(r.getIndex(), r);
+            }
+        }
+        distanceSet.clear();
 
-        this.distance = distance;
-    }
+        // get the existed records for this creator, for example: target
+        final List<MappedRecord> existedRecordList = getMappedRecordDao().findByCreator(config.getId());
+        final Map<String, MappedRecord> existedRecordSet = new HashMap<String, MappedRecord>();
+        for (final MappedRecord record : existedRecordList) {
+            existedRecordSet.put(record.getIndex(), record);
+        }
+        logger.debug("existed records: " + existedRecordSet.size());
 
-    public void setDistanceFilterText(String distanceFilterText) {
+        // if the existed record contains the IGID, then we assume it's been saved in XchangeCore already
+        final Map<String, MappedRecord> inCoreSet = new HashMap<String, MappedRecord>();
+        for (final MappedRecord r : existedRecordList) {
+            if (r.getIgID() != null) {
+                inCoreSet.put(r.getIndex(), r);
+            }
+        }
+        logger.debug("records in Core: " + inCoreSet.size());
 
-        this.distanceFilterText = distanceFilterText;
-    }
-
-    public void setFilterText(String filterText) {
-
-        this.filterText = filterText;
-    }
-
-    public void setRecords(List<MappedRecord> records) {
-
-        this.records = records;
+        // if the in-core record is part of the new incident, we will perform an update of it
+        // if the in-core recrod is not part of the new incident, we will delete it from XchangeCore
+        final Set<String> inCoreKeySet = inCoreSet.keySet();
+        for (final String key : inCoreKeySet) {
+            if (newRecords.containsKey(key)) {
+                final MappedRecord record = newRecords.remove(key);
+                if (inCoreSet.get(key).getContent().equalsIgnoreCase(record.getContent()) == false) {
+                    record.setWorkProductID(inCoreSet.get(key).getWorkProductID());
+                    logger.debug("for update: WPID: " + record.getWorkProductID());
+                    this.updateRecords.put(key, record);
+                }
+            } else {
+                if (config.isAutoClose() == true) {
+                    this.deleteRecords.put(key, inCoreSet.get(key));
+                }
+            }
+        }
+        logger.debug("records need to be created: " + this.newRecords.size());
+        logger.debug("records need to be updated: " + this.updateRecords.size());
+        logger.debug("records need to be deleted: " + this.deleteRecords.size());
     }
 
     private void validateConfiguration(CsvConfiguration csvConfiguration,

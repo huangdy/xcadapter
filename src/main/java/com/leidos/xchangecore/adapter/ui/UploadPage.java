@@ -115,7 +115,7 @@ extends WebPage {
                                                                                csvConfiguration.getPassword());
 
                         // get the new Incidents
-                        final MappedRecord[] records = csvFileParser.getRecords();
+                        final MappedRecord[] records = csvFileParser.getNewRecords();
 
                         setMessage("......");
                         if (records != null) {

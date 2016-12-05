@@ -28,7 +28,7 @@ public class CSVParserTest {
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
             null,
             configFileParser.getConfigMap());
-        final MappedRecord[] records = csvFileParser.getRecords();
+        final MappedRecord[] records = csvFileParser.getNewRecords();
         for (final MappedRecord record : records) {
             final IncidentType incident = Util.getIncidentDocument(record);
             System.out.println("Record: " + incident);
@@ -44,7 +44,7 @@ public class CSVParserTest {
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
             null,
             configFileParser.getConfigMap());
-        final MappedRecord[] records = csvFileParser.getRecords();
+        final MappedRecord[] records = csvFileParser.getNewRecords();
         for (final MappedRecord record : records) {
             final IncidentType incident = Util.getIncidentDocument(record);
             System.out.println("Record: " + incident);
@@ -72,7 +72,7 @@ public class CSVParserTest {
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
             null,
             configFileParser.getConfigMap());
-        final MappedRecord[] records = csvFileParser.getRecords();
+        final MappedRecord[] records = csvFileParser.getNewRecords();
         for (final MappedRecord record : records) {
             final IncidentType incident = Util.getIncidentDocument(record);
             System.out.println("Record: " + incident);
@@ -88,10 +88,24 @@ public class CSVParserTest {
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
             null,
             configFileParser.getConfigMap());
-        final MappedRecord[] records = csvFileParser.getRecords();
-        for (final MappedRecord record : records) {
-            final IncidentType incident = Util.getIncidentDocument(record);
-            System.out.println("Record: " + incident);
+        MappedRecord[] records = csvFileParser.getNewRecords();
+        if (records != null) {
+            for (final MappedRecord record : records) {
+                final IncidentType incident = Util.getIncidentDocument(record);
+                System.out.println("New Record: " + incident);
+            }
+        }
+        if ((records = csvFileParser.getUpdateRecords()) != null) {
+            for (final MappedRecord record : records) {
+                final IncidentType incident = Util.getIncidentDocument(record);
+                System.out.println("Updated Record: " + incident);
+            }
+        }
+        if ((records = csvFileParser.getDeleteRecords()) != null) {
+            for (final MappedRecord record : records) {
+                final IncidentType incident = Util.getIncidentDocument(record);
+                System.out.println("Deleted Record: " + incident);
+            }
         }
     }
 
@@ -104,7 +118,7 @@ public class CSVParserTest {
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
             null,
             configFileParser.getConfigMap());
-        final MappedRecord[] records = csvFileParser.getRecords();
+        final MappedRecord[] records = csvFileParser.getNewRecords();
         for (final MappedRecord record : records) {
             final IncidentType incident = Util.getIncidentDocument(record);
             System.out.println("Record: " + incident);
@@ -120,7 +134,7 @@ public class CSVParserTest {
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
             null,
             configFileParser.getConfigMap());
-        final MappedRecord[] records = csvFileParser.getRecords();
+        final MappedRecord[] records = csvFileParser.getNewRecords();
         for (final MappedRecord record : records) {
             final IncidentType incident = Util.getIncidentDocument(record);
             System.out.println("Record: " + incident);
@@ -151,7 +165,7 @@ public class CSVParserTest {
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
             null,
             configFileParser.getConfigMap());
-        final MappedRecord[] records = csvFileParser.getRecords();
+        final MappedRecord[] records = csvFileParser.getNewRecords();
         for (final MappedRecord record : records) {
             final IncidentType incident = Util.getIncidentDocument(record);
             System.out.println("Record: " + incident);
@@ -169,7 +183,7 @@ public class CSVParserTest {
         final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
             baseIS,
             configFileParser.getConfigMap());
-        final MappedRecord[] records = csvFileParser.getRecords();
+        final MappedRecord[] records = csvFileParser.getNewRecords();
         for (final MappedRecord record : records) {
             System.out.println("Record: " + record);
             System.out.println("Incident Document:\n" + Util.getIncidentDocument(record) + "\n");

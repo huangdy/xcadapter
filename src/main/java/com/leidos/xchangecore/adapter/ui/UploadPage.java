@@ -106,13 +106,15 @@ extends WebPage {
 
                     try {
                         final CSVFileParser csvFileParser = new CSVFileParser(newFile,
-                                                                              getFileStream(baseFilename),
-                                                                              csvConfiguration);
+                            getFileStream(baseFilename),
+                            csvConfiguration);
 
                         redirectUrl = csvConfiguration.getRedirectUrl();
                         final WebServiceClient wsClient = new WebServiceClient(csvConfiguration.getUri(),
-                                                                               csvConfiguration.getUsername(),
-                                                                               csvConfiguration.getPassword());
+                            csvConfiguration.getUsername(),
+                            csvConfiguration.getPassword());
+
+                        numOfCreation = numOfUpdate = numOfDeletion = 0;
 
                         // get the new Incidents
                         final MappedRecord[] records = csvFileParser.getNewRecords();
@@ -121,9 +123,11 @@ extends WebPage {
                         if (records != null) {
                             numOfCreation = records.length;
                             info("Created: " + numOfCreation + " records");
-                            for (final MappedRecord r : records)
-                                if (wsClient.createIncident(r))
+                            for (final MappedRecord r : records) {
+                                if (wsClient.createIncident(r)) {
                                     CSVFileParser.getMappedRecordDao().makePersistent(r);
+                                }
+                            }
                         }
 
                         // update the incidents
@@ -131,9 +135,11 @@ extends WebPage {
                         if (updateRecordSet != null) {
                             numOfUpdate = updateRecordSet.length;
                             info("Updated: " + numOfUpdate + " records");
-                            for (final MappedRecord r : updateRecordSet)
-                                if (wsClient.updateIncident(r))
+                            for (final MappedRecord r : updateRecordSet) {
+                                if (wsClient.updateIncident(r)) {
                                     CSVFileParser.getMappedRecordDao().makePersistent(r);
+                                }
+                            }
                         }
 
                         // delete the incidents
@@ -141,9 +147,11 @@ extends WebPage {
                         if (deleteRecordSet != null) {
                             numOfDeletion = deleteRecordSet.length;
                             info("Deleted: " + numOfDeletion + " records");
-                            for (final MappedRecord r : deleteRecordSet)
-                                if (wsClient.deleteIncident(r))
+                            for (final MappedRecord r : deleteRecordSet) {
+                                if (wsClient.deleteIncident(r)) {
                                     CSVFileParser.getMappedRecordDao().makeTransient(r);
+                                }
+                            }
                         }
 
                         logger.debug("number of creation/update/deletion: " + numOfCreation + "/" +
@@ -200,8 +208,8 @@ extends WebPage {
         // virtue of that panel being nested in the form.
         final FileUploadForm simpleUploadForm = new FileUploadForm("simpleUpload");
         simpleUploadForm.add(new UploadProgressBar("progress",
-                                                   simpleUploadForm,
-                                                   simpleUploadForm.fileUploadField));
+            simpleUploadForm,
+            simpleUploadForm.fileUploadField));
         this.add(simpleUploadForm);
 
         final PropertyModel<String> messageModel = new PropertyModel<String>(this, "message");
@@ -267,7 +275,7 @@ extends WebPage {
         for (final IResourceFinder finder : finders) {
             final IResourceStream resource = finder.find(UrlResourceStream.class, "/config/" +
                 filename);
-            if (resource != null && resource instanceof UrlResourceStream)
+            if (resource != null && resource instanceof UrlResourceStream) {
                 try {
                     return ((UrlResourceStream) resource).getInputStream();
                 } catch (final ResourceStreamNotFoundException e) {
@@ -275,6 +283,7 @@ extends WebPage {
                     e.printStackTrace();
                     return null;
                 }
+            }
         }
 
         return null;

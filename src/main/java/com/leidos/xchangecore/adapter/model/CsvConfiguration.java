@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Transient;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,7 +72,6 @@ implements Serializable {
     @Column(columnDefinition = "VARCHAR(65536)")
     private String index = "title.category.latitude.longitude";
 
-    @Transient
     private boolean autoClose = false;
 
     private String uri = "http://localhost";

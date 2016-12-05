@@ -46,13 +46,6 @@ public class CSVFileParser {
         CSVFileParser.mappedRecordDao = mappedRecordDao;
     }
 
-    /*
-    private String filterText;
-    private String distance;
-    prnivate String distanceFilterText;
-    private String creator;
-     */
-
     private final Map<String, MappedRecord> newRecords = new HashMap<String, MappedRecord>();
     private final Map<String, MappedRecord> updateRecords = new HashMap<String, MappedRecord>();
     private final Map<String, MappedRecord> deleteRecords = new HashMap<String, MappedRecord>();

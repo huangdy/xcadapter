@@ -22,11 +22,13 @@ import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
 
 import com.leidos.xchangecore.adapter.XchangeCoreAdapter;
-import com.leidos.xchangecore.adapter.dao.CsvConfigurationDao;
+import com.leidos.xchangecore.adapter.dao.CoreConfigurationDao;
 import com.leidos.xchangecore.adapter.dao.MappedRecordDao;
 
 @Configuration
 public class AdapterSpringConfig {
+
+    private static final String Key_hibernate_hbm2dll_auto = "hibernate.hbm2ddl.auto";
 
     @Value("${jdbc.url}")
     private String jdbcUrl;
@@ -39,8 +41,6 @@ public class AdapterSpringConfig {
 
     @Value("${hibernate.persistence.package}")
     private String persistencePackage;
-
-    private static final String Key_hibernate_hbm2dll_auto = "hibernate.hbm2ddl.auto";
     @Value("${hibernate.hbm2dll.auto}")
     private String hbm2dll;
 
@@ -54,18 +54,17 @@ public class AdapterSpringConfig {
     private String databasePlatform;
 
     @Bean
-    public CsvConfigurationDao csvConfigurationDao() {
-
-        return new CsvConfigurationDao();
+    public CoreConfigurationDao coreConfigurationDao() {
+        return new CoreConfigurationDao();
     }
 
     @Bean
     public DataSource dataSource() {
 
         return new SimpleDriverDataSource(new org.hsqldb.jdbc.JDBCDriver(),
-                                          jdbcUrl,
-                                          username,
-                                          password);
+            jdbcUrl,
+            username,
+            password);
     }
 
     @Bean

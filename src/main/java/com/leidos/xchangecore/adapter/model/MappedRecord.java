@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 @Entity
 public class MappedRecord
-    implements Serializable {
+implements Serializable {
 
     /**
      *
@@ -48,6 +48,7 @@ public class MappedRecord
     private String longitude;
     private String distance;
     private String distanceFilterText;
+    private String coreUri = null;
 
     private Date lastUpdated;
 
@@ -59,6 +60,11 @@ public class MappedRecord
     public String getContent() {
 
         return this.content;
+    }
+
+    public String getCoreUri() {
+
+        return coreUri;
     }
 
     public String getCreator() {
@@ -101,6 +107,11 @@ public class MappedRecord
         return this.index;
     }
 
+    public String getKey() {
+
+        return this.index + this.coreUri;
+    }
+
     public Date getLastUpdated() {
 
         return this.lastUpdated;
@@ -134,6 +145,11 @@ public class MappedRecord
     public void setContent(String content) {
 
         this.content = content;
+    }
+
+    public void setCoreUri(String uri) {
+
+        this.coreUri = uri;
     }
 
     public void setCreator(String creator) {

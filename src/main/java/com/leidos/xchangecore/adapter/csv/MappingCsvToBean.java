@@ -8,7 +8,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.leidos.xchangecore.adapter.model.CsvConfiguration;
+import com.leidos.xchangecore.adapter.model.Configuration;
 import com.leidos.xchangecore.adapter.model.MappedRecord;
 
 import au.com.bytecode.opencsv.CSVReader;
@@ -28,14 +28,14 @@ extends CsvToBean<MappedRecord> {
     private final Integer[][] columnIndexes;
     private boolean autoClose = false;
 
-    public MappingCsvToBean(CsvConfiguration configMap) {
+    public MappingCsvToBean(Configuration configMap) {
 
         setAutoClose(configMap.isAutoClose());
-        final int columns = CsvConfiguration.DefinedColumnNames.length;
+        final int columns = Configuration.DefinedColumnNames.length;
         columnNames = new String[columns][];
         columnIndexes = new Integer[columns][];
         for (int i = 0; i < columns; i++) {
-            columnNames[i] = configMap.getFieldValue(CsvConfiguration.DefinedColumnNames[i]).split("[.]", -1);
+            columnNames[i] = configMap.getFieldValue(Configuration.DefinedColumnNames[i]).split("[.]", -1);
             columnIndexes[i] = new Integer[columnNames[i].length];
         }
         // indexes = configMap.getIndex().split("[.]", -1);
@@ -90,7 +90,7 @@ extends CsvToBean<MappedRecord> {
     private int findDuplicateName(int index) {
 
         int i = 0;
-        for (; i < CsvConfiguration.DefinedColumnNames.length; i++) {
+        for (; i < Configuration.DefinedColumnNames.length; i++) {
             if (i != index && columnNames[i].length == 1 && columnNames[i][0].equalsIgnoreCase(columnNames[index][0])) {
                 break;
             }
@@ -153,8 +153,8 @@ extends CsvToBean<MappedRecord> {
             if (columnNames[i].length == 1) {
                 continue;
             }
-            final boolean isDescription = CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(
-                CsvConfiguration.FN_Description);
+            final boolean isDescription = Configuration.DefinedColumnNames[i].equalsIgnoreCase(
+                Configuration.FN_Description);
             sb = new StringBuffer();
             for (int j = 0; j < columnNames[i].length; j++) {
                 if (isDescription) {
@@ -172,22 +172,22 @@ extends CsvToBean<MappedRecord> {
                 value = value.substring(0, value.lastIndexOf(TokenSeparator));
             }
 
-            if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FN_Category)) {
+            if (Configuration.DefinedColumnNames[i].equalsIgnoreCase(Configuration.FN_Category)) {
                 record.setCategory(value);
-            } else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FN_Title)) {
+            } else if (Configuration.DefinedColumnNames[i].equalsIgnoreCase(Configuration.FN_Title)) {
                 record.setTitle(value);
-            } else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FN_FilterName)) {
+            } else if (Configuration.DefinedColumnNames[i].equalsIgnoreCase(Configuration.FN_FilterName)) {
                 record.setFilter(value);
-            } else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FN_Description)) {
+            } else if (Configuration.DefinedColumnNames[i].equalsIgnoreCase(Configuration.FN_Description)) {
                 record.setDescription(value);
-            } else if (CsvConfiguration.DefinedColumnNames[i].equalsIgnoreCase(CsvConfiguration.FN_Index)) {
+            } else if (Configuration.DefinedColumnNames[i].equalsIgnoreCase(Configuration.FN_Index)) {
                 record.setIndex(value);
             }
         }
 
         if (record.getCategory().equals("N/A")) {
             final int i = findDuplicateName(1);
-            if (i != CsvConfiguration.DefinedColumnNames.length) {
+            if (i != Configuration.DefinedColumnNames.length) {
                 switch (i) {
                 case 0:
                     record.setCategory(record.getCategory());
@@ -199,7 +199,7 @@ extends CsvToBean<MappedRecord> {
                     record.setCategory(record.getDescription());
                     break;
                 default:
-                    logger.warn("Cannot map " + CsvConfiguration.DefinedColumnNames[i] + "'s value into category");
+                    logger.warn("Cannot map " + Configuration.DefinedColumnNames[i] + "'s value into category");
                 }
             }
         }

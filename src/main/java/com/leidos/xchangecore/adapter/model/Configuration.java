@@ -4,15 +4,10 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Entity
-public class CsvConfiguration
+public class Configuration
 implements Serializable {
 
     /**
@@ -20,7 +15,11 @@ implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    private static final Logger logger = LoggerFactory.getLogger(CsvConfiguration.class);
+    private static final Logger logger = LoggerFactory.getLogger(Configuration.class);
+
+    public static final String N_Configuration_Start = "configuration:start";
+    public static final String N_Configuration_End = "configuration:end";
+
     public static final String FN_Latitude = "latitude";
     public static final String FN_Longitude = "longitude";
     public static final String FN_Title = "title";
@@ -51,8 +50,6 @@ implements Serializable {
         FN_Description,
     };
 
-    @Id
-    @Column
     private String id;
     private String title;
     private String titlePrefix;
@@ -65,15 +62,9 @@ implements Serializable {
     private String longitude;
     private String categoryPrefix = "";
     private String categoryFixed = "";
-
-    @Column(columnDefinition = "VARCHAR(65536)")
     private String description = "title.category";
-
-    @Column(columnDefinition = "VARCHAR(65536)")
     private String index = "title.category.latitude.longitude";
-
     private boolean autoClose = false;
-
     private String uri = "http://localhost";
     private String username = "xchangecore";
     private String password = "xchangecore";
@@ -217,7 +208,9 @@ implements Serializable {
 
     public boolean isValid() {
 
-        return this.getTitle() == null || this.getTitle().length() == 0 ? false : true;
+        return this.title != null && this.index != null && this.category != null &&
+            this.description != null && this.filter != null && this.latitude != null &&
+            this.longitude != null ? true : false;
     }
 
     private void setAutoClose(String ac) {

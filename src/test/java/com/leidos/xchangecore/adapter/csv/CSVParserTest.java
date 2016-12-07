@@ -2,12 +2,14 @@ package com.leidos.xchangecore.adapter.csv;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.leidos.xchangecore.adapter.model.Configuration;
 import com.leidos.xchangecore.adapter.model.MappedRecord;
 import com.leidos.xchangecore.adapter.util.Util;
 
@@ -39,15 +41,22 @@ public class CSVParserTest {
 
         final String path = "src/main/webapp/config/costco.config";
         final FileInputStream fis = new FileInputStream(new File(path));
-        final File csvFile = new File("src/test/resources/a.Costco.csv");
+        final File csvFile = new File("src/test/resources/costco.csv");
         final ConfigFilePaser configFileParser = new ConfigFilePaser("costco.config", fis);
-        final CSVFileParser csvFileParser = new CSVFileParser(csvFile,
-            null,
-            configFileParser.getConfigMap());
-        final MappedRecord[] records = csvFileParser.getNewRecords();
-        for (final MappedRecord record : records) {
-            final IncidentType incident = Util.getIncidentDocument(record);
-            System.out.println("Record: " + incident);
+        final List<Configuration> configurationList = configFileParser.listOfConfiguration();
+        for (final Configuration configuration : configurationList) {
+            final CSVFileParser csvFileParser = new CSVFileParser(csvFile, null, configuration);
+            MappedRecord[] records = csvFileParser.getNewRecords();
+            if (records != null) {
+                for (final MappedRecord record : records) {
+                    final IncidentType incident = Util.getIncidentDocument(record);
+                    System.out.println("New Record: " + incident);
+                }
+            }
+            records = csvFileParser.getUpdateRecords();
+            records = csvFileParser.getDeleteRecords();
+
+
         }
     }
 
@@ -57,7 +66,7 @@ public class CSVParserTest {
         // this.testMacys();
         // this.testTarget();
         // this.testBoyd();
-        // this.testCostco();
+        this.testCostco();
         // this.testIrWin();
         // this.testWalgreen();
         testLowes();

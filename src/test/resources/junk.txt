@@ -1,0 +1,317 @@
+[DEBUG 15:34:58 UploadPage] Removed all the files under xchangecore-uploads:  failure
+[DEBUG 15:34:58 CSVFileParser] record:
+        Title: CostcoSeattle
+        Category: Costco-Closed
+        Lat/Lon: 47.56460000/-122.32990000
+        Index Key: 1:47.56460000
+        Filter: Closed
+        Description: <br/><b>WHS5: </b>1<br/><b>NAME: </b>Seattle<br/><b>Status: </b>Closed<br/><b>LCLAT: </b>47.56460000<br/><b>LCLONG: </b>-122.32990000
+        Content:  [1:Seattle:47.56460000:-122.32990000:Closed]
+
+[DEBUG 15:34:58 CSVFileParser] record:
+        Title: CostcoPortland
+        Category: Costco-Closed
+        Lat/Lon: 45.55920000/-122.52390000
+        Index Key: 2:45.55920000
+        Filter: Closed
+        Description: <br/><b>WHS5: </b>2<br/><b>NAME: </b>Portland<br/><b>Status: </b>Closed<br/><b>LCLAT: </b>45.55920000<br/><b>LCLONG: </b>-122.52390000
+        Content:  [2:Portland:45.55920000:-122.52390000:Closed]
+
+[DEBUG 15:34:58 CSVFileParser] record:
+        Title: CostcoTukwila
+        Category: Costco-Closed
+        Lat/Lon: 47.44610000/-122.24915000
+        Index Key: 6:47.44610000
+        Filter: Closed
+        Description: <br/><b>WHS5: </b>6<br/><b>NAME: </b>Tukwila<br/><b>Status: </b>Closed<br/><b>LCLAT: </b>47.44610000<br/><b>LCLONG: </b>-122.24915000
+        Content:  [6:Tukwila:47.44610000:-122.24915000:Closed]
+
+[DEBUG 15:34:58 CSVFileParser] record:
+        Title: CostcoKirkland
+        Category: Costco-Closed
+        Lat/Lon: 47.68130000/-122.18120000
+        Index Key: 8:47.68130000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>8<br/><b>NAME: </b>Kirkland<br/><b>Status: </b>Open<br/><b>LCLAT: </b>47.68130000<br/><b>LCLONG: </b>-122.18120000
+        Content:  [8:Kirkland:47.68130000:-122.18120000:Open]
+
+[DEBUG 15:34:58 CSVFileParser] record:
+        Title: CostcoAloha
+        Category: Costco-Closed
+        Lat/Lon: 45.50870000/-122.84236000
+        Index Key: 9:45.50870000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>9<br/><b>NAME: </b>Aloha<br/><b>Status: </b>Open<br/><b>LCLAT: </b>45.50870000<br/><b>LCLONG: </b>-122.84236000
+        Content:  [9:Aloha:45.50870000:-122.84236000:Open]
+
+[DEBUG 15:34:58 CSVFileParser] record:
+        Title: CostcoAnchorage
+        Category: Costco-Closed
+        Lat/Lon: 61.14370000/-149.88538680
+        Index Key: 10:61.14370000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>10<br/><b>NAME: </b>Anchorage<br/><b>Status: </b>Open<br/><b>LCLAT: </b>61.14370000<br/><b>LCLONG: </b>-149.88538680
+        Content:  [10:Anchorage:61.14370000:-149.88538680:Open]
+
+[DEBUG 15:34:58 CSVFileParser] record:
+        Title: CostcoSilverdale
+        Category: Costco-Closed
+        Lat/Lon: 47.65615000/-122.68100000
+        Index Key: 13:47.65615000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>13<br/><b>NAME: </b>Silverdale<br/><b>Status: </b>Open<br/><b>LCLAT: </b>47.65615000<br/><b>LCLONG: </b>-122.68100000
+        Content:  [13:Silverdale:47.65615000:-122.68100000:Open]
+
+[DEBUG 15:34:58 CSVFileParser] record:
+        Title: CostcoEugene
+        Category: Costco-Closed
+        Lat/Lon: 44.08930000/-123.06493000
+        Index Key: 17:44.08930000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>17<br/><b>NAME: </b>Eugene<br/><b>Status: </b>Open<br/><b>LCLAT: </b>44.08930000<br/><b>LCLONG: </b>-123.06493000
+        Content:  [17:Eugene:44.08930000:-123.06493000:Open]
+
+[DEBUG 15:34:58 CSVFileParser] record:
+        Title: CostcoBellingham
+        Category: Costco-Closed
+        Lat/Lon: 48.79765000/-122.48810000
+        Index Key: 19:48.79765000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>19<br/><b>NAME: </b>Bellingham<br/><b>Status: </b>Open<br/><b>LCLAT: </b>48.79765000<br/><b>LCLONG: </b>-122.48810000
+        Content:  [19:Bellingham:48.79765000:-122.48810000:Open]
+
+[DEBUG 15:34:58 CSVFileParser] record:
+        Title: CostcoDanville
+        Category: Costco-Closed
+        Lat/Lon: 37.78225000/-121.97270000
+        Index Key: 21:37.78225000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>21<br/><b>NAME: </b>Danville<br/><b>Status: </b>Open<br/><b>LCLAT: </b>37.78225000<br/><b>LCLONG: </b>-121.97270000
+        Content:  [21:Danville:37.78225000:-121.97270000:Open]
+
+[DEBUG 15:34:58 CSVFileParser] record:
+        Title: CostcoVictorville
+        Category: Costco-Closed
+        Lat/Lon: 34.51613557/-117.31907210
+        Index Key: 22:34.51613557
+        Filter: Open
+        Description: <br/><b>WHS5: </b>22<br/><b>NAME: </b>Victorville<br/><b>Status: </b>Open<br/><b>LCLAT: </b>34.51613557<br/><b>LCLONG: </b>-117.31907210
+        Content:  [22:Victorville:34.51613557:-117.31907210:Open]
+
+[DEBUG 15:34:58 CSVFileParser] record:
+        Title: CostcoSanta Maria
+        Category: Costco-Closed
+        Lat/Lon: 34.93690000/-120.42050000
+        Index Key: 24:34.93690000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>24<br/><b>NAME: </b>Santa Maria<br/><b>Status: </b>Open<br/><b>LCLAT: </b>34.93690000<br/><b>LCLONG: </b>-120.42050000
+        Content:  [24:Santa Maria:34.93690000:-120.42050000:Open]
+
+[DEBUG 15:34:58 CSVFileParser] record:
+        Title: CostcoReno
+        Category: Costco-Closed
+        Lat/Lon: 39.50360000/-119.78450000
+        Index Key: 25:39.50360000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>25<br/><b>NAME: </b>Reno<br/><b>Status: </b>Open<br/><b>LCLAT: </b>39.50360000<br/><b>LCLONG: </b>-119.78450000
+        Content:  [25:Reno:39.50360000:-119.78450000:Open]
+
+[DEBUG 15:34:58 CSVFileParser] record:
+        Title: CostcoLaguna Niguel
+        Category: Costco-Closed
+        Lat/Lon: 33.55560000/-117.67680000
+        Index Key: 28:33.55560000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>28<br/><b>NAME: </b>Laguna Niguel<br/><b>Status: </b>Open<br/><b>LCLAT: </b>33.55560000<br/><b>LCLONG: </b>-117.67680000
+        Content:  [28:Laguna Niguel:33.55560000:-117.67680000:Open]
+
+[DEBUG 15:34:58 CSVFileParser] record:
+        Title: CostcoRoseville CA
+        Category: Costco-Closed
+        Lat/Lon: 38.78040000/-121.26689000
+        Index Key: 29:38.78040000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>29<br/><b>NAME: </b>Roseville CA<br/><b>Status: </b>Open<br/><b>LCLAT: </b>38.78040000<br/><b>LCLONG: </b>-121.26689000
+        Content:  [29:Roseville CA:38.78040000:-121.26689000:Open]
+
+[DEBUG 15:34:58 CSVFileParser] total records: 15
+[DEBUG 15:34:58 CSVFileParser] Filter Pattern: (?i:.*Closed.*)
+[DEBUG 15:34:58 CSVFileParser] filtered records: 3
+[DEBUG 15:34:58 CSVFileParser] within the BoundingBox: 3 records found
+[DEBUG 15:34:58 GenericHibernateDAO] findByCriteria: found 0 entries
+[DEBUG 15:34:59 CSVFileParser] existed records: 0
+[DEBUG 15:34:59 CSVFileParser] records in Core: 0
+[DEBUG 15:34:59 CSVFileParser] records need to be created: 6
+[DEBUG 15:34:59 CSVFileParser] records need to be updated: 0
+[DEBUG 15:34:59 CSVFileParser] records need to be deleted: 0
+[DEBUG 15:34:59 WebServiceClient] WebServiceClient: url: http://localhost/xchangecore/core/ws/services, username: admin
+[DEBUG 15:34:59 WebServiceClient] createIncident: IGID: IG-c49f0dbc-8d21-49d1-8737-0f42f4a2ec8c, WPID: <xml-fragment xmlns:ulex="ulex:message:structure:1.0" xmlns:str="http://www.saic.com/precis/2009/06/structures" xmlns:wor="http://uicds.org/WorkProductService" xmlns:inc="http://uicds.org/IncidentManagementService"><base:Identifier xmlns:base="http://www.saic.com/precis/2009/06/base">Incident-8b768212-1f27-40c6-b35e-53a43f341330</base:Identifier><base:Version xmlns:base="http://www.saic.com/precis/2009/06/base">1</base:Version><base:Type xmlns:base="http://www.saic.com/precis/2009/06/base">Incident</base:Type><base:Checksum xmlns:base="http://www.saic.com/precis/2009/06/base">Tue Dec 06 15:34:59 EST 2016:1:2:1823359774</base:Checksum><base:State xmlns:base="http://www.saic.com/precis/2009/06/base">Active</base:State></xml-fragment>
+[DEBUG 15:35:00 WebServiceClient] createIncident: IGID: IG-bdef467b-23a4-4643-b011-b10fa20e3c82, WPID: <xml-fragment xmlns:ulex="ulex:message:structure:1.0" xmlns:str="http://www.saic.com/precis/2009/06/structures" xmlns:wor="http://uicds.org/WorkProductService" xmlns:inc="http://uicds.org/IncidentManagementService"><base:Identifier xmlns:base="http://www.saic.com/precis/2009/06/base">Incident-2840669c-d1cb-4d28-8a07-b34ac255f9b2</base:Identifier><base:Version xmlns:base="http://www.saic.com/precis/2009/06/base">1</base:Version><base:Type xmlns:base="http://www.saic.com/precis/2009/06/base">Incident</base:Type><base:Checksum xmlns:base="http://www.saic.com/precis/2009/06/base">Tue Dec 06 15:35:00 EST 2016:1:2:1439895924</base:Checksum><base:State xmlns:base="http://www.saic.com/precis/2009/06/base">Active</base:State></xml-fragment>
+[DEBUG 15:35:00 WebServiceClient] createIncident: IGID: IG-2867d4a0-ada1-428e-8c1a-af933c2a79be, WPID: <xml-fragment xmlns:ulex="ulex:message:structure:1.0" xmlns:str="http://www.saic.com/precis/2009/06/structures" xmlns:wor="http://uicds.org/WorkProductService" xmlns:inc="http://uicds.org/IncidentManagementService"><base:Identifier xmlns:base="http://www.saic.com/precis/2009/06/base">Incident-58795d5b-224a-4179-94e9-08d2b4741313</base:Identifier><base:Version xmlns:base="http://www.saic.com/precis/2009/06/base">1</base:Version><base:Type xmlns:base="http://www.saic.com/precis/2009/06/base">Incident</base:Type><base:Checksum xmlns:base="http://www.saic.com/precis/2009/06/base">Tue Dec 06 15:35:00 EST 2016:1:2:1439895924</base:Checksum><base:State xmlns:base="http://www.saic.com/precis/2009/06/base">Active</base:State></xml-fragment>
+[DEBUG 15:35:02 WebServiceClient] createIncident: IGID: IG-73937ab3-fff2-4937-bb32-8fbb90b358eb, WPID: <xml-fragment xmlns:ulex="ulex:message:structure:1.0" xmlns:str="http://www.saic.com/precis/2009/06/structures" xmlns:wor="http://uicds.org/WorkProductService" xmlns:inc="http://uicds.org/IncidentManagementService"><base:Identifier xmlns:base="http://www.saic.com/precis/2009/06/base">Incident-5ee984e2-5ca3-4c49-b45c-464bb5901098</base:Identifier><base:Version xmlns:base="http://www.saic.com/precis/2009/06/base">1</base:Version><base:Type xmlns:base="http://www.saic.com/precis/2009/06/base">Incident</base:Type><base:Checksum xmlns:base="http://www.saic.com/precis/2009/06/base">Tue Dec 06 15:35:02 EST 2016:1:2:3119026155</base:Checksum><base:State xmlns:base="http://www.saic.com/precis/2009/06/base">Active</base:State></xml-fragment>
+[DEBUG 15:35:02 WebServiceClient] createIncident: IGID: IG-25a6d693-c159-4845-b962-05e44835a0c6, WPID: <xml-fragment xmlns:ulex="ulex:message:structure:1.0" xmlns:str="http://www.saic.com/precis/2009/06/structures" xmlns:wor="http://uicds.org/WorkProductService" xmlns:inc="http://uicds.org/IncidentManagementService"><base:Identifier xmlns:base="http://www.saic.com/precis/2009/06/base">Incident-c14c3344-237b-498e-a981-139d4c9e0a2c</base:Identifier><base:Version xmlns:base="http://www.saic.com/precis/2009/06/base">1</base:Version><base:Type xmlns:base="http://www.saic.com/precis/2009/06/base">Incident</base:Type><base:Checksum xmlns:base="http://www.saic.com/precis/2009/06/base">Tue Dec 06 15:35:02 EST 2016:1:2:3119026155</base:Checksum><base:State xmlns:base="http://www.saic.com/precis/2009/06/base">Active</base:State></xml-fragment>
+[DEBUG 15:35:03 WebServiceClient] createIncident: IGID: IG-d988aa17-8549-4138-9b21-5cb41615cba3, WPID: <xml-fragment xmlns:ulex="ulex:message:structure:1.0" xmlns:str="http://www.saic.com/precis/2009/06/structures" xmlns:wor="http://uicds.org/WorkProductService" xmlns:inc="http://uicds.org/IncidentManagementService"><base:Identifier xmlns:base="http://www.saic.com/precis/2009/06/base">Incident-93f35377-b288-4c0f-93fb-0e6070fd686a</base:Identifier><base:Version xmlns:base="http://www.saic.com/precis/2009/06/base">1</base:Version><base:Type xmlns:base="http://www.saic.com/precis/2009/06/base">Incident</base:Type><base:Checksum xmlns:base="http://www.saic.com/precis/2009/06/base">Tue Dec 06 15:35:03 EST 2016:1:2:575521668</base:Checksum><base:State xmlns:base="http://www.saic.com/precis/2009/06/base">Active</base:State></xml-fragment>
+[DEBUG 15:35:03 UploadPage] number of creation/update/deletion: 6/0/0
+[DEBUG 15:35:03 CSVFileParser] record:
+        Title: CostcoSeattle
+        Category: Costco-Opened
+        Lat/Lon: 47.56460000/-122.32990000
+        Index Key: 1:47.56460000
+        Filter: Closed
+        Description: <br/><b>WHS5: </b>1<br/><b>NAME: </b>Seattle<br/><b>Status: </b>Closed<br/><b>LCLAT: </b>47.56460000<br/><b>LCLONG: </b>-122.32990000
+        Content:  [1:Seattle:47.56460000:-122.32990000:Closed]
+
+[DEBUG 15:35:03 CSVFileParser] record:
+        Title: CostcoPortland
+        Category: Costco-Opened
+        Lat/Lon: 45.55920000/-122.52390000
+        Index Key: 2:45.55920000
+        Filter: Closed
+        Description: <br/><b>WHS5: </b>2<br/><b>NAME: </b>Portland<br/><b>Status: </b>Closed<br/><b>LCLAT: </b>45.55920000<br/><b>LCLONG: </b>-122.52390000
+        Content:  [2:Portland:45.55920000:-122.52390000:Closed]
+
+[DEBUG 15:35:03 CSVFileParser] record:
+        Title: CostcoTukwila
+        Category: Costco-Opened
+        Lat/Lon: 47.44610000/-122.24915000
+        Index Key: 6:47.44610000
+        Filter: Closed
+        Description: <br/><b>WHS5: </b>6<br/><b>NAME: </b>Tukwila<br/><b>Status: </b>Closed<br/><b>LCLAT: </b>47.44610000<br/><b>LCLONG: </b>-122.24915000
+        Content:  [6:Tukwila:47.44610000:-122.24915000:Closed]
+
+[DEBUG 15:35:03 CSVFileParser] record:
+        Title: CostcoKirkland
+        Category: Costco-Opened
+        Lat/Lon: 47.68130000/-122.18120000
+        Index Key: 8:47.68130000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>8<br/><b>NAME: </b>Kirkland<br/><b>Status: </b>Open<br/><b>LCLAT: </b>47.68130000<br/><b>LCLONG: </b>-122.18120000
+        Content:  [8:Kirkland:47.68130000:-122.18120000:Open]
+
+[DEBUG 15:35:03 CSVFileParser] record:
+        Title: CostcoAloha
+        Category: Costco-Opened
+        Lat/Lon: 45.50870000/-122.84236000
+        Index Key: 9:45.50870000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>9<br/><b>NAME: </b>Aloha<br/><b>Status: </b>Open<br/><b>LCLAT: </b>45.50870000<br/><b>LCLONG: </b>-122.84236000
+        Content:  [9:Aloha:45.50870000:-122.84236000:Open]
+
+[DEBUG 15:35:03 CSVFileParser] record:
+        Title: CostcoAnchorage
+        Category: Costco-Opened
+        Lat/Lon: 61.14370000/-149.88538680
+        Index Key: 10:61.14370000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>10<br/><b>NAME: </b>Anchorage<br/><b>Status: </b>Open<br/><b>LCLAT: </b>61.14370000<br/><b>LCLONG: </b>-149.88538680
+        Content:  [10:Anchorage:61.14370000:-149.88538680:Open]
+
+[DEBUG 15:35:03 CSVFileParser] record:
+        Title: CostcoSilverdale
+        Category: Costco-Opened
+        Lat/Lon: 47.65615000/-122.68100000
+        Index Key: 13:47.65615000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>13<br/><b>NAME: </b>Silverdale<br/><b>Status: </b>Open<br/><b>LCLAT: </b>47.65615000<br/><b>LCLONG: </b>-122.68100000
+        Content:  [13:Silverdale:47.65615000:-122.68100000:Open]
+
+[DEBUG 15:35:03 CSVFileParser] record:
+        Title: CostcoEugene
+        Category: Costco-Opened
+        Lat/Lon: 44.08930000/-123.06493000
+        Index Key: 17:44.08930000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>17<br/><b>NAME: </b>Eugene<br/><b>Status: </b>Open<br/><b>LCLAT: </b>44.08930000<br/><b>LCLONG: </b>-123.06493000
+        Content:  [17:Eugene:44.08930000:-123.06493000:Open]
+
+[DEBUG 15:35:03 CSVFileParser] record:
+        Title: CostcoBellingham
+        Category: Costco-Opened
+        Lat/Lon: 48.79765000/-122.48810000
+        Index Key: 19:48.79765000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>19<br/><b>NAME: </b>Bellingham<br/><b>Status: </b>Open<br/><b>LCLAT: </b>48.79765000<br/><b>LCLONG: </b>-122.48810000
+        Content:  [19:Bellingham:48.79765000:-122.48810000:Open]
+
+[DEBUG 15:35:03 CSVFileParser] record:
+        Title: CostcoDanville
+        Category: Costco-Opened
+        Lat/Lon: 37.78225000/-121.97270000
+        Index Key: 21:37.78225000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>21<br/><b>NAME: </b>Danville<br/><b>Status: </b>Open<br/><b>LCLAT: </b>37.78225000<br/><b>LCLONG: </b>-121.97270000
+        Content:  [21:Danville:37.78225000:-121.97270000:Open]
+
+[DEBUG 15:35:03 CSVFileParser] record:
+        Title: CostcoVictorville
+        Category: Costco-Opened
+        Lat/Lon: 34.51613557/-117.31907210
+        Index Key: 22:34.51613557
+        Filter: Open
+        Description: <br/><b>WHS5: </b>22<br/><b>NAME: </b>Victorville<br/><b>Status: </b>Open<br/><b>LCLAT: </b>34.51613557<br/><b>LCLONG: </b>-117.31907210
+        Content:  [22:Victorville:34.51613557:-117.31907210:Open]
+
+[DEBUG 15:35:03 CSVFileParser] record:
+        Title: CostcoSanta Maria
+        Category: Costco-Opened
+        Lat/Lon: 34.93690000/-120.42050000
+        Index Key: 24:34.93690000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>24<br/><b>NAME: </b>Santa Maria<br/><b>Status: </b>Open<br/><b>LCLAT: </b>34.93690000<br/><b>LCLONG: </b>-120.42050000
+        Content:  [24:Santa Maria:34.93690000:-120.42050000:Open]
+
+[DEBUG 15:35:03 CSVFileParser] record:
+        Title: CostcoReno
+        Category: Costco-Opened
+        Lat/Lon: 39.50360000/-119.78450000
+        Index Key: 25:39.50360000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>25<br/><b>NAME: </b>Reno<br/><b>Status: </b>Open<br/><b>LCLAT: </b>39.50360000<br/><b>LCLONG: </b>-119.78450000
+        Content:  [25:Reno:39.50360000:-119.78450000:Open]
+
+[DEBUG 15:35:03 CSVFileParser] record:
+        Title: CostcoLaguna Niguel
+        Category: Costco-Opened
+        Lat/Lon: 33.55560000/-117.67680000
+        Index Key: 28:33.55560000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>28<br/><b>NAME: </b>Laguna Niguel<br/><b>Status: </b>Open<br/><b>LCLAT: </b>33.55560000<br/><b>LCLONG: </b>-117.67680000
+        Content:  [28:Laguna Niguel:33.55560000:-117.67680000:Open]
+
+[DEBUG 15:35:03 CSVFileParser] record:
+        Title: CostcoRoseville CA
+        Category: Costco-Opened
+        Lat/Lon: 38.78040000/-121.26689000
+        Index Key: 29:38.78040000
+        Filter: Open
+        Description: <br/><b>WHS5: </b>29<br/><b>NAME: </b>Roseville CA<br/><b>Status: </b>Open<br/><b>LCLAT: </b>38.78040000<br/><b>LCLONG: </b>-121.26689000
+        Content:  [29:Roseville CA:38.78040000:-121.26689000:Open]
+
+[DEBUG 15:35:03 CSVFileParser] total records: 15
+[DEBUG 15:35:03 CSVFileParser] Filter Pattern: (?i:.*Open.*)
+[DEBUG 15:35:03 CSVFileParser] filtered records: 12
+[DEBUG 15:35:03 CSVFileParser] within the BoundingBox: 12 records found
+[DEBUG 15:35:03 GenericHibernateDAO] findByCriteria: found 6 entries
+[DEBUG 15:35:04 CSVFileParser] existed records: 6
+[DEBUG 15:35:04 CSVFileParser] records in Core: 6
+[DEBUG 15:35:04 CSVFileParser] IGID: 1:47.56460000 existed ... Auto.Close: true
+[DEBUG 15:35:04 CSVFileParser] IGID: 2:45.55920000 existed ... Auto.Close: true
+[DEBUG 15:35:04 CSVFileParser] IGID: 6:47.44610000 existed ... Auto.Close: true
+[DEBUG 15:35:04 CSVFileParser] records need to be created: 9
+[DEBUG 15:35:04 CSVFileParser] records need to be updated: 0
+[DEBUG 15:35:04 CSVFileParser] records need to be deleted: 3
+[DEBUG 15:35:04 WebServiceClient] WebServiceClient: url: http://localhost/xchangecore/core/ws/services, username: admin
+[DEBUG 15:35:04 WebServiceClient] createIncident: IGID: IG-6c1a7df1-054e-41e3-9722-8e1071c4093f, WPID: <xml-fragment xmlns:ulex="ulex:message:structure:1.0" xmlns:str="http://www.saic.com/precis/2009/06/structures" xmlns:wor="http://uicds.org/WorkProductService" xmlns:inc="http://uicds.org/IncidentManagementService"><base:Identifier xmlns:base="http://www.saic.com/precis/2009/06/base">Incident-749926c9-3410-4573-9754-69262077c88a</base:Identifier><base:Version xmlns:base="http://www.saic.com/precis/2009/06/base">1</base:Version><base:Type xmlns:base="http://www.saic.com/precis/2009/06/base">Incident</base:Type><base:Checksum xmlns:base="http://www.saic.com/precis/2009/06/base">Tue Dec 06 15:35:04 EST 2016:1:2:1456810507</base:Checksum><base:State xmlns:base="http://www.saic.com/precis/2009/06/base">Active</base:State></xml-fragment>
+[DEBUG 15:35:05 WebServiceClient] createIncident: IGID: IG-111a6506-183f-4fbf-a0c2-123314698383, WPID: <xml-fragment xmlns:ulex="ulex:message:structure:1.0" xmlns:str="http://www.saic.com/precis/2009/06/structures" xmlns:wor="http://uicds.org/WorkProductService" xmlns:inc="http://uicds.org/IncidentManagementService"><base:Identifier xmlns:base="http://www.saic.com/precis/2009/06/base">Incident-e19e72a7-5e20-40e5-9c2f-9a2581850b6b</base:Identifier><base:Version xmlns:base="http://www.saic.com/precis/2009/06/base">1</base:Version><base:Type xmlns:base="http://www.saic.com/precis/2009/06/base">Incident</base:Type><base:Checksum xmlns:base="http://www.saic.com/precis/2009/06/base">Tue Dec 06 15:35:05 EST 2016:1:2:3446695524</base:Checksum><base:State xmlns:base="http://www.saic.com/precis/2009/06/base">Active</base:State></xml-fragment>
+[DEBUG 15:35:05 WebServiceClient] createIncident: IGID: IG-20b71138-d84b-4b5c-af6f-7d15c063bb3e, WPID: <xml-fragment xmlns:ulex="ulex:message:structure:1.0" xmlns:str="http://www.saic.com/precis/2009/06/structures" xmlns:wor="http://uicds.org/WorkProductService" xmlns:inc="http://uicds.org/IncidentManagementService"><base:Identifier xmlns:base="http://www.saic.com/precis/2009/06/base">Incident-f3a42207-5b16-4d78-93d3-b88aaaea37fd</base:Identifier><base:Version xmlns:base="http://www.saic.com/precis/2009/06/base">1</base:Version><base:Type xmlns:base="http://www.saic.com/precis/2009/06/base">Incident</base:Type><base:Checksum xmlns:base="http://www.saic.com/precis/2009/06/base">Tue Dec 06 15:35:05 EST 2016:1:2:3446695524</base:Checksum><base:State xmlns:base="http://www.saic.com/precis/2009/06/base">Active</base:State></xml-fragment>
+[DEBUG 15:35:06 WebServiceClient] createIncident: IGID: IG-5a141c94-bb8d-4e2c-92b1-904846112ff9, WPID: <xml-fragment xmlns:ulex="ulex:message:structure:1.0" xmlns:str="http://www.saic.com/precis/2009/06/structures" xmlns:wor="http://uicds.org/WorkProductService" xmlns:inc="http://uicds.org/IncidentManagementService"><base:Identifier xmlns:base="http://www.saic.com/precis/2009/06/base">Incident-f34f6ab2-596b-41ae-85a9-d70bd95b0e8b</base:Identifier><base:Version xmlns:base="http://www.saic.com/precis/2009/06/base">1</base:Version><base:Type xmlns:base="http://www.saic.com/precis/2009/06/base">Incident</base:Type><base:Checksum xmlns:base="http://www.saic.com/precis/2009/06/base">Tue Dec 06 15:35:06 EST 2016:1:2:3136205972</base:Checksum><base:State xmlns:base="http://www.saic.com/precis/2009/06/base">Active</base:State></xml-fragment>
+[DEBUG 15:35:06 WebServiceClient] createIncident: IGID: IG-a7b136a8-62ca-47fb-b8e8-bac71472ee5b, WPID: <xml-fragment xmlns:ulex="ulex:message:structure:1.0" xmlns:str="http://www.saic.com/precis/2009/06/structures" xmlns:wor="http://uicds.org/WorkProductService" xmlns:inc="http://uicds.org/IncidentManagementService"><base:Identifier xmlns:base="http://www.saic.com/precis/2009/06/base">Incident-15814dfb-2220-44b0-b2da-b60036686f74</base:Identifier><base:Version xmlns:base="http://www.saic.com/precis/2009/06/base">1</base:Version><base:Type xmlns:base="http://www.saic.com/precis/2009/06/base">Incident</base:Type><base:Checksum xmlns:base="http://www.saic.com/precis/2009/06/base">Tue Dec 06 15:35:06 EST 2016:1:2:3136205972</base:Checksum><base:State xmlns:base="http://www.saic.com/precis/2009/06/base">Active</base:State></xml-fragment>
+[DEBUG 15:35:07 WebServiceClient] createIncident: IGID: IG-5e4e1328-90ca-4748-97b0-63276b83e322, WPID: <xml-fragment xmlns:ulex="ulex:message:structure:1.0" xmlns:str="http://www.saic.com/precis/2009/06/structures" xmlns:wor="http://uicds.org/WorkProductService" xmlns:inc="http://uicds.org/IncidentManagementService"><base:Identifier xmlns:base="http://www.saic.com/precis/2009/06/base">Incident-1b0b99e7-6e50-4d8c-b256-5710b659734b</base:Identifier><base:Version xmlns:base="http://www.saic.com/precis/2009/06/base">1</base:Version><base:Type xmlns:base="http://www.saic.com/precis/2009/06/base">Incident</base:Type><base:Checksum xmlns:base="http://www.saic.com/precis/2009/06/base">Tue Dec 06 15:35:07 EST 2016:1:2:558627067</base:Checksum><base:State xmlns:base="http://www.saic.com/precis/2009/06/base">Active</base:State></xml-fragment>
+[DEBUG 15:35:07 WebServiceClient] createIncident: IGID: IG-97026d91-75d1-4f51-b36a-dc7b0ac57ff7, WPID: <xml-fragment xmlns:ulex="ulex:message:structure:1.0" xmlns:str="http://www.saic.com/precis/2009/06/structures" xmlns:wor="http://uicds.org/WorkProductService" xmlns:inc="http://uicds.org/IncidentManagementService"><base:Identifier xmlns:base="http://www.saic.com/precis/2009/06/base">Incident-1cfd60f5-a13e-4ce9-8ac7-984912eac151</base:Identifier><base:Version xmlns:base="http://www.saic.com/precis/2009/06/base">1</base:Version><base:Type xmlns:base="http://www.saic.com/precis/2009/06/base">Incident</base:Type><base:Checksum xmlns:base="http://www.saic.com/precis/2009/06/base">Tue Dec 06 15:35:07 EST 2016:1:2:558627067</base:Checksum><base:State xmlns:base="http://www.saic.com/precis/2009/06/base">Active</base:State></xml-fragment>
+[DEBUG 15:35:08 WebServiceClient] createIncident: IGID: IG-029d8a39-9b5b-4f5d-a305-9856284e48a7, WPID: <xml-fragment xmlns:ulex="ulex:message:structure:1.0" xmlns:str="http://www.saic.com/precis/2009/06/structures" xmlns:wor="http://uicds.org/WorkProductService" xmlns:inc="http://uicds.org/IncidentManagementService"><base:Identifier xmlns:base="http://www.saic.com/precis/2009/06/base">Incident-b31b89a4-3772-4c11-b418-f23f509ec7bf</base:Identifier><base:Version xmlns:base="http://www.saic.com/precis/2009/06/base">1</base:Version><base:Type xmlns:base="http://www.saic.com/precis/2009/06/base">Incident</base:Type><base:Checksum xmlns:base="http://www.saic.com/precis/2009/06/base">Tue Dec 06 15:35:08 EST 2016:1:2:1407149962</base:Checksum><base:State xmlns:base="http://www.saic.com/precis/2009/06/base">Active</base:State></xml-fragment>
+[DEBUG 15:35:08 WebServiceClient] createIncident: IGID: IG-5ef282aa-c5d0-4140-8455-c03887c55eda, WPID: <xml-fragment xmlns:ulex="ulex:message:structure:1.0" xmlns:str="http://www.saic.com/precis/2009/06/structures" xmlns:wor="http://uicds.org/WorkProductService" xmlns:inc="http://uicds.org/IncidentManagementService"><base:Identifier xmlns:base="http://www.saic.com/precis/2009/06/base">Incident-95706cc3-8e91-41f9-909d-3e25f4ab948c</base:Identifier><base:Version xmlns:base="http://www.saic.com/precis/2009/06/base">1</base:Version><base:Type xmlns:base="http://www.saic.com/precis/2009/06/base">Incident</base:Type><base:Checksum xmlns:base="http://www.saic.com/precis/2009/06/base">Tue Dec 06 15:35:08 EST 2016:1:2:1407149962</base:Checksum><base:State xmlns:base="http://www.saic.com/precis/2009/06/base">Active</base:State></xml-fragment>
+[DEBUG 15:35:09 WebServiceClient] deleteIncident: delete: [IG-c49f0dbc-8d21-49d1-8737-0f42f4a2ec8c] ... successful ...
+[DEBUG 15:35:09 WebServiceClient] deleteIncident: delete: [IG-2867d4a0-ada1-428e-8c1a-af933c2a79be] ... successful ...
+[DEBUG 15:35:10 WebServiceClient] deleteIncident: delete: [IG-d988aa17-8549-4138-9b21-5cb41615cba3] ... successful ...
+[DEBUG 15:35:11 UploadPage] number of creation/update/deletion: 9/0/3
+

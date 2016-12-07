@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 import com.leidos.xchangecore.adapter.XchangeCoreAdapter;
 import com.leidos.xchangecore.adapter.csv.CSVFileParser;
 import com.leidos.xchangecore.adapter.csv.ConfigFilePaser;
-import com.leidos.xchangecore.adapter.model.CsvConfiguration;
+import com.leidos.xchangecore.adapter.model.Configuration;
 import com.leidos.xchangecore.adapter.model.MappedRecord;
 import com.leidos.xchangecore.adapter.webclient.WebServiceClient;
 
@@ -79,8 +79,7 @@ extends WebPage {
                 try {
                     getUploadFolder().ensureExists();
                 } catch (final IOException ioe) {
-                    final String errorMessage = "Upload Folder not existed and creation failed: " +
-                        ioe.getMessage();
+                    final String errorMessage = "Upload Folder not existed and creation failed: " + ioe.getMessage();
                     logger.error(errorMessage);
                     UploadPage.this.error(errorMessage);
                     return;
@@ -105,57 +104,59 @@ extends WebPage {
                     }
 
                     try {
-                        final CSVFileParser csvFileParser = new CSVFileParser(newFile,
-                            getFileStream(baseFilename),
-                            csvConfiguration);
+                        for (final Configuration configuration : configurationList) {
+                            final CSVFileParser csvFileParser = new CSVFileParser(newFile,
+                                getFileStream(baseFilename),
+                                configuration);
 
-                        redirectUrl = csvConfiguration.getRedirectUrl();
-                        final WebServiceClient wsClient = new WebServiceClient(csvConfiguration.getUri(),
-                            csvConfiguration.getUsername(),
-                            csvConfiguration.getPassword());
+                            redirectUrl = configuration.getRedirectUrl();
+                            final WebServiceClient wsClient = new WebServiceClient(configuration.getUri(),
+                                                                                   configuration.getUsername(),
+                                                                                   configuration.getPassword());
 
-                        numOfCreation = numOfUpdate = numOfDeletion = 0;
+                            numOfCreation = numOfUpdate = numOfDeletion = 0;
 
-                        // get the new Incidents
-                        final MappedRecord[] records = csvFileParser.getNewRecords();
+                            // get the new Incidents
+                            final MappedRecord[] records = csvFileParser.getNewRecords();
 
-                        setMessage("......");
-                        if (records != null) {
-                            numOfCreation = records.length;
-                            info("Created: " + numOfCreation + " records");
-                            for (final MappedRecord r : records) {
-                                if (wsClient.createIncident(r)) {
-                                    CSVFileParser.getMappedRecordDao().makePersistent(r);
+                            setMessage("......");
+                            if (records != null) {
+                                numOfCreation = records.length;
+                                info("Created: " + numOfCreation + " records");
+                                for (final MappedRecord r : records) {
+                                    if (wsClient.createIncident(r)) {
+                                        CSVFileParser.getMappedRecordDao().makePersistent(r);
+                                    }
                                 }
                             }
-                        }
 
-                        // update the incidents
-                        final MappedRecord[] updateRecordSet = csvFileParser.getUpdateRecords();
-                        if (updateRecordSet != null) {
-                            numOfUpdate = updateRecordSet.length;
-                            info("Updated: " + numOfUpdate + " records");
-                            for (final MappedRecord r : updateRecordSet) {
-                                if (wsClient.updateIncident(r)) {
-                                    CSVFileParser.getMappedRecordDao().makePersistent(r);
+                            // update the incidents
+                            final MappedRecord[] updateRecordSet = csvFileParser.getUpdateRecords();
+                            if (updateRecordSet != null) {
+                                numOfUpdate = updateRecordSet.length;
+                                info("Updated: " + numOfUpdate + " records");
+                                for (final MappedRecord r : updateRecordSet) {
+                                    if (wsClient.updateIncident(r)) {
+                                        CSVFileParser.getMappedRecordDao().makePersistent(r);
+                                    }
                                 }
                             }
-                        }
 
-                        // delete the incidents
-                        final MappedRecord[] deleteRecordSet = csvFileParser.getDeleteRecords();
-                        if (deleteRecordSet != null) {
-                            numOfDeletion = deleteRecordSet.length;
-                            info("Deleted: " + numOfDeletion + " records");
-                            for (final MappedRecord r : deleteRecordSet) {
-                                if (wsClient.deleteIncident(r)) {
-                                    CSVFileParser.getMappedRecordDao().makeTransient(r);
+                            // delete the incidents
+                            final MappedRecord[] deleteRecordSet = csvFileParser.getDeleteRecords();
+                            if (deleteRecordSet != null) {
+                                numOfDeletion = deleteRecordSet.length;
+                                info("Deleted: " + numOfDeletion + " records");
+                                for (final MappedRecord r : deleteRecordSet) {
+                                    if (wsClient.deleteIncident(r)) {
+                                        CSVFileParser.getMappedRecordDao().makeTransient(r);
+                                    }
                                 }
                             }
-                        }
 
-                        logger.debug("number of creation/update/deletion: " + numOfCreation + "/" +
-                            numOfUpdate + "/" + numOfDeletion);
+                            logger.debug("number of creation/update/deletion: " + numOfCreation + "/" + numOfUpdate +
+                                "/" + numOfDeletion);
+                        }
                         info("Upload is done ...");
                         Files.remove(newFile);
                     } catch (final Throwable e) {
@@ -184,7 +185,7 @@ extends WebPage {
     private String configFilename;
     private String message = "";
 
-    private CsvConfiguration csvConfiguration = null;
+    private List<Configuration> configurationList = null;
 
     /**
      * Constructor.
@@ -207,9 +208,7 @@ extends WebPage {
         // Add simple upload form, which is hooked up to its feedback panel by
         // virtue of that panel being nested in the form.
         final FileUploadForm simpleUploadForm = new FileUploadForm("simpleUpload");
-        simpleUploadForm.add(new UploadProgressBar("progress",
-            simpleUploadForm,
-            simpleUploadForm.fileUploadField));
+        simpleUploadForm.add(new UploadProgressBar("progress", simpleUploadForm, simpleUploadForm.fileUploadField));
         this.add(simpleUploadForm);
 
         final PropertyModel<String> messageModel = new PropertyModel<String>(this, "message");
@@ -263,7 +262,8 @@ extends WebPage {
             return;
         }
         try {
-            csvConfiguration = new ConfigFilePaser(configFilename, getFileStream(configFilename)).getConfigMap();
+            configurationList = new ConfigFilePaser(configFilename,
+                getFileStream(configFilename)).listOfConfiguration();
         } catch (final Exception e) {
             error(e.getMessage());
         }
@@ -273,8 +273,7 @@ extends WebPage {
 
         final List<IResourceFinder> finders = UploadPage.this.getApplication().getResourceSettings().getResourceFinders();
         for (final IResourceFinder finder : finders) {
-            final IResourceStream resource = finder.find(UrlResourceStream.class, "/config/" +
-                filename);
+            final IResourceStream resource = finder.find(UrlResourceStream.class, "/config/" + filename);
             if (resource != null && resource instanceof UrlResourceStream) {
                 try {
                     return ((UrlResourceStream) resource).getInputStream();

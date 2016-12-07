@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.leidos.xchangecore.adapter.dao.MappedRecordDao;
-import com.leidos.xchangecore.adapter.model.CsvConfiguration;
+import com.leidos.xchangecore.adapter.model.Configuration;
 import com.leidos.xchangecore.adapter.model.MappedRecord;
 import com.leidos.xchangecore.adapter.util.Util;
 
@@ -55,7 +55,7 @@ public class CSVFileParser {
         super();
     }
 
-    public CSVFileParser(File file, InputStream baseInputStream, CsvConfiguration configMap) throws Throwable {
+    public CSVFileParser(File file, InputStream baseInputStream, Configuration configMap) throws Throwable {
 
         super();
 
@@ -90,6 +90,7 @@ public class CSVFileParser {
             }
             record.setCreator(configMap.getId());
             record.setLastUpdated(currentDate);
+            record.setCoreUri(configMap.getUri());
             logger.debug("record: " + record.toString());
         }
 
@@ -280,7 +281,7 @@ public class CSVFileParser {
         return null;
     }
 
-    private void parseRecords(List<MappedRecord> records, CsvConfiguration config) {
+    private void parseRecords(List<MappedRecord> records, Configuration config) {
 
         // reset the update and delete set
         this.newRecords.clear();
@@ -306,7 +307,8 @@ public class CSVFileParser {
         if (config.getDistance().length() > 0 && newRecords.size() > 1) {
             final Double[][] boundingBox = this.calculateBoundingBox(newRecords, Double.parseDouble(
                 config.getDistance()));
-            for (final MappedRecord r : records) {
+            final Collection<MappedRecord> newRecordSet = newRecords.values();
+            for (final MappedRecord r : newRecordSet) {
                 if (r.getFilter().equalsIgnoreCase(config.getDistanceFilterText())) {
                     if (Util.insideBoundingBox(boundingBox, r.getLatitude(), r.getLongitude())) {
                         distanceSet.add(r);
@@ -324,7 +326,10 @@ public class CSVFileParser {
         final List<MappedRecord> existedRecordList = getMappedRecordDao().findByCreator(config.getId());
         final Map<String, MappedRecord> existedRecordSet = new HashMap<String, MappedRecord>();
         for (final MappedRecord record : existedRecordList) {
-            existedRecordSet.put(record.getIndex(), record);
+            logger.debug("instance's Core: " + record.getCoreUri() + " and configuration's Core: " + config.getUri());
+            if (record.getCoreUri().equalsIgnoreCase(config.getUri())) {
+                existedRecordSet.put(record.getIndex(), record);
+            }
         }
         logger.debug("existed records: " + existedRecordSet.size());
 
@@ -349,6 +354,7 @@ public class CSVFileParser {
                     this.updateRecords.put(key, record);
                 }
             } else {
+                // logger.debug("IGID: " + key + " existed ... Auto.Close: " + (config.isAutoClose() ? "true" : "false"));
                 if (config.isAutoClose() == true) {
                     this.deleteRecords.put(key, inCoreSet.get(key));
                 }
@@ -359,13 +365,13 @@ public class CSVFileParser {
         logger.debug("records need to be deleted: " + this.deleteRecords.size());
     }
 
-    private void validateConfiguration(CsvConfiguration csvConfiguration,
+    private void validateConfiguration(Configuration csvConfiguration,
                                        MappingHeaderColumnNameTranslateMappingStrategy strategy,
                                        CSVReader csvReader) throws Throwable {
 
         strategy.captureHeader(csvReader);
 
-        for (final String columnName : CsvConfiguration.DefinedColumnNames) {
+        for (final String columnName : Configuration.DefinedColumnNames) {
             final String column = csvConfiguration.getValue(columnName);
             final String[] columns = column.split("\\.", -1);
             for (final String c : columns) {

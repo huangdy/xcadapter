@@ -74,8 +74,8 @@ public class WebServiceClient {
             final WorkProduct workProduct = response.getCreateIncidentResponse().getWorkProductPublicationResponse().getWorkProduct();
             record.setIgID(Util.getIGID(workProduct));
             record.setWorkProductID(Util.getProductIdentification(workProduct));
-            logger.debug("createIncident: IGID: " + record.getIgID() + ", WPID: " +
-                         record.getWorkProductID());
+            logger.debug("createIncident: create: [" + record.getIgID() + "] @Core: " + record.getCoreUri() +
+                " ... successfully ...");
             return true;
         }
         return false;
@@ -98,8 +98,8 @@ public class WebServiceClient {
             if (archiveResponse != null &&
                 archiveResponse.getArchiveIncidentResponse().getWorkProductProcessingStatus().getStatus().equals(
                     ProcessingStateType.ACCEPTED)) {
-                logger.debug("deleteIncident: delete: [" + record.getIgID() +
-                             "] ... successful ...");
+                logger.debug("deleteIncident: delete: [" + record.getIgID() + "] @Core: " + record.getContent() +
+                    " ... successful ...");
                 return true;
             }
         }
@@ -126,19 +126,20 @@ public class WebServiceClient {
         request.getUpdateIncidentRequest().addNewWorkProductIdentification().set(
             Util.getProductIdentification(record.getWorkProductID()));
 
-        logger.debug("Update: " + request);
+        // logger.debug("Update: " + request);
 
         final UpdateIncidentResponseDocument response = (UpdateIncidentResponseDocument) this.sendAndReceive(
             request);
 
-        logger.debug("Update: Response: " + response);
+        // logger.debug("Update: Response: " + response);
 
         if (response != null &&
             response.getUpdateIncidentResponse().getWorkProductPublicationResponse().getWorkProductProcessingStatus().equals(
                 ProcessingStateType.ACCEPTED)) {
             final WorkProduct workProduct = response.getUpdateIncidentResponse().getWorkProductPublicationResponse().getWorkProduct();
             record.setWorkProductID(Util.getProductIdentification(workProduct));
-            logger.debug("updateIncident: new WPID: " + record.getWorkProductID());
+            logger.debug("updateIncident: update [: " + record.getIgID() + "] @Core: " + record.getCoreUri() +
+                " ... successfully");
             return true;
         }
         return false;

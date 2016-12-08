@@ -29,11 +29,11 @@
 	<bean class="com.leidos.xchangecore.adapter.config.AdapterSpringConfig" />
 
 	<bean id="csvFileParser" class="com.leidos.xchangecore.adapter.csv.CSVFileParser">
-		<property name="mappedRecordDao" ref="mappedRecordDao" />
+        <property name="mappedRecordDao" ref="mappedRecordDao" />
 	</bean>
 
 	<bean id="configFileParser" class="com.leidos.xchangecore.adapter.csv.ConfigFilePaser">
-		<property name="coreConfigurationDao" ref="coreConfigurationDao" />
+        <property name="coreConfigurationDao" ref="coreConfigurationDao" />
 		<!-- <property name="csvConfigurationDao" ref="csvConfigurationDao" /> -->
 	</bean>
 
@@ -42,4 +42,9 @@
 		<property name="webServiceTemplate" ref="webServiceTemplate" />
 	</bean>
 
+    <bean id="initializer" class="com.leidos.xchangecore.adapter.processor.Initializer">
+        <property name="coreConfigurationDao" ref="coreConfigurationDao" />
+        <property name="mappedRecordDao" ref="mappedRecordDao" />
+    </bean>
+    
 </beans>  

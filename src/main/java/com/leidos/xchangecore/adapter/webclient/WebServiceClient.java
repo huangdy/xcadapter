@@ -99,11 +99,15 @@ public class WebServiceClient {
                 archiveResponse.getArchiveIncidentResponse().getWorkProductProcessingStatus().getStatus().equals(
                     ProcessingStateType.ACCEPTED)) {
                 logger.debug("deleteIncident: delete: [" + record.getIgID() + "] @Core: " + record.getContent() +
-                    " ... successful ...");
+                             " ... successful ...");
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean getIncident(String igId) {
+        return false;        
     }
 
     private XmlObject sendAndReceive(XmlObject request) {
